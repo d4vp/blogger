@@ -11,9 +11,6 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body, html { height: 100%; font-family: 'Poppins', sans-serif; }
-    main {
-        padding-right: 250px; /* Ajusta este valor según el ancho de tu banner */
-    }
 
     body { background: #ffffff; color: #222; position: relative; overflow-x: hidden; }
     #particles-js { position: absolute; width: 100%; height: 100%; z-index: -1; }
@@ -336,57 +333,150 @@
 
 
 
-  .right-banner {
-      position: fixed;
-      top: 50%; /* Centra verticalmente (ajusta según tu header) */
-      right: 20px; /* Espacio desde el borde derecho */
-      width: 200px; /* Ancho del banner */
-      background-color: #f9f9f9; /* Color de fondo del banner */
-      color: #333;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transform: translateY(-50%); /* Ajuste para centrado vertical exacto */
-      z-index: 9; /* Asegura que esté por encima del contenido principal */
-      text-align: center;
-  }
 
-  .right-banner h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
-  }
 
-  .right-banner .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 15px;
-  }
 
-  .right-banner .social-links a {
-      color: #333;
-      font-size: 1.2rem;
-      text-decoration: none;
-  }
 
-  .right-banner img {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-      border-radius: 3px;
-  }
 
-  /* Ocultar el banner en pantallas pequeñas */
-  @media (max-width: 768px) {
-      .right-banner {
-          display: none;
-      }
+  .skills {
+        padding: 40px 20px;
+        text-align: center;
+        background-color: #f9f9f9;
+    }
 
-      main {
-          padding-right: 0; /* Restablecer el padding del main en pantallas pequeñas */
-      }
-  }
+    .skills h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #333;
+    }
 
+    .skills h2 i {
+        margin-right: 10px;
+    }
+
+    .skills-intro {
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .skills-container {
+        display: grid;
+        gap: 30px;
+        padding: 0 20px;
+    }
+
+    @media (min-width: 768px) {
+        .skills-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 767px) {
+        .skills-container {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .skill-item {
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+
+    .skill-item h3 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .skill-item h3 i {
+        margin-right: 10px;
+    }
+
+    .skill-details {
+        list-style: none;
+        padding: 0;
+        margin-top: 10px;
+    }
+
+    .skill-details li {
+        font-size: 0.95em;
+        color: #666;
+        display: flex;
+        align-items: center;
+        position: relative; /* Para posicionar el circular progress */
+        padding-bottom: 25px; /* Mayor espacio entre filas */
+    }
+
+    .skill-details li i {
+        margin-right: 15px;
+        font-size: 1.1em;
+        color: #007bff;
+        min-width: 20px;
+        text-align: center;
+    }
+
+    .circular-progress-wrapper {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px; /* Círculo más pequeño */
+        height: 40px;
+    }
+
+    .circular-progress {
+        transform: rotate(0deg); /* Asegura que el SVG no esté rotado inicialmente */
+    }
+
+    .circular-progress .bg {
+        stroke: #e9ecef;
+    }
+
+    .circular-progress .progress {
+        stroke: #007bff;
+        transition: stroke-dashoffset 0.8s ease-in-out;
+    }
+
+    .circular-progress text {
+        fill: #333;
+    }
+
+    /* Estilos para modo oscuro (opcional) */
+    .dark-mode .skills {
+        background-color: #333;
+        color: #eee;
+    }
+
+    .dark-mode .skills h2,
+    .dark-mode .skill-item h3 {
+        color: #eee;
+    }
+
+    .dark-mode .skill-item {
+        color: #ccc;
+        background-color: #444;
+        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+    }
+
+    .dark-mode .skill-details li,
+    .dark-mode .circular-progress text {
+        color: #ccc;
+    }
+
+    .dark-mode .circular-progress .bg {
+        stroke: #555;
+    }
+
+    .dark-mode .circular-progress .progress {
+        stroke: #aaa;
+    }
+
+    .dark-mode .skill-details li i {
+        color: #aaa;
+    }
 
 
 
@@ -469,21 +559,201 @@
 
     </section>
 
+    <section id="habilidades" class="skills">
+        <h2><i class="fas fa-code"></i> Mis Habilidades</h2>
+        <p class="skills-intro">Aquí puedes explorar de forma interactiva algunas de mis habilidades y cuánto las he desarrollado.</p>
+
+        <div class="skills-container">
+            <div class="skill-item">
+                <h3><i class="fab fa-html5"></i> Desarrollo Web</h3>
+                <ul class="skill-details">
+                    <li style="padding-bottom: 30px;">
+                        <i class="fab fa-html5"></i> HTML
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="80" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fab fa-css3-alt"></i> CSS
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="60" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fab fa-js"></i> JavaScript
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="40" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fab fa-react"></i> React
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="50" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fab fa-node-js"></i> Node.js
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="50" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="skill-item">
+                <h3><i class="fas fa-camera"></i> Fotografía</h3>
+                <ul class="skill-details">
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-camera-retro"></i> Composición
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="80" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-paint-brush"></i> Edición
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="75" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-user-circle"></i> Fotografía de retrato
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="90" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-mountain"></i> Fotografía de paisaje
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="85" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="skill-item">
+                <h3><i class="fas fa-running"></i> Deportes</h3>
+                <ul class="skill-details">
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-shoe-prints"></i> Running
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="60" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-swimmer"></i> Natación
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="65" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-basketball-ball"></i> Baloncesto
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="55" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-dumbbell"></i> Acondicionamiento físico
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="10" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="skill-item">
+                <h3><i class="fas fa-guitar"></i> Guitarra</h3>
+                <ul class="skill-details">
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-music"></i> Acordes básicos
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="40" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-dance"></i> Ritmos sencillos
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="20" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 30px;">
+                        <i class="fas fa-book-open"></i> Teoría musical
+                        <div class="circular-progress-wrapper">
+                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
+                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
+                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="15" />
+                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
+                            </svg>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <footer id="contacto">
       <p>&copy; 2025 David Pinchao | Blog Personal. Todos los derechos reservados.</p>
     </footer>
   </main>
-
-  <aside class="right-banner">
-      <h3>¡Sígueme!</h3>
-      <div class="social-links">
-          <a href="#" title="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
-      </div>
-      <img src="./mc.png" alt="Banner Image">
-      <p>"El milagro no es que terminara. El milagro es que tuve el coraje de empezar". - John Bingham </p>
-  </aside>
 
 
   <script>
@@ -590,6 +860,63 @@
     window.addEventListener('scroll', checkSlide);
 
 
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const circularProgressWrappers = document.querySelectorAll('.circular-progress-wrapper');
+
+        const animateProgress = (wrapper) => {
+            const svg = wrapper.querySelector('.circular-progress');
+            const progressCircle = svg.querySelector('.progress');
+            const valueText = svg.querySelector('text');
+            const percentage = parseInt(progressCircle.getAttribute('data-percentage'));
+
+            const circumference = parseFloat(progressCircle.getAttribute('stroke-dasharray'));
+            const offset = circumference - (percentage / 100) * circumference;
+
+            progressCircle.style.strokeDashoffset = offset;
+            valueText.textContent = `${percentage}%`;
+        };
+
+        const handleScroll = () => {
+            circularProgressWrappers.forEach(wrapper => {
+                const rect = wrapper.getBoundingClientRect();
+                const isInView = (rect.top >= 0 && rect.bottom <= window.innerHeight);
+
+                if (isInView && !wrapper.dataset.animated) {
+                    animateProgress(wrapper);
+                    wrapper.dataset.animated = true; // Marca como animado
+                }
+            });
+        };
+
+        // Animar los elementos que estén en la vista inicial
+        circularProgressWrappers.forEach(wrapper => {
+            const rect = wrapper.getBoundingClientRect();
+            const isInView = (rect.top >= 0 && rect.bottom <= window.innerHeight);
+            if (isInView) {
+                animateProgress(wrapper);
+                wrapper.dataset.animated = true;
+            }
+        });
+
+        // Inicialmente, establecer el offset para que los círculos estén vacíos
+        circularProgressWrappers.forEach(wrapper => {
+            const svg = wrapper.querySelector('.circular-progress');
+            const progressCircle = svg.querySelector('.progress');
+            const valueText = svg.querySelector('text');
+            const circumference = parseFloat(progressCircle.getAttribute('stroke-dasharray'));
+            progressCircle.style.strokeDashoffset = circumference;
+            valueText.textContent = '0%';
+        });
+
+        window.addEventListener('scroll', handleScroll);
+    });
+
+
+    
+    
   </script>
 </body>
 </html>
