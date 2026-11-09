@@ -1,0 +1,9 @@
+<header class='sticky top-0 z-40 border-b border-neutral-200 bg-white/80 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80'>
+  <div class='mx-auto flex h-14 max-w-5xl items-center gap-4 px-4'>
+    <a class='mr-auto text-lg font-bold' expr:href='data:blog.homepageUrl'><data:blog.title/></a>
+    <button aria-label='Cambiar entre modo claro y oscuro' class='grid size-10 cursor-pointer place-items-center rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800' data-theme-toggle='' type='button'>
+      <svg aria-hidden='true' class='size-5 dark:hidden' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24'><path d='M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401'/></svg>
+      <svg aria-hidden='true' class='hidden size-5 dark:block' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24'><circle cx='12' cy='12' r='4'/><path d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41'/></svg>
+    </button>
+  </div>
+</header>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <!-- @include partials/head.xml -->
+</head>
+<body class='min-h-screen bg-white font-sans text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100'>
+  <a class='sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-neutral-950' href='#contenido'>Saltar al contenido</a>
+
+  <!-- @include partials/header.xml -->
+
+  <main class='mx-auto max-w-5xl px-4 py-10' id='contenido'>
+    <!-- @include partials/hero.xml -->
+    <!-- @include partials/blog.xml -->
+  </main>
+
+  <!-- @include partials/footer.xml -->
+
+  <!-- @js scripts/main.js -->
+</body>
+</html>

@@ -1,0 +1,19 @@
+<b:if cond='data:view.isHomepage'>
+  <section aria-label='Terminal interactiva' class='mb-12'>
+    <div class='overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950 font-mono text-sm text-neutral-200 shadow-xl' data-terminal='' expr:data-about='data:blog.metaDescription' expr:data-host='data:blog.title'>
+      <div class='flex items-center gap-2 border-b border-neutral-800 px-4 py-3'>
+        <span class='size-3 rounded-full bg-red-500'/>
+        <span class='size-3 rounded-full bg-yellow-500'/>
+        <span class='size-3 rounded-full bg-green-500'/>
+        <span class='ml-2 text-xs text-neutral-400'>visitante@blog: ~</span>
+      </div>
+      <div aria-live='polite' class='h-64 overflow-y-auto p-4 leading-relaxed' data-terminal-output='' role='log'>
+        <noscript>Activa JavaScript para usar la terminal.</noscript>
+      </div>
+      <form class='flex items-center gap-2 border-t border-neutral-800 px-4 py-3' data-terminal-form=''>
+        <label class='text-accent' for='terminal-input'><span aria-hidden='true'>$</span><span class='sr-only'>Comando</span></label>
+        <input autocapitalize='off' autocomplete='off' class='w-full bg-transparent text-neutral-100 outline-none placeholder:text-neutral-600' id='terminal-input' placeholder='Escribe "help" y pulsa Enter' spellcheck='false' type='text'/>
+      </form>
+    </div>
+  </section>
+</b:if>

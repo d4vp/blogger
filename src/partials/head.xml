@@ -1,0 +1,12 @@
+<meta charset='utf-8'/>
+<meta content='width=device-width, initial-scale=1' name='viewport'/>
+<title><data:view.title.escaped/></title>
+<!-- Blogger: meta description, canonical, feeds y Open Graph -->
+<b:include data='blog' name='all-head-content'/>
+
+<!-- Tema antes del primer pintado (evita el parpadeo claro/oscuro) -->
+<!-- @js scripts/head.js -->
+
+<!-- Blogger exige <b:skin>; el CSS real va en <style> para que su preprocesador no toque la salida de Tailwind -->
+<b:skin><![CDATA[]]></b:skin>
+<!-- @css styles/main.css -->

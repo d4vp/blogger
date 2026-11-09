@@ -1,0 +1,60 @@
+<b:section class='main' id='main' showaddelement='false'>
+  <b:widget id='Blog1' locked='true' title='Entradas del blog' type='Blog' version='2' visible='true'>
+    <b:includable id='main'>
+      <b:if cond='data:view.isSingleItem'>
+        <b:loop values='data:posts' var='post'>
+          <b:include data='post' name='article'/>
+        </b:loop>
+      <b:else/>
+        <div class='grid gap-8 sm:grid-cols-2'>
+          <b:loop values='data:posts' var='post'>
+            <b:include data='post' name='card'/>
+          </b:loop>
+        </div>
+        <b:include name='pager'/>
+      </b:if>
+    </b:includable>
+
+    <!-- Tarjeta para portada, etiquetas, archivo y búsqueda -->
+    <b:includable id='card' var='post'>
+      <article class='group overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800'>
+        <b:if cond='data:post.featuredImage'>
+          <a aria-hidden='true' expr:href='data:post.url' tabindex='-1'>
+            <img class='aspect-video w-full object-cover' expr:alt='data:post.title' expr:src='resizeImage(data:post.featuredImage, 640, "16:9")' height='360' loading='lazy' width='640'/>
+          </a>
+        </b:if>
+        <div class='p-5'>
+          <time class='text-sm text-neutral-500 dark:text-neutral-400' expr:datetime='data:post.date.iso8601'><data:post.date/></time>
+          <h2 class='mt-1 text-xl font-bold'>
+            <a class='group-hover:text-accent' expr:href='data:post.url'><data:post.title/></a>
+          </h2>
+          <p class='mt-2 text-neutral-600 dark:text-neutral-300'><data:post.snippets.short/></p>
+        </div>
+      </article>
+    </b:includable>
+
+    <!-- Entrada o página completa -->
+    <b:includable id='article' var='post'>
+      <article class='mx-auto max-w-3xl'>
+        <header class='mb-8'>
+          <h1 class='text-3xl font-bold sm:text-4xl'><data:post.title/></h1>
+          <b:if cond='data:view.isPost'>
+            <time class='mt-2 block text-sm text-neutral-500 dark:text-neutral-400' expr:datetime='data:post.date.iso8601'><data:post.date/></time>
+          </b:if>
+        </header>
+        <div class='post-body'><data:post.body/></div>
+      </article>
+    </b:includable>
+
+    <b:includable id='pager'>
+      <nav aria-label='Paginación' class='mt-10 flex justify-between'>
+        <b:if cond='data:newerPageUrl'>
+          <a class='font-medium hover:text-accent' expr:href='data:newerPageUrl'>← Más recientes</a>
+        </b:if>
+        <b:if cond='data:olderPageUrl'>
+          <a class='ml-auto font-medium hover:text-accent' expr:href='data:olderPageUrl'>Anteriores →</a>
+        </b:if>
+      </nav>
+    </b:includable>
+  </b:widget>
+</b:section>

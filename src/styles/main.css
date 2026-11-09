@@ -1,0 +1,54 @@
+/* Entrada de Tailwind v4. Solo se escanea src/ (no el index.html de la raíz). */
+@import "tailwindcss" source(none);
+@source "../";
+
+/* Modo oscuro por atributo: head.js fija data-theme antes del primer pintado. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --color-accent: #ff6600;
+  --font-sans: Poppins, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html { color-scheme: light; scroll-behavior: smooth; }
+  html[data-theme="dark"] { color-scheme: dark; }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+}
+
+@layer components {
+  /* El cuerpo de la entrada es HTML del editor de Blogger, sin clases: se estiliza por descendencia. */
+  .post-body { @apply text-lg leading-relaxed; }
+  .post-body > * + * { @apply mt-5; }
+  .post-body h2 { @apply mt-10 text-2xl font-bold; }
+  .post-body h3 { @apply mt-8 text-xl font-bold; }
+  .post-body a { @apply text-accent underline underline-offset-2; }
+  .post-body ul { @apply list-disc pl-6; }
+  .post-body ol { @apply list-decimal pl-6; }
+  .post-body blockquote { @apply border-l-4 border-accent pl-4 italic text-neutral-600 dark:text-neutral-300; }
+  .post-body img { @apply h-auto max-w-full rounded-lg; }
+  .post-body :not(pre) > code { @apply rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-neutral-800; }
+
+  /* Bloques de código + botón copiar (scripts/code.js) */
+  .code-block { @apply relative; }
+  .code-block pre { @apply overflow-x-auto rounded-lg bg-neutral-950 p-4 font-mono text-sm leading-relaxed text-neutral-200; tab-size: 2; }
+  .code-copy { @apply absolute right-2 top-2 cursor-pointer rounded-md border border-neutral-700 bg-neutral-900 px-2 py-1 font-sans text-xs text-neutral-300 opacity-0 transition-opacity hover:text-white focus-visible:opacity-100; }
+  .code-block:hover .code-copy { @apply opacity-100; }
+  @media (hover: none) { .code-copy { @apply opacity-100; } }
+
+  /* Tema de Prism (el fondo siempre es oscuro, así que sirve para ambos modos) */
+  .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #8b949e; }
+  .token.punctuation { color: #c9d1d9; }
+  .token.property, .token.tag, .token.constant, .token.symbol, .token.deleted { color: #7ee787; }
+  .token.boolean, .token.number { color: #79c0ff; }
+  .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #a5d6ff; }
+  .token.operator, .token.entity, .token.url { color: #c9d1d9; }
+  .token.atrule, .token.attr-value, .token.keyword { color: #ff7b72; }
+  .token.function, .token.class-name { color: #d2a8ff; }
+  .token.regex, .token.important, .token.variable { color: #ffa657; }
+}
