@@ -1,0 +1,30 @@
+name: Plantilla de Blogger
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Compila, minifica y valida; falla si el XML no es válido.
+      - run: npm run theme:build
+      # Segunda opinión independiente sobre que el XML esté bien formado.
+      - run: sudo apt-get install -y --no-install-recommends libxml2-utils && xmllint --noout dist/theme.xml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blogger-theme
+          path: dist/theme.xml
+          if-no-files-found: error
