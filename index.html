@@ -4,1296 +4,446 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>David Pinchao | About</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <meta name="description" content="David Pinchao: estudiante de Ingeniería de Sistemas en Popayán, Colombia. Desarrollo web, fotografía, deporte, guitarra y agricultura.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="profile">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:title" content="David Pinchao | Blog Personal">
+  <meta property="og:description" content="Desarrollo web, fotografía, deporte, guitarra y agricultura: las distintas facetas de David Pinchao.">
+  <!-- og:url, og:image y <link rel="canonical"> requieren la URL pública absoluta del sitio. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "David Pinchao",
+    "description": "Estudiante de Ingeniería de Sistemas con interés en el desarrollo web.",
+    "address": { "@type": "PostalAddress", "addressLocality": "Popayán", "addressRegion": "Cauca", "addressCountry": "CO" },
+    "knowsAbout": ["Desarrollo web", "Fotografía", "Running", "Natación", "Baloncesto", "Guitarra", "Agricultura"]
+  }
+  </script>
+  <link rel="preload" href="assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>
+    // Antes del primer pintado: aplica el tema guardado (si no hay, manda prefers-color-scheme vía CSS).
+    document.documentElement.classList.add('js');
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
+  </script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { height: 100%; font-family: 'Poppins', sans-serif; }
-
-    body { background: #ffffff; color: #222; position: relative; overflow-x: hidden; }
-    #particles-js { position: absolute; width: 100%; height: 100%; z-index: -1; }
-
-    .light-mode {
-      background-color: #f9f9f9;
-      color: #111;
-    }
-
-    .dark-mode {
-      background-color: #121212;
-      color: #f9f9f9;
-    }
-
-    .dark-mode nav {
-      background-color: #121212;
-      color: #f9f9f9;
-    }
-
-    .dark-mode .socials a {
-      color: #f9f9f9;
-    }
-
-    #mode-toggle i {
-        color: #222; /* Color del icono de luna en modo claro */
-    }
-
-    .dark-mode #mode-toggle i {
-        color: #f9f9f9; /* Color del icono de sol en modo oscuro */
-    }
-
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
-    nav .logo { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
-    nav .logo::before { content: ''; font-size: 1.2rem; }
-    nav ul { display: flex; list-style: none; gap: 1.5rem;}
-    nav ul li a { text-decoration: none; color: inherit; font-weight: 500; }
-    nav ul li a:hover { color: #ff6600; }
-
-    
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 2rem;
-      position: relative;
-    }
-    
-    .hero h1 span { color: #ff6600; }
-    .hero p { margin-top: 1rem; font-size: 1.2rem; color: #444; }
-    
-    .avatar {
-      margin-top: 2rem;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: url('./avatar.png') no-repeat center/cover;
-      border: 5px solid #ff6600;
-    }
-
-    .btn {
-      margin-top: 2rem;
-      padding: 0.8rem 1.5rem;
-      background: #ff6600;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .btn:hover { background: #e05500; }
-
-    .socials {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-    .socials a {
-      color: #333;
-      font-size: 1.4rem;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .socials a:hover { color: #ff6600; }
-
-    footer {
-      margin-top: 4rem;
-      text-align: center;
-      padding: 2rem;
-      background: #111;
-      color: white;
-    }
-    
-    #mode-toggle {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      margin-left: 1.5rem;
-    }
-
-  /* Estilos para la sección "Sobre mí" */
-  .about {
-    padding: 4rem 2rem;
-    text-align: center;
-  }
-
-  .about h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-
-
-
-
-  .about-item {
-    display: flex;
-    flex-direction: column; /* Texto encima de la imagen en móvil */
-    margin-bottom: 2rem;
-    opacity: 0; /* Inicialmente oculto para la animación */
-    transform: translateX(-50px); /* Empieza ligeramente a la izquierda */
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.about-item.show {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.about-item.reversed {
-    flex-direction: column-reverse; /* Imagen encima del texto en móvil */
-}
-
-.about-text {
-    margin-bottom: 1rem;
-}
-
-.about-text p {
-    line-height: 1.6;
-    color: #555;
-}
-
-.dark-mode .about-text p {
-    color: #ccc;
-}
-
-.about-image {
-    width: 150px; /* Ajusta el tamaño de los "portaretratos" */
-    height: 150px;
-    border-radius: 10px; /* O 50% para un círculo */
-    overflow: hidden; /* Recorta la imagen si no coincide con el aspect ratio */
-    margin: 0 auto 1rem; /* Centra la imagen en móvil */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: sombra */
-}
-
-.about-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Cubre el contenedor sin deformar la imagen */
-}
-
-/* Estilos para pantallas más grandes */
-@media (min-width: 769px) {
-    .about {
-        text-align: left; /* Alinea el texto a la izquierda en pantallas grandes */
-    }
-
-    .about-item {
-        flex-direction: row; /* Texto a la izquierda, imagen a la derecha por defecto */
-        align-items: center; /* Centra verticalmente texto e imagen */
-        margin-bottom: 3rem;
-        transform: translateX(-50px); /* Animación desde la izquierda por defecto */
-    }
-
-    .about-item.reversed {
-        flex-direction: row-reverse; /* Imagen a la izquierda, texto a la derecha */
-        transform: translateX(50px); /* Animación desde la derecha para reversed */
-    }
-
-    .about-text {
-        flex: 1; /* El texto ocupa el espacio disponible */
-        margin-right: 2rem;
-        margin-bottom: 0; /* Elimina el margen inferior en pantallas grandes */
-    }
-
-    .about-item.reversed .about-text {
-        margin-left: 2rem;
-        margin-right: 0;
-    }
-
-    .about-image {
-        width: 200px; /* Ajusta el tamaño en pantallas grandes */
-        height: 200px;
-        margin: 0; /* Elimina el centrado en móvil */
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-  .dark-mode .about h2 {
-    color: #f9f9f9;
-  }
-
-  .about p {
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 1rem;
-  }
-
-  .dark-mode .about p {
-    color: #ccc;
-  }
-
-
-
-
-
-
-
-  @media (max-width: 600px) {
-    .hero h1 { font-size: 2rem; }
-    nav ul { flex-direction: column; gap: 0.5rem; }
-    .about h2 { font-size: 1.8rem; }
-    .about p { font-size: 1rem; }
-  }
-
-    /* ... tus estilos existentes ... */
-
-    /* Estilos para el menú de hamburguesa (icono de Font Awesome) */
-  .burger {
-      display: none; /* Oculto por defecto en pantallas grandes */
-      cursor: pointer;
-      font-size: 1.5rem; /* Tamaño del icono */
-      margin-left: 20px;
-      color: #333; /* Color del icono */
-  }
-
-  .dark-mode .burger {
-      color: #f9f9f9; /* Color del icono en modo oscuro */
-  }
-
-  /* Estilos para la lista de navegación en móvil */
-  .nav-links {
-      position: fixed;
-      background-color: #fff; /* Fondo del menú desplegable */
-      height: auto; /* Ajusta la altura al contenido */
-      width: 100%; /* Ocupa todo el ancho */
-      top: -100%; /* Inicialmente oculto fuera de la parte superior */
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: top 0.3s ease-in-out;
-      z-index: 100; /* Asegura que esté por encima de otros elementos */
-      overflow: hidden; /* Oculta el contenido que se desborda */
-      padding-top: 60px; /* Espacio para que no se solape con la barra de navegación */
-  }
-
-  .dark-mode .nav-links {
-      background-color: #121212; /* Fondo del menú desplegable en modo oscuro */
-  }
-
-  .nav-links li {
-      opacity: 0; /* Inicialmente ocultos */
-      margin: 20px 0; /* Espacio vertical entre los enlaces */
-  }
-
-  .nav-links li a {
-      font-size: 1.2rem;
-      padding: 10px 20px; /* Añade un poco de espacio alrededor de los enlaces */
-      display: block; /* Para que ocupe todo el ancho del li y sea más fácil de tocar */
-  }
-
-  /* Clase para mostrar/ocultar la lista en móvil */
-  .nav-active {
-      top: 60px; /* Desciende desde la parte superior (ajusta según la altura de tu nav) */
-  }
-
-  .nav-active li {
-      opacity: 1;
-      transition: opacity 0.5s ease-in-out 0.3s; /* Retraso para la animación de aparición */
-  }
-
-  /* Media query para pantallas más pequeñas */
-  @media screen and (max-width: 768px) {
-      nav {
-          padding: 1rem; /* Reducir el padding del nav en móvil */
-          position: fixed; /* Fija la barra de navegación en la parte superior */
-          width: 100%;
-          z-index: 110; /* Asegura que esté por encima del menú desplegable */
-          display: flex; /* Habilitar flexbox en el nav */
-          justify-content: space-between; /* Espaciar logo y el contenedor del botón/burger */
-          align-items: center; /* Centrar verticalmente */
-      }
-      .nav-links {
-          display: flex;
-      }
-      .burger {
-          display: block; /* Mostrar el burger en pantallas pequeñas */
-      }
-      
-      #mode-toggle {
-          margin-left: auto; /* Empuja el botón de modo a la derecha en pantallas pequeñas */
-      }
-  }
-
-/* Rappi */
-
-.btn-rappi {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: #FF441F; /* El color característico de Rappi */
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 15px rgba(255, 68, 31, 0.3);
-}
-
-.btn-rappi:hover {
-    background-color: #e63d1a;
-    transform: translateY(-2px);
-    color: white;
-}
-
-.btn-rappi i {
-    margin-right: 8px;
-}
-
-
-
-
-
-  .skills {
-        padding: 40px 20px;
-        text-align: center;
-        background-color: #f9f9f9;
-    }
-
-    .skills h2 {
-        font-size: 2.5em;
-        margin-bottom: 20px;
-        color: #333;
-    }
-
-    .skills h2 i {
-        margin-right: 10px;
-    }
-
-    .skills-intro {
-        color: #666;
-        margin-bottom: 30px;
-    }
-
-    .skills-container {
-        display: grid;
-        gap: 30px;
-        padding: 0 20px;
-    }
-
-    @media (min-width: 768px) {
-        .skills-container {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 767px) {
-        .skills-container {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .skill-item {
-        background-color: #fff;
-        padding: 25px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        text-align: left;
-    }
-
-    .skill-item h3 {
-        font-size: 1.8em;
-        margin-bottom: 15px;
-        color: #333;
-    }
-
-    .skill-item h3 i {
-        margin-right: 10px;
-    }
-
-    .skill-details {
-        list-style: none;
-        padding: 0;
-        margin-top: 10px;
-    }
-
-    .skill-details li {
-        font-size: 0.95em;
-        color: #666;
-        display: flex;
-        align-items: center;
-        position: relative; /* Para posicionar el circular progress */
-        padding-bottom: 25px; /* Mayor espacio entre filas */
-    }
-
-    .skill-details li i {
-        margin-right: 15px;
-        font-size: 1.1em;
-        color: #007bff;
-        min-width: 20px;
-        text-align: center;
-    }
-
-    .circular-progress-wrapper {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px; /* Círculo más pequeño */
-        height: 40px;
-    }
-
-    .circular-progress {
-        transform: rotate(0deg); /* Asegura que el SVG no esté rotado inicialmente */
-    }
-
-    .circular-progress .bg {
-        stroke: #e9ecef;
-    }
-
-    .circular-progress .progress {
-        stroke: #007bff;
-        transition: stroke-dashoffset 0.8s ease-in-out;
-    }
-
-    .circular-progress text {
-        fill: #333;
-    }
-
-    /* Estilos para modo oscuro (opcional) */
-    .dark-mode .skills {
-        background-color: #333;
-        color: #eee;
-    }
-
-    .dark-mode .skills h2,
-    .dark-mode .skill-item h3 {
-        color: #eee;
-    }
-
-    .dark-mode .skill-item {
-        color: #ccc;
-        background-color: #444;
-        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-    }
-
-    .dark-mode .skill-details li,
-    .dark-mode .circular-progress text {
-        color: #ccc;
-    }
-
-    .dark-mode .circular-progress .bg {
-        stroke: #555;
-    }
-
-    .dark-mode .circular-progress .progress {
-        stroke: #aaa;
-    }
-
-    .dark-mode .skill-details li i {
-        color: #aaa;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    .contact {
-        padding: 60px 20px;
-        text-align: center;
-        background-color: #fff; /* Un fondo blanco o claro para la sección */
-    }
-
-    .contact h2 {
-        font-size: 2.5em;
-        margin-bottom: 20px;
-        color: #333;
-    }
-
-    .contact p {
-        color: #666;
-        margin-bottom: 30px;
-    }
-
-    .contact-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 40px;
-        padding: 0 20px;
-        max-width: 1000px; /* Limitar el ancho del contenedor */
-        margin: 0 auto;
-    }
-
-    .contact-form,
-    .contact-info {
-        padding: 30px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        text-align: left;
-    }
-
-    .contact-form h3,
-    .contact-info h3 {
-        font-size: 1.8em;
-        margin-bottom: 20px;
-        color: #333;
-        text-align: center;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #555;
+    @font-face { font-family: Poppins; font-weight: 400; font-display: swap; src: url(assets/fonts/poppins-latin-400-normal.woff2) format('woff2'); }
+    @font-face { font-family: Poppins; font-weight: 500; font-display: swap; src: url(assets/fonts/poppins-latin-500-normal.woff2) format('woff2'); }
+    @font-face { font-family: Poppins; font-weight: 700; font-display: swap; src: url(assets/fonts/poppins-latin-700-normal.woff2) format('woff2'); }
+    @property --p { syntax: '<number>'; inherits: true; initial-value: 0; }
+
+    /* ---------- Tokens ---------- */
+    :root {
+      color-scheme: light dark;
+      --bg: light-dark(#f9f9f9, #121212);
+      --panel: light-dark(#ffffff, #121212);
+      --band: light-dark(#f9f9f9, #1b1b1b);
+      --card: light-dark(#ffffff, #262626);
+      --card-alt: light-dark(#f9f9f9, #262626);
+      --text: light-dark(#222222, #f3f3f3);
+      --muted: light-dark(#555555, #c4c4c4);
+      --border: light-dark(#d4d4d4, #4a4a4a);
+      --shadow: light-dark(rgb(0 0 0 / .1), rgb(0 0 0 / .5));
+      --accent: #ff6600;
+      --accent-text: light-dark(#c2410c, #ff8a3d);
+      --on-accent: #1a1a1a;
+      --info: light-dark(#007bff, #9ec5ff);
+      --nav-h: 3.75rem;
+    }
+    :root[data-theme="light"] { color-scheme: light; }
+    :root[data-theme="dark"] { color-scheme: dark; }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+    body { font-family: Poppins, system-ui, sans-serif; line-height: 1.6; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    img, iframe { max-width: 100%; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; border-radius: 4px; }
+    .icon { width: 1em; height: 1em; flex: none; vertical-align: -.125em; }
+    .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 200; padding: .5rem 1rem; background: var(--accent); color: var(--on-accent); border-radius: 0 0 8px 8px; }
+    .skip-link:focus { top: 0; }
+
+    /* ---------- Navegación ---------- */
+    .site-header { position: sticky; top: 0; z-index: 100; background: var(--panel); box-shadow: 0 2px 5px var(--shadow); }
+    nav { display: flex; align-items: center; gap: 1rem; min-height: var(--nav-h); padding: 0 2rem; }
+    .logo { font-size: 1.5rem; font-weight: 700; margin-right: auto; }
+    .nav-links { display: flex; list-style: none; gap: 1.5rem; }
+    .nav-links a { text-decoration: none; font-weight: 500; padding: .5rem 0; }
+    .nav-links a:hover { color: var(--accent-text); }
+    .icon-btn { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; background: none; border: 0; border-radius: 50%; color: inherit; font-size: 1.25rem; cursor: pointer; }
+    .icon-btn:hover { color: var(--accent-text); }
+    #mode-toggle .i-sun, [aria-expanded="true"] .i-open, [aria-expanded="false"] .i-close { display: none; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme]) #mode-toggle .i-sun { display: block; } :root:not([data-theme]) #mode-toggle .i-moon { display: none; } }
+    [data-theme="dark"] #mode-toggle .i-sun { display: block; }
+    [data-theme="dark"] #mode-toggle .i-moon { display: none; }
+    .burger { display: none; }
+    @media (max-width: 768px) {
+      nav { padding: 0 1rem; gap: .25rem; }
+      .burger { display: grid; }
+      .nav-links { position: absolute; inset: 100% 0 auto; flex-direction: column; align-items: center; gap: 0; padding: 1rem 0; background: var(--panel); box-shadow: 0 6px 8px var(--shadow); visibility: hidden; opacity: 0; transform: translateY(-.5rem); transition: opacity .25s, transform .25s, visibility .25s; }
+      .nav-links.open { visibility: visible; opacity: 1; transform: none; }
+      .nav-links a { display: block; padding: .75rem 2rem; font-size: 1.2rem; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; min-height: calc(100vh - var(--nav-h)); min-height: calc(100svh - var(--nav-h)); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+    #particles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+    .hero h1 { font-size: clamp(1.75rem, 5vw, 2.25rem); line-height: 1.3; }
+    .hero h1 span, #typed { color: var(--accent-text); }
+    .hero h2 { font-size: 1.5rem; min-height: 1.6em; }
+    #typed::after { content: '|'; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .avatar { margin-top: 2rem; width: 180px; height: 180px; border-radius: 50%; border: 5px solid var(--accent); object-fit: cover; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; margin-top: 2rem; padding: .8rem 1.5rem; background: var(--accent); color: var(--on-accent); border: 0; border-radius: 30px; font: inherit; font-weight: 700; cursor: pointer; text-decoration: none; transition: background-color .2s, transform .2s; }
+    .btn:hover { background: #ff7f2a; transform: translateY(-2px); }
+    .btn-rappi { margin-top: 1.25rem; background: #ff441f; box-shadow: 0 4px 15px rgb(255 68 31 / .3); }
+    .btn-rappi:hover { background: #ff5c3b; }
+    .socials { margin-top: 2rem; display: flex; justify-content: center; gap: .25rem; }
+    .socials a { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; font-size: 1.4rem; color: var(--muted); transition: color .3s; }
+    .socials a:hover { color: var(--accent-text); }
+
+    /* ---------- Secciones ---------- */
+    section h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin-bottom: 1.25rem; }
+    .container { max-width: 1100px; margin-inline: auto; }
+
+    .about { padding: 4rem 2rem; text-align: center; }
+    .about p { color: var(--muted); margin-bottom: 1rem; }
+    .about-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .about-item.reversed { flex-direction: column-reverse; }
+    .about-image { width: 150px; height: 150px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 8px var(--shadow); }
+    .strava { display: block; margin: 1rem auto 0; border: 0; }
+    @media (min-width: 769px) {
+      .about { text-align: left; }
+      .about-item, .about-item.reversed { flex-direction: row; gap: 2rem; margin-bottom: 3rem; }
+      .about-item.reversed { flex-direction: row-reverse; }
+      .about-text { flex: 1; }
+      .about-image { width: 200px; height: 200px; }
+      .strava { margin-inline: 0; }
+    }
+
+    .skills { padding: 3rem 1.25rem; text-align: center; background: var(--band); }
+    .skills > .container > p { color: var(--muted); margin-bottom: 2rem; }
+    .skills-container { display: grid; gap: 30px; }
+    @media (min-width: 768px) { .skills-container { grid-template-columns: repeat(2, 1fr); } }
+    .skill-item { background: var(--card); padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px var(--shadow); text-align: left; }
+    .skill-item h3 { font-size: 1.6rem; margin-bottom: 1rem; }
+    .skill-details { list-style: none; }
+    .skill-details li { display: flex; align-items: center; gap: .9rem; padding-block: .45rem; color: var(--muted); font-size: .95rem; }
+    .skill-details .icon { font-size: 1.15rem; color: var(--info); }
+    .ring { --p: var(--v); position: relative; margin-left: auto; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font-size: .7rem; font-weight: 700; color: var(--text); background: conic-gradient(var(--info) calc(var(--p) * 1%), var(--border) 0); isolation: isolate; transition: --p .9s ease-out; }
+    .ring::before { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--card); z-index: -1; }
+
+    .contact { padding: 4rem 1.25rem; text-align: center; background: var(--panel); }
+    .contact > .container > p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 40px; max-width: 1000px; margin-inline: auto; }
+    .contact-form, .contact-info { padding: 30px; background: var(--card-alt); border-radius: 8px; box-shadow: 0 2px 5px var(--shadow); text-align: left; }
+    .contact h3 { font-size: 1.6rem; margin-bottom: 1.25rem; text-align: center; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-weight: 700; margin-bottom: .3rem; color: var(--muted); }
+    .form-group :is(input, textarea) { width: 100%; padding: .65rem; border: 1px solid var(--border); border-radius: 4px; font: inherit; color: var(--text); background: light-dark(#fff, #333); }
+    .form-group textarea { resize: vertical; }
+    .contact-form .btn { margin-top: 0; }
+    .contact-info p { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; color: var(--muted); }
+    .contact-info p .icon { font-size: 1.2rem; color: var(--info); }
+    .alert { margin-top: 1rem; padding: 15px; border: 1px solid light-dark(#c3e6cb, #375e4b); border-radius: 4px; color: light-dark(#155724, #a7f3d0); background: light-dark(#d4edda, #1e2e24); }
+
+    footer { text-align: center; padding: 2rem; background: #111; color: #fff; }
+
+    /* ---------- Animaciones de entrada (solo con JS y sin reduced-motion) ---------- */
+    @media (prefers-reduced-motion: no-preference) {
+      .js .about-item { opacity: 0; transform: translateX(-50px); transition: opacity .5s ease, transform .5s ease; }
+      .js .about-item.reversed { transform: translateX(50px); }
+      .js .about-item.in { opacity: 1; transform: none; }
+      .js .ring:not(.in) { --p: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
-
-    .form-group input[type="text"],
-    .form-group input[type="email"],
-    .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 1em;
-    }
-
-    .form-group textarea {
-        resize: vertical;
-    }
-
-    .contact-info p {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .contact-info p i {
-        margin-right: 10px;
-        color: #007bff;
-        font-size: 1.2em;
-        min-width: 20px; /* Para alinear los iconos */
-        text-align: center;
-    }
-
-    .contact-info .socials {
-        margin-top: 20px;
-        text-align: center;
-    }
-
-    .contact-info .socials a {
-        display: inline-block;
-        margin: 0 10px;
-        color: #555;
-        font-size: 1.5em;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .contact-info .socials a:hover {
-        color: #007bff;
-    }
-
-    .error-message {
-        color: red;
-        font-size: 0.8em;
-        margin-top: 5px;
-    }
-
-    .alert {
-        padding: 15px;
-        margin-bottom: 20px;
-        border: 1px solid transparent;
-        border-radius: 4px;
-    }
-
-    .alert-success {
-        color: #155724;
-        background-color: #d4edda;
-        border-color: #c3e6cb;
-    }
-
-    .alert-danger {
-        color: #721c24;
-        background-color: #f8d7da;
-        border-color: #f5c6cb;
-    }
-
-    .mt-3 {
-        margin-top: 1rem;
-    }
-
-    /* Estilos para modo oscuro (opcional) */
-    .dark-mode .contact {
-        background-color: #121212;
-        color: #eee;
-    }
-
-    .dark-mode .contact h2,
-    .dark-mode .contact-form h3,
-    .dark-mode .contact-info h3 {
-        color: #eee;
-    }
-
-    .dark-mode .contact p,
-    .dark-mode .contact-form label,
-    .dark-mode .contact-info p {
-        color: #ccc;
-    }
-
-    .dark-mode .contact-form,
-    .dark-mode .contact-info {
-        background-color: #444;
-        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-    }
-
-    .dark-mode .form-group input[type="text"],
-    .dark-mode .form-group input[type="email"],
-    .dark-mode .form-group textarea {
-        border-color: #666;
-        background-color: #555;
-        color: #eee;
-    }
-
-    .dark-mode .contact-info .socials a {
-        color: #ccc;
-    }
-
-    .dark-mode .contact-info .socials a:hover {
-        color: #aaa;
-    }
-
-    .dark-mode .alert-success {
-        color: #a7f3d0;
-        background-color: #1e2e24;
-        border-color: #375e4b;
-    }
-
-    .dark-mode .alert-danger {
-        color: #fca5a5;
-        background-color: #4c1d1d;
-        border-color: #842029;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
   </style>
-
 </head>
-<body class="light-mode">
-  <div id="particles-js"></div>
-  <nav>
-    <div class="logo">David Pinchao</div>
-    <ul class="nav-links">
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <nav aria-label="Principal">
+      <a class="logo" href="#" style="text-decoration:none">David Pinchao</a>
+      <ul class="nav-links" id="nav-links">
         <li><a href="#">Inicio</a></li>
         <li><a href="#sobre-mi">Sobre mí</a></li>
         <li><a href="#habilidades">Habilidades</a></li>
         <li><a href="#contacto">Contacto</a></li>
-    </ul>
-    <button id="mode-toggle"><i class="fas fa-moon"></i></button>
-    <div class="burger">
-        <i class="fas fa-bars"></i>
-    </div>
-  </nav>
+      </ul>
+      <button id="mode-toggle" class="icon-btn" type="button" aria-label="Cambiar entre modo claro y oscuro">
+        <svg class="icon i-moon" aria-hidden="true"><use href="assets/icons.svg#i-moon"/></svg>
+        <svg class="icon i-sun" aria-hidden="true"><use href="assets/icons.svg#i-sun"/></svg>
+      </button>
+      <button class="burger icon-btn" type="button" aria-label="Menú" aria-expanded="false" aria-controls="nav-links">
+        <svg class="icon i-open" aria-hidden="true"><use href="assets/icons.svg#i-menu"/></svg>
+        <svg class="icon i-close" aria-hidden="true"><use href="assets/icons.svg#i-close"/></svg>
+      </button>
+    </nav>
+  </header>
 
-  <main>
+  <main id="contenido">
     <section class="hero">
-      <h1>Hi there, I'm <span>David Pinchao</span></h1>
-      <h2>I Am Into <span id="typed"></span></h2>
-      <div class="avatar"></div>
+      <canvas id="particles" aria-hidden="true"></canvas>
+      <h1 lang="en">Hi there, I'm <span>David Pinchao</span></h1>
+      <h2 lang="en" aria-label="I Am Into Web Development, Sports, Photography, Music">I Am Into <span id="typed" data-strings="Web Development|Sports|Photography|Music">Web Development</span></h2>
+      <img class="avatar" src="assets/img/avatar-180.webp" srcset="assets/img/avatar-180.webp 1x, assets/img/avatar-360.webp 2x" width="180" height="180" alt="Avatar de David Pinchao" fetchpriority="high">
       <a href="#sobre-mi" class="btn">Sobre mí</a>
-
       <div class="socials">
-        <a href="#" title="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#" title="X"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="#" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
+        <a href="#" aria-label="X"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
       </div>
     </section>
-    
+
     <section id="sobre-mi" class="about">
+     <div class="container">
       <h2>¡Hola! Soy David Pinchao</h2>
 
       <div class="about-item">
-          <div class="about-text">
-              <p>Actualmente soy estudiante de <strong>Ingeniería de Sistemas</strong>, con un gran interés en el <strong>desarrollo web</strong>. Me apasiona la creación de soluciones digitales y la construcción de experiencias online funcionales y atractivas.</p>
-          </div>
-          <div class="about-image">
-              <img src="./inge.png" alt="Desarrollo Web">
-          </div>
+        <div class="about-text">
+          <p>Actualmente soy estudiante de <strong>Ingeniería de Sistemas</strong>, con un gran interés en el <strong>desarrollo web</strong>. Me apasiona la creación de soluciones digitales y la construcción de experiencias online funcionales y atractivas.</p>
+        </div>
+        <img class="about-image" src="assets/img/inge-200.webp" srcset="assets/img/inge-200.webp 1x, assets/img/inge-400.webp 2x" width="200" height="200" alt="Desarrollo Web" loading="lazy" decoding="async">
       </div>
-
       <div class="about-item reversed">
-          <div class="about-text">
-              <p>Aunque mi enfoque académico es la tecnología, mi corazón también late por la <strong>fotografía</strong>. Encuentro en ella una vía de expresión artística y una manera de capturar momentos únicos y perspectivas interesantes del mundo que me rodea.</p>
-          </div>
-          <div class="about-image">
-              <img src="./fotografo.png" alt="Fotografía">
-          </div>
-      </div>
-
-      <div class="about-item">
-          <div class="about-text">
-              <p>En cuanto a deportes, soy entusiasta del <strong>running</strong>, la <strong>natación</strong> y el <strong>baloncesto</strong>. Disfruto de la disciplina y la energía que cada uno aporta, tanto a nivel físico como mental.</p>
-              <iframe height='454' width='300' frameborder='0' allowtransparency='true' scrolling='no' src='https://www.strava.com/athletes/164622761/latest-rides/44a460fa1c2a4dfc1179d197f28e22fa1a6125a9'></iframe>
-          </div>
-          <div class="about-image">
-              <img src="./run.png" alt="Deportes">
-          </div>
-      </div>
-
-      <div class="about-item reversed">
-          <div class="about-text">
-              <p>Además, un amateur en <strong>guitarra</strong>. Explorar el mundo de la música y aprender a tocar este instrumento es una actividad que me relaja y me permite desarrollar una nueva forma de creatividad.</p>
-          </div>
-          <div class="about-image">
-              <img src="./guitar.png" alt="Guitarra">
-          </div>
+        <div class="about-text">
+          <p>Aunque mi enfoque académico es la tecnología, mi corazón también late por la <strong>fotografía</strong>. Encuentro en ella una vía de expresión artística y una manera de capturar momentos únicos y perspectivas interesantes del mundo que me rodea.</p>
+        </div>
+        <img class="about-image" src="assets/img/fotografo-200.webp" srcset="assets/img/fotografo-200.webp 1x, assets/img/fotografo-400.webp 2x" width="200" height="200" alt="Fotografía" loading="lazy" decoding="async">
       </div>
       <div class="about-item">
         <div class="about-text">
-            <p>Mi conexión con la tierra se manifiesta en mi labor como <strong>agricultor</strong>. Disfruto del proceso de siembra y cosecha, cultivando alimentos frescos y valorando la importancia de la sostenibilidad y el respeto por el medio ambiente en el campo.</p>
+          <p>En cuanto a deportes, soy entusiasta del <strong>running</strong>, la <strong>natación</strong> y el <strong>baloncesto</strong>. Disfruto de la disciplina y la energía que cada uno aporta, tanto a nivel físico como mental.</p>
+          <iframe class="strava" title="Actividad reciente en Strava" loading="lazy" width="300" height="454" src="https://www.strava.com/athletes/164622761/latest-rides/44a460fa1c2a4dfc1179d197f28e22fa1a6125a9"></iframe>
         </div>
-        <div class="about-image">
-            <img src="./agricultor.jpg" alt="Agricultura">
-        </div>
+        <img class="about-image" src="assets/img/run-200.webp" srcset="assets/img/run-200.webp 1x, assets/img/run-400.webp 2x" width="200" height="200" alt="Deportes" loading="lazy" decoding="async">
       </div>
-
       <div class="about-item reversed">
         <div class="about-text">
-            <p>En mis tiempos libres, también colaboro como <strong>repartidor de Rappi</strong>. Esta experiencia me permite interactuar con diversas personas de la ciudad y contribuir a la economía local, moviéndome de manera ágil para realizar entregas eficientes.</p>
-                
-            <div class="cta-container" style="margin-top: 20px;">
-                <a href="https://www.youtube.com/@ldavorappi" target="_blank" class="btn-rappi">
-                    <i class="fab fa-youtube"></i> Ver canal de Rappi
-                </a>
-            </div>
+          <p>Además, un amateur en <strong>guitarra</strong>. Explorar el mundo de la música y aprender a tocar este instrumento es una actividad que me relaja y me permite desarrollar una nueva forma de creatividad.</p>
         </div>
-        <div class="about-image">
-            <img src="./repartidor_rappi.png" alt="Repartidor de Rappi">
+        <img class="about-image" src="assets/img/guitar-200.webp" srcset="assets/img/guitar-200.webp 1x, assets/img/guitar-400.webp 2x" width="200" height="200" alt="Guitarra" loading="lazy" decoding="async">
+      </div>
+      <div class="about-item">
+        <div class="about-text">
+          <p>Mi conexión con la tierra se manifiesta en mi labor como <strong>agricultor</strong>. Disfruto del proceso de siembra y cosecha, cultivando alimentos frescos y valorando la importancia de la sostenibilidad y el respeto por el medio ambiente en el campo.</p>
         </div>
+        <img class="about-image" src="assets/img/agricultor-200.webp" srcset="assets/img/agricultor-200.webp 1x, assets/img/agricultor-400.webp 2x" width="200" height="200" alt="Agricultura" loading="lazy" decoding="async">
+      </div>
+      <div class="about-item reversed">
+        <div class="about-text">
+          <p>En mis tiempos libres, también colaboro como <strong>repartidor de Rappi</strong>. Esta experiencia me permite interactuar con diversas personas de la ciudad y contribuir a la economía local, moviéndome de manera ágil para realizar entregas eficientes.</p>
+          <a href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" class="btn btn-rappi"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg> Ver canal de Rappi</a>
+        </div>
+        <img class="about-image" src="assets/img/repartidor_rappi-200.webp" srcset="assets/img/repartidor_rappi-200.webp 1x, assets/img/repartidor_rappi-400.webp 2x" width="200" height="200" alt="Repartidor de Rappi" loading="lazy" decoding="async">
       </div>
 
-  <p>Este espacio es una ventana a mis diferentes facetas: desde mis avances en el desarrollo web hasta mis exploraciones fotográficas, pasando por mi actividad deportiva, mis primeros pasos con la guitarra, mi labor en la agricultura y mis recorridos como repartidor. ¡Espero que disfrutes conociéndome un poco más!</p>
-
+      <p>Este espacio es una ventana a mis diferentes facetas: desde mis avances en el desarrollo web hasta mis exploraciones fotográficas, pasando por mi actividad deportiva, mis primeros pasos con la guitarra, mi labor en la agricultura y mis recorridos como repartidor. ¡Espero que disfrutes conociéndome un poco más!</p>
+     </div>
     </section>
 
     <section id="habilidades" class="skills">
-        <h2><i class="fas fa-code"></i> Mis Habilidades</h2>
-        <p class="skills-intro">Aquí puedes explorar de forma interactiva algunas de mis habilidades y cuánto las he desarrollado.</p>
-
-        <div class="skills-container">
-            <div class="skill-item">
-                <h3><i class="fab fa-html5"></i> Desarrollo Web</h3>
-                <ul class="skill-details">
-                    <li style="padding-bottom: 30px;">
-                        <i class="fab fa-html5"></i> HTML
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="80" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fab fa-css3-alt"></i> CSS
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="60" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fab fa-js"></i> JavaScript
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="40" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fab fa-react"></i> React
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="50" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fab fa-node-js"></i> Node.js
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="50" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="skill-item">
-                <h3><i class="fas fa-camera"></i> Fotografía</h3>
-                <ul class="skill-details">
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-camera-retro"></i> Composición
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="80" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-paint-brush"></i> Edición
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="75" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-user-circle"></i> Fotografía de retrato
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="90" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-mountain"></i> Fotografía de paisaje
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="85" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="skill-item">
-                <h3><i class="fas fa-running"></i> Deportes</h3>
-                <ul class="skill-details">
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-shoe-prints"></i> Running
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="60" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-swimmer"></i> Natación
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="65" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-basketball-ball"></i> Baloncesto
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="55" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-dumbbell"></i> Acondicionamiento físico
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="10" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="skill-item">
-                <h3><i class="fas fa-guitar"></i> Guitarra</h3>
-                <ul class="skill-details">
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-music"></i> Acordes básicos
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="40" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-headphones"></i> Ritmos sencillos
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="20" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                    <li style="padding-bottom: 30px;">
-                        <i class="fas fa-book-open"></i> Teoría musical
-                        <div class="circular-progress-wrapper">
-                            <svg class="circular-progress" width="40" height="40" viewBox="0 0 40 40">
-                                <circle class="bg" cx="20" cy="20" r="18" stroke-width="3" fill="none" />
-                                <circle class="progress" cx="20" cy="20" r="18" stroke-width="3" fill="none" transform="rotate(-90 20 20)" stroke-dasharray="113.1" stroke-dashoffset="113.1" data-percentage="15" />
-                                <text x="20" y="22" text-anchor="middle" font-size="0.8em" font-weight="bold" fill="#333">0%</text>
-                            </svg>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+     <div class="container">
+      <h2><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Mis Habilidades</h2>
+      <p>Aquí puedes explorar de forma interactiva algunas de mis habilidades y cuánto las he desarrollado.</p>
+      <div class="skills-container">
+        <article class="skill-item">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Desarrollo Web</h3>
+          <ul class="skill-details">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-html"/></svg> HTML <span class="ring" style="--v:80">80%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> CSS <span class="ring" style="--v:60">60%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> JavaScript <span class="ring" style="--v:40">40%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React <span class="ring" style="--v:50">50%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js <span class="ring" style="--v:50">50%</span></li>
+          </ul>
+        </article>
+        <article class="skill-item">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-camera"/></svg> Fotografía</h3>
+          <ul class="skill-details">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-aperture"/></svg> Composición <span class="ring" style="--v:80">80%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-brush"/></svg> Edición <span class="ring" style="--v:75">75%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-portrait"/></svg> Fotografía de retrato <span class="ring" style="--v:90">90%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mountain"/></svg> Fotografía de paisaje <span class="ring" style="--v:85">85%</span></li>
+          </ul>
+        </article>
+        <article class="skill-item">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Deportes</h3>
+          <ul class="skill-details">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-run"/></svg> Running <span class="ring" style="--v:60">60%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-swim"/></svg> Natación <span class="ring" style="--v:65">65%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-ball"/></svg> Baloncesto <span class="ring" style="--v:55">55%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-dumbbell"/></svg> Acondicionamiento físico <span class="ring" style="--v:10">10%</span></li>
+          </ul>
+        </article>
+        <article class="skill-item">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-guitar"/></svg> Guitarra</h3>
+          <ul class="skill-details">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-music"/></svg> Acordes básicos <span class="ring" style="--v:40">40%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headphones"/></svg> Ritmos sencillos <span class="ring" style="--v:20">20%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Teoría musical <span class="ring" style="--v:15">15%</span></li>
+          </ul>
+        </article>
+      </div>
+     </div>
     </section>
 
     <section id="contacto" class="contact">
-        <h2>¡Contáctame!</h2>
-        <p>¿Tienes alguna pregunta, propuesta o simplemente quieres saludar? ¡No dudes en ponerte en contacto conmigo a través del formulario o mis redes sociales!</p>
-    
-        <div class="contact-container">
-            <div class="contact-form">
-                <h3>Enviar un mensaje</h3>
-                <form id="contactForm" action="#" method="POST">
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                        <div class="error-message" id="nombreError"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                        <div class="error-message" id="emailError"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="mensaje">Mensaje</label>
-                        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
-                        <div class="error-message" id="mensajeError"></div>
-                    </div>
-                    <button type="submit" class="btn">Enviar Mensaje</button>
-                </form>
-                <div id="alert-success" class="alert alert-success mt-3" role="alert" style="display: none;">
-                    ¡Mensaje enviado correctamente!
-                </div>
-                <div id="alert-error" class="alert alert-danger mt-3" role="alert" style="display: none;">
-                    Por favor, corrige los errores en el formulario.
-                </div>
-            </div>
-            <div class="contact-info">
-                <h3>Información de Contacto</h3>
-                <p><i class="fas fa-envelope"></i> david.pinchao@email.com</p>
-                <p><i class="fas fa-phone"></i> +57 3XX XXX XXXX</p>
-                <p><i class="fas fa-map-marker-alt"></i> Popayán, Cauca, Colombia</p>
-                <div class="socials">
-                    <a href="#" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" title="X"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
+     <div class="container">
+      <h2>¡Contáctame!</h2>
+      <p>¿Tienes alguna pregunta, propuesta o simplemente quieres saludar? ¡No dudes en ponerte en contacto conmigo a través del formulario o mis redes sociales!</p>
 
-    <footer>
-      <p>&copy; 2025 David Pinchao | Blog Personal. Todos los derechos reservados.</p>
-    </footer>
+      <div class="contact-container">
+        <div class="contact-form">
+          <h3>Enviar un mensaje</h3>
+          <form id="contactForm" action="#" method="POST">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+            <div class="form-group">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn">Enviar Mensaje</button>
+          </form>
+          <div id="alert-success" class="alert" role="status" hidden>¡Mensaje enviado correctamente!</div>
+        </div>
+        <div class="contact-info">
+          <h3>Información de Contacto</h3>
+          <p><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mail"/></svg> david.pinchao@email.com</p>
+          <p><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"/></svg> +57 3XX XXX XXXX</p>
+          <p><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-pin"/></svg> Popayán, Cauca, Colombia</p>
+          <div class="socials">
+        <a href="#" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
+        <a href="#" aria-label="X"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
+          </div>
+        </div>
+      </div>
+     </div>
+    </section>
   </main>
 
+  <footer>
+    <p>&copy; 2025 David Pinchao | Blog Personal. Todos los derechos reservados.</p>
+  </footer>
 
-  <script>
-    var typed = new Typed("#typed", {
-      strings: ["Web Development", "Sports", "Photography", "Music"],
-      typeSpeed: 60,
-      backSpeed: 30,
-      loop: true
+  <script type="module">
+    const $ = (s, el = document) => el.querySelector(s);
+    const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+    const root = document.documentElement;
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isDark = () => (root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark';
+
+    // ----- Tema claro/oscuro (persistente) -----
+    $('#mode-toggle').addEventListener('click', () => {
+      root.dataset.theme = isDark() ? 'light' : 'dark';
+      try { localStorage.setItem('theme', root.dataset.theme); } catch {}
     });
 
-    const toggleBtn = document.getElementById('mode-toggle');
-    const body = document.body;
-    const modeIcon = toggleBtn.querySelector('i');
+    // ----- Menú móvil -----
+    const burger = $('.burger'), navLinks = $('#nav-links');
+    const setMenu = (open) => { navLinks.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); };
+    burger.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
+    navLinks.addEventListener('click', (e) => e.target.closest('a') && setMenu(false));
+    addEventListener('keydown', (e) => e.key === 'Escape' && setMenu(false));
 
-    toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      body.classList.toggle('light-mode');
-      if (body.classList.contains('dark-mode')) {
-          modeIcon.classList.remove('fa-moon');
-          modeIcon.classList.add('fa-sun');
-      } else {
-          modeIcon.classList.remove('fa-sun');
-          modeIcon.classList.add('fa-moon');
-      }
-    });
+    // ----- Animaciones de entrada (una sola vez por elemento) -----
+    const reveal = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
+    }, { threshold: 0.25 });
+    $$('.about-item, .ring').forEach((el) => reveal.observe(el));
 
-
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#000000" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.3 },
-        "size": { "value": 4 },
-        "line_linked": { "enable": true, "distance": 150, "color": "#000000", "opacity": 0.2, "width": 1 },
-        "move": { "enable": true, "speed": 3 }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": { "onhover": { "enable": true, "mode": "grab" } },
-        "modes": { "grab": { "distance": 200, "line_linked": { "opacity": 0.4 } } }
-      },
-      "retina_detect": true
-    });
-
-    const burger = document.querySelector('.burger');
-    const navLinks = document.querySelector('.nav-links');
-    const navLinksLi = document.querySelectorAll('.nav-links li');
-    const burgerIcon = document.querySelector('.burger i'); // Selecciona el icono
-
-    burger.addEventListener('click', () => {
-        // Activar/desactivar la clase nav-active para mostrar/ocultar la lista
-        navLinks.classList.toggle('nav-active');
-
-        // Cambiar el icono al abrir/cerrar
-        burgerIcon.classList.toggle('fa-bars');
-        burgerIcon.classList.toggle('fa-times');
-
-        // Animar la aparición de los links
-        navLinksLi.forEach((link, index) => {
-            if (link.style.animation) {
-                link.style.animation = '';
-            } else {
-                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
-            }
-        });
-
-        // Desactivar el scroll del body cuando el menú está abierto
-        if (navLinks.classList.contains('nav-active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    // Cerrar el menú al hacer clic en un enlace
-    navLinksLi.forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('nav-active');
-            burgerIcon.classList.remove('fa-times');
-            burgerIcon.classList.add('fa-bars');
-            document.body.style.overflow = 'auto'; // Reactivar el scroll
-        });
-    });
-
-
-    const aboutItems = document.querySelectorAll('.about-item');
-
-    function checkSlide() {
-        aboutItems.forEach(item => {
-            const slideInAt = (window.scrollY + window.innerHeight) - item.offsetHeight / 2;
-            const itemBottom = item.offsetTop + item.offsetHeight;
-            const isHalfShown = slideInAt > item.offsetTop;
-            const isNotScrolledPast = window.scrollY < itemBottom;
-
-            if (isHalfShown && isNotScrolledPast) {
-                item.classList.add('show');
-            } else {
-                item.classList.remove('show');
-            }
-        });
+    // ----- Efecto máquina de escribir -----
+    const typed = $('#typed');
+    if (!reducedMotion) {
+      const words = typed.dataset.strings.split('|');
+      let w = 0, n = words[0].length, dir = -1;
+      const tick = () => {
+        n += dir;
+        typed.textContent = words[w].slice(0, n);
+        let delay = dir > 0 ? 60 : 30;
+        if (n === words[w].length) { dir = -1; delay = 1400; }
+        else if (n === 0) { dir = 1; w = (w + 1) % words.length; delay = 300; }
+        setTimeout(tick, delay);
+      };
+      setTimeout(tick, 1400);
     }
 
-    window.addEventListener('scroll', checkSlide);
-
-
-
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const circularProgressWrappers = document.querySelectorAll('.circular-progress-wrapper');
-
-        const animateProgress = (wrapper) => {
-            const svg = wrapper.querySelector('.circular-progress');
-            const progressCircle = svg.querySelector('.progress');
-            const valueText = svg.querySelector('text');
-            const percentage = parseInt(progressCircle.getAttribute('data-percentage'));
-
-            const circumference = parseFloat(progressCircle.getAttribute('stroke-dasharray'));
-            const offset = circumference - (percentage / 100) * circumference;
-
-            progressCircle.style.strokeDashoffset = offset;
-            valueText.textContent = `${percentage}%`;
-        };
-
-        const handleScroll = () => {
-            circularProgressWrappers.forEach(wrapper => {
-                const rect = wrapper.getBoundingClientRect();
-                const isInView = (rect.top >= 0 && rect.bottom <= window.innerHeight);
-
-                if (isInView && !wrapper.dataset.animated) {
-                    animateProgress(wrapper);
-                    wrapper.dataset.animated = true; // Marca como animado
-                }
-            });
-        };
-
-        // Animar los elementos que estén en la vista inicial
-        circularProgressWrappers.forEach(wrapper => {
-            const rect = wrapper.getBoundingClientRect();
-            const isInView = (rect.top >= 0 && rect.bottom <= window.innerHeight);
-            if (isInView) {
-                animateProgress(wrapper);
-                wrapper.dataset.animated = true;
-            }
-        });
-
-        // Inicialmente, establecer el offset para que los círculos estén vacíos
-        circularProgressWrappers.forEach(wrapper => {
-            const svg = wrapper.querySelector('.circular-progress');
-            const progressCircle = svg.querySelector('.progress');
-            const valueText = svg.querySelector('text');
-            const circumference = parseFloat(progressCircle.getAttribute('stroke-dasharray'));
-            progressCircle.style.strokeDashoffset = circumference;
-            valueText.textContent = '0%';
-        });
-
-        window.addEventListener('scroll', handleScroll);
+    // ----- Formulario de contacto -----
+    // La validación la hace el navegador (required / type=email).
+    // TODO: conectar a un backend real (p. ej. Formspree); por ahora el envío es simulado.
+    const form = $('#contactForm'), ok = $('#alert-success');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.reset();
+      ok.hidden = false;
+      setTimeout(() => { ok.hidden = true; }, 5000);
     });
 
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const contactForm = document.getElementById('contactForm');
-        const nombreInput = document.getElementById('nombre');
-        const emailInput = document.getElementById('email');
-        const mensajeInput = document.getElementById('mensaje');
-        const nombreError = document.getElementById('nombreError');
-        const emailError = document.getElementById('emailError');
-        const mensajeError = document.getElementById('mensajeError');
-        const alertSuccess = document.getElementById('alert-success');
-        const alertError = document.getElementById('alert-error');
-
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar el envío por defecto
-
-            let isValid = true;
-
-            // Validar nombre
-            if (nombreInput.value.trim() === '') {
-                nombreError.textContent = 'Por favor, ingresa tu nombre.';
-                isValid = false;
-            } else {
-                nombreError.textContent = '';
-            }
-
-            // Validar email
-            if (emailInput.value.trim() === '') {
-                emailError.textContent = 'Por favor, ingresa tu email.';
-                isValid = false;
-            } else if (!isValidEmail(emailInput.value.trim())) {
-                emailError.textContent = 'Por favor, ingresa un email válido.';
-                isValid = false;
-            } else {
-                emailError.textContent = '';
-            }
-
-            // Validar mensaje
-            if (mensajeInput.value.trim() === '') {
-                mensajeError.textContent = 'Por favor, ingresa un mensaje.';
-                isValid = false;
-            } else {
-                mensajeError.textContent = '';
-            }
-
-            if (isValid) {
-                // Aquí puedes agregar la lógica para enviar el formulario
-                // (por ejemplo, usando fetch API para enviar los datos a un servidor)
-
-                // Simulación de envío exitoso
-                alertSuccess.style.display = 'block';
-                alertError.style.display = 'none';
-                contactForm.reset(); // Limpiar el formulario después del éxito
-
-                // Ocultar la alerta de éxito después de unos segundos (opcional)
-                setTimeout(() => {
-                    alertSuccess.style.display = 'none';
-                }, 5000);
-
-            } else {
-                alertError.style.display = 'block';
-                alertSuccess.style.display = 'none';
-            }
-        });
-
-        function isValidEmail(email) {
-            // Expresión regular básica para validar el formato del email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+    // ----- Fondo de partículas (reemplaza particles.js) -----
+    const canvas = $('#particles'), ctx = canvas.getContext('2d');
+    const LINK = 150, SPEED = 0.6;
+    let dots = [], W = 0, H = 0, raf = 0, visible = true;
+    const resize = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      W = canvas.clientWidth; H = canvas.clientHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(80, Math.round((W * H) / 14000));
+      dots = Array.from({ length: count }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 2 * SPEED, vy: (Math.random() - 0.5) * 2 * SPEED,
+      }));
+    };
+    const draw = () => {
+      const rgb = isDark() ? '255 255 255' : '0 0 0';
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = `rgb(${rgb} / .3)`;
+      for (const [i, d] of dots.entries()) {
+        d.x += d.vx; d.y += d.vy;
+        if (d.x < 0 || d.x > W) d.vx *= -1;
+        if (d.y < 0 || d.y > H) d.vy *= -1;
+        ctx.beginPath(); ctx.arc(d.x, d.y, 3, 0, 6.2832); ctx.fill();
+        for (let j = i + 1; j < dots.length; j++) {
+          const o = dots[j], dist = Math.hypot(d.x - o.x, d.y - o.y);
+          if (dist < LINK) {
+            ctx.strokeStyle = `rgb(${rgb} / ${0.2 * (1 - dist / LINK)})`;
+            ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(o.x, o.y); ctx.stroke();
+          }
         }
+      }
+    };
+    const loop = () => { draw(); raf = requestAnimationFrame(loop); };
+    const sync = () => {
+      cancelAnimationFrame(raf);
+      if (reducedMotion) draw();                       // un único fotograma estático
+      else if (visible && !document.hidden) loop();    // solo anima mientras se ve
+    };
+    (window.requestIdleCallback ?? setTimeout)(() => {
+      resize();
+      new ResizeObserver(() => { resize(); sync(); }).observe(canvas);
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(canvas);
+      document.addEventListener('visibilitychange', sync);
+      $('#mode-toggle').addEventListener('click', () => reducedMotion && draw());
     });
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </script>
 </body>
 </html>

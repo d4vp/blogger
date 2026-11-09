@@ -1,0 +1,12 @@
+{
+  "name": "blogger",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "images": "node scripts/optimize-images.mjs",
+    "dev": "npx --yes serve ."
+  },
+  "devDependencies": {
+    "sharp": "^0.35.0"
+  }
+}
