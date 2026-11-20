@@ -223,6 +223,8 @@
     .support-card p { color: var(--muted); font-size: .9rem; }
     .support-card .btn { margin-top: auto; justify-content: center; }
     .support-card.featured { border: 2px solid var(--accent); }
+    .support-card[hidden] { display: none; }
+    .support-grid:not(:has(.support-card:not(.featured):not([hidden]))) { max-width: 420px; margin-inline: auto; }
     .qr { display: grid; place-items: center; width: 140px; aspect-ratio: 1; margin: .25rem auto; border: 2px dashed var(--border); border-radius: 12px; color: var(--muted); font-size: .75rem; text-align: center; }
     .qr .icon { font-size: 2.5rem; }
     .copy-key { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; padding: .55rem .9rem; border-radius: 30px; border: 2px solid var(--accent); background: none; color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
@@ -251,6 +253,7 @@
     .support-dialog .actions { display: grid; gap: .6rem; margin-top: 1rem; }
     .support-dialog .actions .btn { margin: 0; justify-content: center; }
     .support-dialog .close { position: absolute; top: .5rem; right: .5rem; }
+    .support-dialog [hidden] { display: none; }
     .support-dialog small { display: block; margin-top: .75rem; font-size: .75rem; color: var(--muted); }
     .ad-status { min-height: 1.4em; font-weight: 500; color: var(--accent-text); }
     footer { padding-bottom: 5.5rem; }
@@ -537,30 +540,30 @@
     <section id="apoyame" class="support">
      <div class="container">
       <h2><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Apóyame</h2>
-      <p class="section-lead">Tu apoyo paga el hosting de KhipuOps, Copa Arrayanes y HogarSync, y me ayuda a terminar el videojuego. Puedes donar o, si prefieres, <strong>apoyar gratis viendo un anuncio</strong>.</p>
-      <!-- TODO: reemplazar TU_USUARIO / TU_LLAVE y la imagen del QR por los datos reales. -->
+      <p class="section-lead">Tu apoyo paga el hosting de KhipuOps, Copa Arrayanes y HogarSync, y me ayuda a terminar el videojuego. Puedes <strong>apoyar gratis viendo un anuncio</strong>; muy pronto habrá más formas de donar.</p>
+      <!-- Tarjetas ocultas con "hidden" hasta tener los datos reales: pon tu usuario / llave / QR y quita el atributo hidden para mostrarlas. -->
       <div class="support-grid">
         <article class="support-card featured reveal">
           <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg> Mira un anuncio</h3>
           <p>Gratis para ti: ves un anuncio corto y lo que paga el anunciante me llega a mí.</p>
           <button type="button" class="btn" data-open-support><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg> Apoyar con un anuncio</button>
         </article>
-        <article class="support-card reveal">
+        <article class="support-card reveal" hidden>
           <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-coffee"/></svg> Ko-fi</h3>
           <p>Invítame un café desde cualquier país, con tarjeta o PayPal.</p>
           <a class="btn" href="https://ko-fi.com/TU_USUARIO" target="_blank" rel="noopener">Invitar un café</a>
         </article>
-        <article class="support-card reveal">
+        <article class="support-card reveal" hidden>
           <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-wallet"/></svg> PayPal</h3>
           <p>Un aporte del monto que quieras.</p>
           <a class="btn" href="https://paypal.me/TU_USUARIO" target="_blank" rel="noopener">Donar con PayPal</a>
         </article>
-        <article class="support-card reveal">
+        <article class="support-card reveal" hidden>
           <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> GitHub Sponsors</h3>
           <p>Para quienes usan o siguen mis proyectos de código.</p>
           <a class="btn" href="https://github.com/sponsors/d4vp" target="_blank" rel="noopener">Patrocinar</a>
         </article>
-        <article class="support-card reveal">
+        <article class="support-card reveal" hidden>
           <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-qr"/></svg> Nequi / Bre-B</h3>
           <p>Desde Colombia, sin comisiones.</p>
           <!-- Reemplaza este div por: <img class="qr" src="assets/img/qr-nequi.webp" alt="Código QR para donar por Nequi" width="140" height="140"> -->
@@ -628,7 +631,8 @@
     <p class="ad-status" role="status" aria-live="polite"></p>
     <div class="actions">
       <button type="button" class="btn" id="watch-ad"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg> Ver anuncio</button>
-      <a class="btn" href="#apoyame" data-close style="background:transparent;color:var(--text);box-shadow:inset 0 0 0 2px var(--accent)"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Otras formas de apoyar</a>
+      <!-- Quita "hidden" cuando estén activas las tarjetas de donación. -->
+      <a class="btn" href="#apoyame" data-close hidden style="background:transparent;color:var(--text);box-shadow:inset 0 0 0 2px var(--accent)"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Otras formas de apoyar</a>
     </div>
     <small>Los anuncios los sirve Google. Nunca tienes que hacer clic en ellos.</small>
   </dialog>
@@ -820,8 +824,8 @@
         });
       } catch (err) {
         adStatus.textContent = err.message === 'bloqueado'
-          ? 'Parece que un bloqueador de anuncios lo impidió. Puedes apoyar de otras formas 💛'
-          : 'Los anuncios todavía no están activos. ¡Muy pronto! Mientras tanto, mira otras formas de apoyar.';
+          ? 'Parece que un bloqueador de anuncios lo impidió. Gracias igual por la intención 💛'
+          : 'Los anuncios todavía no están activos. ¡Muy pronto podrás echar tu moneda a la alcancía! 🪙';
         watchBtn.disabled = false;
       }
     });
