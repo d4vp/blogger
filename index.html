@@ -214,6 +214,47 @@
 
     footer { text-align: center; padding: 2rem; background: #111; color: #fff; }
 
+    /* ---------- Apóyame ---------- */
+    .support { padding: 4rem 1.25rem; text-align: center; }
+    .support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 1.25rem; text-align: left; }
+    .support-card { display: flex; flex-direction: column; gap: .6rem; padding: 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 2px 5px var(--shadow); }
+    .support-card h3 { display: flex; align-items: center; gap: .5rem; font-size: 1.15rem; }
+    .support-card h3 .icon { color: var(--accent-text); }
+    .support-card p { color: var(--muted); font-size: .9rem; }
+    .support-card .btn { margin-top: auto; justify-content: center; }
+    .support-card.featured { border: 2px solid var(--accent); }
+    .qr { display: grid; place-items: center; width: 140px; aspect-ratio: 1; margin: .25rem auto; border: 2px dashed var(--border); border-radius: 12px; color: var(--muted); font-size: .75rem; text-align: center; }
+    .qr .icon { font-size: 2.5rem; }
+    .copy-key { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; padding: .55rem .9rem; border-radius: 30px; border: 2px solid var(--accent); background: none; color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
+    .copy-key:hover { background: var(--accent); color: var(--on-accent); }
+
+    /* ---------- Alcancía flotante ---------- */
+    .piggy-fab { position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 150; display: grid; place-items: center; width: 3.75rem; height: 3.75rem; border: 0; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-size: 1.75rem; cursor: pointer; box-shadow: 0 6px 18px rgb(255 102 0 / .45); transition: transform .2s; }
+    .piggy-fab:hover { transform: scale(1.08) rotate(-6deg); }
+    .piggy-fab .coin { position: absolute; top: -.2rem; left: 50%; width: .9rem; height: .9rem; margin-left: -.1rem; border-radius: 50%; background: #ffd23f; border: 2px solid #b8860b; box-shadow: inset -2px -2px 0 rgb(0 0 0 / .15); }
+    .piggy-fab .tip { position: absolute; right: calc(100% + .6rem); white-space: nowrap; padding: .35rem .7rem; border-radius: 8px; background: var(--card); color: var(--text); font-size: .8rem; font-weight: 500; box-shadow: 0 2px 8px var(--shadow); opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; pointer-events: none; }
+    .piggy-fab:is(:hover, :focus-visible) .tip { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: no-preference) {
+      .piggy-fab .coin { animation: coin-drop 3.2s ease-in infinite; }
+    }
+    @keyframes coin-drop {
+      0%, 55% { transform: translateY(-1.4rem) rotateY(0); opacity: 0; }
+      65% { opacity: 1; }
+      85% { transform: translateY(.35rem) rotateY(360deg); opacity: 1; }
+      100% { transform: translateY(.6rem) rotateY(360deg); opacity: 0; }
+    }
+    .support-dialog { margin: auto; width: min(440px, calc(100% - 2rem)); padding: 1.75rem; border: 0; border-radius: 16px; background: var(--panel); color: var(--text); box-shadow: 0 20px 50px rgb(0 0 0 / .35); text-align: center; }
+    .support-dialog::backdrop { background: rgb(0 0 0 / .55); backdrop-filter: blur(2px); }
+    .support-dialog .big { font-size: 3rem; color: var(--accent-text); }
+    .support-dialog h2 { font-size: 1.4rem; margin: .25rem 0 .5rem; }
+    .support-dialog p { color: var(--muted); font-size: .92rem; margin-bottom: .75rem; }
+    .support-dialog .actions { display: grid; gap: .6rem; margin-top: 1rem; }
+    .support-dialog .actions .btn { margin: 0; justify-content: center; }
+    .support-dialog .close { position: absolute; top: .5rem; right: .5rem; }
+    .support-dialog small { display: block; margin-top: .75rem; font-size: .75rem; color: var(--muted); }
+    .ad-status { min-height: 1.4em; font-weight: 500; color: var(--accent-text); }
+    footer { padding-bottom: 5.5rem; }
+
     /* ---------- Animaciones de entrada (solo con JS y sin reduced-motion) ---------- */
     @media (prefers-reduced-motion: no-preference) {
       .js .about-item { opacity: 0; transform: translateX(-50px); transition: opacity .5s ease, transform .5s ease; }
@@ -242,6 +283,7 @@
         <li><a href="#habilidades">Habilidades</a></li>
         <li><a href="#aprendizajes">Aprendizajes</a></li>
         <li><a href="#juego">Juego</a></li>
+        <li><a href="#apoyame">Apóyame</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
       <button id="mode-toggle" class="icon-btn" type="button" aria-label="Cambiar entre modo claro y oscuro">
@@ -270,7 +312,7 @@
         <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
         <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
         <a href="#" aria-label="X"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
-        <a href="#" aria-label="TikTok"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
+        <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
       </div>
     </section>
 
@@ -492,6 +534,43 @@
      </div>
     </section>
 
+    <section id="apoyame" class="support">
+     <div class="container">
+      <h2><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Apóyame</h2>
+      <p class="section-lead">Tu apoyo paga el hosting de KhipuOps, Copa Arrayanes y HogarSync, y me ayuda a terminar el videojuego. Puedes donar o, si prefieres, <strong>apoyar gratis viendo un anuncio</strong>.</p>
+      <!-- TODO: reemplazar TU_USUARIO / TU_LLAVE y la imagen del QR por los datos reales. -->
+      <div class="support-grid">
+        <article class="support-card featured reveal">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg> Mira un anuncio</h3>
+          <p>Gratis para ti: ves un anuncio corto y lo que paga el anunciante me llega a mí.</p>
+          <button type="button" class="btn" data-open-support><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg> Apoyar con un anuncio</button>
+        </article>
+        <article class="support-card reveal">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-coffee"/></svg> Ko-fi</h3>
+          <p>Invítame un café desde cualquier país, con tarjeta o PayPal.</p>
+          <a class="btn" href="https://ko-fi.com/TU_USUARIO" target="_blank" rel="noopener">Invitar un café</a>
+        </article>
+        <article class="support-card reveal">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-wallet"/></svg> PayPal</h3>
+          <p>Un aporte del monto que quieras.</p>
+          <a class="btn" href="https://paypal.me/TU_USUARIO" target="_blank" rel="noopener">Donar con PayPal</a>
+        </article>
+        <article class="support-card reveal">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> GitHub Sponsors</h3>
+          <p>Para quienes usan o siguen mis proyectos de código.</p>
+          <a class="btn" href="https://github.com/sponsors/d4vp" target="_blank" rel="noopener">Patrocinar</a>
+        </article>
+        <article class="support-card reveal">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-qr"/></svg> Nequi / Bre-B</h3>
+          <p>Desde Colombia, sin comisiones.</p>
+          <!-- Reemplaza este div por: <img class="qr" src="assets/img/qr-nequi.webp" alt="Código QR para donar por Nequi" width="140" height="140"> -->
+          <div class="qr"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-qr"/></svg><span>QR próximamente</span></div>
+          <button type="button" class="copy-key" data-copy="TU_LLAVE"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span>Copiar llave</span></button>
+        </article>
+      </div>
+     </div>
+    </section>
+
     <section id="contacto" class="contact">
      <div class="container">
       <h2>¡Contáctame!</h2>
@@ -527,13 +606,32 @@
         <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
         <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
         <a href="#" aria-label="X"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
-        <a href="#" aria-label="TikTok"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
+        <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
           </div>
         </div>
       </div>
      </div>
     </section>
   </main>
+
+  <button type="button" class="piggy-fab" data-open-support aria-haspopup="dialog" aria-label="Apóyame viendo un anuncio">
+    <span class="coin" aria-hidden="true"></span>
+    <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg>
+    <span class="tip" aria-hidden="true">¡Apóyame gratis!</span>
+  </button>
+
+  <dialog class="support-dialog" id="support-dialog" aria-labelledby="support-title">
+    <button type="button" class="icon-btn close" data-close aria-label="Cerrar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-close"/></svg></button>
+    <div class="big"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg></div>
+    <h2 id="support-title">Apóyame viendo un anuncio</h2>
+    <p>Mirar un anuncio corto no te cuesta nada y me ayuda a mantener mis proyectos en línea. ¡Gracias por echar una moneda a la alcancía!</p>
+    <p class="ad-status" role="status" aria-live="polite"></p>
+    <div class="actions">
+      <button type="button" class="btn" id="watch-ad"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg> Ver anuncio</button>
+      <a class="btn" href="#apoyame" data-close style="background:transparent;color:var(--text);box-shadow:inset 0 0 0 2px var(--accent)"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Otras formas de apoyar</a>
+    </div>
+    <small>Los anuncios los sirve Google. Nunca tienes que hacer clic en ellos.</small>
+  </dialog>
 
   <section class="stack" aria-labelledby="stack-title">
     <h2 id="stack-title">Herramientas, tools y skills con las que construyo</h2>
@@ -673,6 +771,68 @@
       ok.hidden = false;
       setTimeout(() => { ok.hidden = true; }, 5000);
     });
+
+
+    // ----- Apóyame: alcancía + anuncio con recompensa (Google H5 Games Ads / Ad Placement API) -----
+    // Para activarlo: pon tu ID de editor de AdSense (ca-pub-…) en ADSENSE_CLIENT.
+    // Mientras ADS_TEST sea true, Google muestra anuncios de prueba (no generan ingresos).
+    const ADSENSE_CLIENT = '';
+    const ADS_TEST = true;
+    const dlg = $('#support-dialog'), adStatus = $('.ad-status', dlg), watchBtn = $('#watch-ad');
+    $$('[data-open-support]').forEach((b) => b.addEventListener('click', () => { adStatus.textContent = ''; dlg.showModal(); }));
+    $$('[data-close]', dlg).forEach((b) => b.addEventListener('click', () => dlg.close()));
+    dlg.addEventListener('click', (e) => e.target === dlg && dlg.close());
+
+    let adsReady = null;
+    const loadAds = () => adsReady ??= new Promise((resolve, reject) => {
+      if (!ADSENSE_CLIENT) return reject(new Error('sin-config'));
+      const sc = document.createElement('script');
+      sc.async = true;
+      sc.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT;
+      sc.crossOrigin = 'anonymous';
+      sc.dataset.adClient = ADSENSE_CLIENT;
+      if (ADS_TEST) sc.dataset.adbreakTest = 'on';
+      sc.onload = () => {
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adBreak = window.adConfig = (o) => window.adsbygoogle.push(o);
+        window.adConfig({ preloadAdBreaks: 'on', sound: 'on', onReady: resolve });
+      };
+      sc.onerror = () => reject(new Error('bloqueado'));
+      document.head.append(sc);
+    });
+
+    watchBtn.addEventListener('click', async () => {
+      watchBtn.disabled = true;
+      adStatus.textContent = 'Cargando anuncio…';
+      try {
+        await loadAds();
+        let shown = false;
+        window.adBreak({
+          type: 'reward',
+          name: 'apoyo-alcancia',
+          beforeReward: (showAdFn) => { shown = true; showAdFn(); },
+          adViewed: () => { adStatus.textContent = '¡Moneda en la alcancía! 🪙 Muchas gracias.'; },
+          adDismissed: () => { adStatus.textContent = 'Cerraste el anuncio antes de terminar. ¡Igual gracias!'; },
+          adBreakDone: () => {
+            if (!shown) adStatus.textContent = 'No hay anuncios disponibles ahora. Inténtalo más tarde 🙏';
+            watchBtn.disabled = false;
+          },
+        });
+      } catch (err) {
+        adStatus.textContent = err.message === 'bloqueado'
+          ? 'Parece que un bloqueador de anuncios lo impidió. Puedes apoyar de otras formas 💛'
+          : 'Los anuncios todavía no están activos. ¡Muy pronto! Mientras tanto, mira otras formas de apoyar.';
+        watchBtn.disabled = false;
+      }
+    });
+
+    // Copiar llave de Nequi / Bre-B
+    $$('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
+      const label = $('span', b), prev = label.textContent;
+      try { await navigator.clipboard.writeText(b.dataset.copy); label.textContent = '¡Copiada!'; }
+      catch { label.textContent = b.dataset.copy; }
+      setTimeout(() => { label.textContent = prev; }, 2000);
+    }));
 
     // ----- Fondo de partículas (reemplaza particles.js) -----
     const canvas = $('#particles'), ctx = canvas.getContext('2d');
