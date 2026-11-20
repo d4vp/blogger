@@ -3,24 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>David Pinchao | About</title>
-  <meta name="description" content="David Pinchao: estudiante de Ingeniería de Sistemas en Popayán, Colombia. Desarrollo web, fotografía, deporte, guitarra y agricultura.">
+  <title>David Pinchao | Desarrollo web, IA y proyectos</title>
+  <meta name="description" content="David Pinchao (d4vp): estudiante de Ingeniería de Sistemas en Popayán, Colombia. Construyo apps full-stack con IA: KhipuOps, Copa Arrayanes y HogarSync.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="profile">
   <meta property="og:locale" content="es_CO">
   <meta property="og:title" content="David Pinchao | Blog Personal">
-  <meta property="og:description" content="Desarrollo web, fotografía, deporte, guitarra y agricultura: las distintas facetas de David Pinchao.">
+  <meta property="og:description" content="Proyectos full-stack, desarrollo asistido por IA, fotografía, deporte, guitarra y agricultura: las distintas facetas de David Pinchao.">
   <!-- og:url, og:image y <link rel="canonical"> requieren la URL pública absoluta del sitio. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "David Pinchao",
-    "description": "Estudiante de Ingeniería de Sistemas con interés en el desarrollo web.",
+    "alternateName": "d4vp",
+    "description": "Estudiante de Ingeniería de Sistemas y desarrollador web full-stack que construye con agentes de IA.",
+    "sameAs": ["https://github.com/d4vp", "https://www.youtube.com/@ldavorappi"],
     "address": { "@type": "PostalAddress", "addressLocality": "Popayán", "addressRegion": "Cauca", "addressCountry": "CO" },
-    "knowsAbout": ["Desarrollo web", "Fotografía", "Running", "Natación", "Baloncesto", "Guitarra", "Agricultura"]
+    "knowsAbout": ["Desarrollo web", "React", "Next.js", "Node.js", "MongoDB", "Tailwind CSS", "Claude Code", "Model Context Protocol", "Fotografía", "Running", "Natación", "Baloncesto", "Guitarra", "Agricultura"]
   }
   </script>
   <link rel="preload" href="assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -82,7 +84,7 @@
     [data-theme="dark"] #mode-toggle .i-sun { display: block; }
     [data-theme="dark"] #mode-toggle .i-moon { display: none; }
     .burger { display: none; }
-    @media (max-width: 768px) {
+    @media (max-width: 960px) {
       nav { padding: 0 1rem; gap: .25rem; }
       .burger { display: grid; }
       .nav-links { position: absolute; inset: 100% 0 auto; flex-direction: column; align-items: center; gap: 0; padding: 1rem 0; background: var(--panel); box-shadow: 0 6px 8px var(--shadow); visibility: hidden; opacity: 0; transform: translateY(-.5rem); transition: opacity .25s, transform .25s, visibility .25s; }
@@ -152,6 +154,64 @@
     .contact-info p .icon { font-size: 1.2rem; color: var(--info); }
     .alert { margin-top: 1rem; padding: 15px; border: 1px solid light-dark(#c3e6cb, #375e4b); border-radius: 4px; color: light-dark(#155724, #a7f3d0); background: light-dark(#d4edda, #1e2e24); }
 
+    /* ---------- Proyectos ---------- */
+    .section-lead { color: var(--muted); margin: 0 auto 2.5rem; max-width: 60ch; }
+    .projects { padding: 4rem 1.25rem; text-align: center; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1.75rem; text-align: left; }
+    .project { position: relative; display: flex; flex-direction: column; gap: .9rem; padding: 1.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 2px 5px var(--shadow); transition: transform .25s, box-shadow .25s, border-color .25s; }
+    .project:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 28px var(--shadow); }
+    .project-head { display: flex; align-items: center; gap: .85rem; }
+    .project-icon { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 12px; font-size: 1.5rem; color: var(--on-accent); background: var(--accent); flex: none; }
+    .project h3 { font-size: 1.3rem; line-height: 1.2; }
+    .project-tag { font-size: .8rem; color: var(--muted); }
+    .project p { color: var(--muted); font-size: .95rem; }
+    .project ul.features { list-style: none; display: grid; gap: .35rem; font-size: .9rem; color: var(--muted); }
+    .project ul.features li { display: flex; gap: .5rem; align-items: baseline; }
+    .project ul.features .icon { color: var(--accent-text); }
+    .chips { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; margin-top: auto; }
+    .chips li { padding: .2rem .65rem; font-size: .75rem; font-weight: 500; border-radius: 999px; background: var(--band); border: 1px solid var(--border); }
+    .project-link { display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; color: var(--accent-text); text-decoration: none; }
+    .project-link::after { content: ''; position: absolute; inset: 0; border-radius: inherit; } /* toda la tarjeta es clicable */
+    .project-link:hover { text-decoration: underline; }
+    .live { display: inline-flex; align-items: center; gap: .35rem; margin-left: auto; font-size: .75rem; color: light-dark(#15803d, #4ade80); }
+    .live::before { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px light-dark(rgb(21 128 61 / .2), rgb(74 222 128 / .2)); }
+
+    /* ---------- Aprendizajes ---------- */
+    .learning { padding: 4rem 1.25rem; background: var(--panel); text-align: center; }
+    .timeline { list-style: none; max-width: 760px; margin-inline: auto; text-align: left; border-left: 2px solid var(--border); padding-left: 1.75rem; display: grid; gap: 1.75rem; }
+    .timeline li { position: relative; }
+    .timeline li::before { content: ''; position: absolute; left: calc(-1.75rem - 7px); top: .45rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--panel); }
+    .timeline time { font-size: .8rem; font-weight: 700; color: var(--accent-text); text-transform: uppercase; letter-spacing: .05em; }
+    .timeline h3 { font-size: 1.15rem; margin: .15rem 0 .35rem; }
+    .timeline p { color: var(--muted); font-size: .95rem; }
+
+    /* ---------- Videojuego ---------- */
+    .game { padding: 4rem 1.25rem; text-align: center; background: var(--band); }
+    .game-frame { position: relative; max-width: 960px; margin-inline: auto; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #0d0d0d; border: 2px solid var(--accent); box-shadow: 0 0 0 6px rgb(255 102 0 / .12), 0 18px 40px var(--shadow); }
+    .game-frame > :is(iframe, canvas) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+    .game-placeholder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .75rem; padding: 1.5rem; color: #f3f3f3; background: radial-gradient(circle at 50% 40%, rgb(255 102 0 / .18), transparent 60%), repeating-linear-gradient(0deg, rgb(255 255 255 / .03) 0 2px, transparent 2px 4px); font-family: ui-monospace, 'JetBrains Mono', monospace; }
+    .game-placeholder .icon { font-size: 3.5rem; color: var(--accent); }
+    .game-placeholder strong { font-size: clamp(1.1rem, 3vw, 1.6rem); letter-spacing: .1em; }
+    .game-placeholder span { color: #c4c4c4; font-size: .9rem; }
+    .game-placeholder .press { color: var(--accent); animation: blink 1.2s steps(1) infinite; }
+
+    /* ---------- Banner de herramientas ---------- */
+    .stack { padding: 2.5rem 0 3rem; background: var(--panel); border-top: 1px solid var(--border); text-align: center; overflow: hidden; }
+    .stack h2 { font-size: 1.1rem; font-weight: 500; color: var(--muted); margin-bottom: 1.25rem; padding-inline: 1.25rem; }
+    .marquee { display: grid; gap: .9rem; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+    .marquee-track { display: flex; width: max-content; gap: .75rem; list-style: none; animation: scroll 45s linear infinite; }
+    .marquee-track.reverse { animation-direction: reverse; animation-duration: 55s; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-track li { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; padding: .5rem 1rem; border-radius: 999px; background: var(--card); border: 1px solid var(--border); font-size: .9rem; font-weight: 500; }
+    .marquee-track li small { font-size: .7rem; color: var(--muted); font-weight: 400; }
+    .marquee-track li .icon { color: var(--accent-text); }
+    @keyframes scroll { to { transform: translateX(calc(-50% - .375rem)); } }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee { mask-image: none; -webkit-mask-image: none; }
+      .marquee-track { width: auto; flex-wrap: wrap; justify-content: center; padding-inline: 1rem; }
+      .marquee-track [aria-hidden="true"] { display: none; }
+    }
+
     footer { text-align: center; padding: 2rem; background: #111; color: #fff; }
 
     /* ---------- Animaciones de entrada (solo con JS y sin reduced-motion) ---------- */
@@ -160,6 +220,8 @@
       .js .about-item.reversed { transform: translateX(50px); }
       .js .about-item.in { opacity: 1; transform: none; }
       .js .ring:not(.in) { --p: 0; }
+      .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+      .js .reveal.in { opacity: 1; transform: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -176,7 +238,10 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="#">Inicio</a></li>
         <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#aprendizajes">Aprendizajes</a></li>
+        <li><a href="#juego">Juego</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
       <button id="mode-toggle" class="icon-btn" type="button" aria-label="Cambiar entre modo claro y oscuro">
@@ -194,11 +259,14 @@
     <section class="hero">
       <canvas id="particles" aria-hidden="true"></canvas>
       <h1 lang="en">Hi there, I'm <span>David Pinchao</span></h1>
-      <h2 lang="en" aria-label="I Am Into Web Development, Sports, Photography, Music">I Am Into <span id="typed" data-strings="Web Development|Sports|Photography|Music">Web Development</span></h2>
+      <h2 lang="en" aria-label="I Am Into Web Development, AI Agents, Sports, Photography, Music">I Am Into <span id="typed" data-strings="Web Development|AI Agents|Full-Stack Apps|Sports|Photography|Music">Web Development</span></h2>
       <img class="avatar" src="assets/img/avatar-180.webp" srcset="assets/img/avatar-180.webp 1x, assets/img/avatar-360.webp 2x" width="180" height="180" alt="Avatar de David Pinchao" fetchpriority="high">
-      <a href="#sobre-mi" class="btn">Sobre mí</a>
+      <div style="display:flex;flex-wrap:wrap;gap:0 1rem;justify-content:center">
+        <a href="#proyectos" class="btn">Ver proyectos</a>
+        <a href="#sobre-mi" class="btn" style="background:transparent;color:var(--text);box-shadow:inset 0 0 0 2px var(--accent)">Sobre mí</a>
+      </div>
       <div class="socials">
-        <a href="#" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
+        <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
         <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
         <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
         <a href="#" aria-label="X"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
@@ -212,7 +280,8 @@
 
       <div class="about-item">
         <div class="about-text">
-          <p>Actualmente soy estudiante de <strong>Ingeniería de Sistemas</strong>, con un gran interés en el <strong>desarrollo web</strong>. Me apasiona la creación de soluciones digitales y la construcción de experiencias online funcionales y atractivas.</p>
+          <p>Soy estudiante de <strong>Ingeniería de Sistemas</strong> y desarrollador web <strong>full-stack</strong>. Paso de la idea al despliegue: diseño la interfaz, modelo los datos, construyo la API y la publico en la nube.</p>
+          <p>Hoy trabajo codo a codo con <strong>agentes de IA</strong> (Claude Code, servidores MCP y skills) para prototipar más rápido, revisar código y automatizar lo repetitivo. Así nacieron <a href="#proyectos">KhipuOps, Copa Arrayanes y HogarSync</a>: problemas reales de mi comunidad resueltos con software.</p>
         </div>
         <img class="about-image" src="assets/img/inge-200.webp" srcset="assets/img/inge-200.webp 1x, assets/img/inge-400.webp 2x" width="200" height="200" alt="Desarrollo Web" loading="lazy" decoding="async">
       </div>
@@ -253,19 +322,86 @@
      </div>
     </section>
 
+    <section id="proyectos" class="projects">
+     <div class="container">
+      <h2>Proyectos</h2>
+      <p class="section-lead">Aplicaciones reales, desplegadas y en uso. Cada una nació de una necesidad concreta y se construyó de punta a punta con ayuda de agentes de IA.</p>
+      <div class="projects-grid">
+        <article class="project reveal">
+          <div class="project-head">
+            <span class="project-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headset"/></svg></span>
+            <div><h3>KhipuOps</h3><span class="project-tag">Mesa de ayuda · Render</span></div>
+            <span class="live">En línea</span>
+          </div>
+          <p>Plataforma de mesa de ayuda (help desk) para gestionar tickets de soporte, con actualizaciones en tiempo real y un asistente de IA integrado.</p>
+          <ul class="features">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tickets y estados sincronizados en tiempo real</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Asistente de IA integrado</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Panel con métricas y gráficas</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Modo claro / oscuro</li>
+          </ul>
+          <ul class="chips" aria-label="Tecnologías"><li>React</li><li>Vite</li><li>Node.js</li><li>MongoDB</li><li>Tiempo real</li><li>IA</li></ul>
+          <a class="project-link" href="https://khipuops.onrender.com" target="_blank" rel="noopener">khipuops.onrender.com <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a>
+        </article>
+        <article class="project reveal">
+          <div class="project-head">
+            <span class="project-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-trophy"/></svg></span>
+            <div><h3>Copa Arrayanes</h3><span class="project-tag">Torneo comunitario · Cloudflare Pages</span></div>
+            <span class="live">En línea</span>
+          </div>
+          <p>Sitio oficial del campeonato de la vereda Los Arrayanes (Córdoba, Nariño): partidos, resultados, tabla de posiciones y estadísticas.</p>
+          <ul class="features">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Fixture y resultados al día</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tabla de posiciones automática</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Equipos y patrocinadores</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Panel de gestión para organizadores</li>
+          </ul>
+          <ul class="chips" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Cloudflare Pages</li><li>Mobile-first</li></ul>
+          <a class="project-link" href="https://copa-arrayanes.pages.dev" target="_blank" rel="noopener">copa-arrayanes.pages.dev <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a>
+        </article>
+        <article class="project reveal">
+          <div class="project-head">
+            <span class="project-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-home"/></svg></span>
+            <div><h3>HogarSync</h3><span class="project-tag">Organización del hogar · Vercel</span></div>
+            <span class="live">En línea</span>
+          </div>
+          <p>“Horarios y pendientes del hogar, en sincronía.” App para que quienes viven en una casa compartan tareas y horarios.</p>
+          <ul class="features">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Cuentas con registro e inicio de sesión</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tareas y horarios compartidos</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Sincronización entre miembros del hogar</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Pensada para el celular</li>
+          </ul>
+          <ul class="chips" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Auth</li><li>Vercel</li></ul>
+          <a class="project-link" href="https://hogarsync-woad.vercel.app" target="_blank" rel="noopener">hogarsync-woad.vercel.app <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a>
+        </article>
+      </div>
+     </div>
+    </section>
+
     <section id="habilidades" class="skills">
      <div class="container">
       <h2><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Mis Habilidades</h2>
-      <p>Aquí puedes explorar de forma interactiva algunas de mis habilidades y cuánto las he desarrollado.</p>
+      <p>Una autoevaluación honesta de dónde estoy hoy en cada área. Los números suben con cada proyecto.</p>
       <div class="skills-container">
         <article class="skill-item">
           <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Desarrollo Web</h3>
           <ul class="skill-details">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-html"/></svg> HTML <span class="ring" style="--v:80">80%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> CSS <span class="ring" style="--v:60">60%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> JavaScript <span class="ring" style="--v:40">40%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React <span class="ring" style="--v:50">50%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js <span class="ring" style="--v:50">50%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-html"/></svg> HTML <span class="ring" style="--v:90">90%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> CSS / Tailwind <span class="ring" style="--v:80">80%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> JavaScript / TypeScript <span class="ring" style="--v:70">70%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React / Next.js <span class="ring" style="--v:75">75%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js / APIs <span class="ring" style="--v:70">70%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB / bases de datos <span class="ring" style="--v:60">60%</span></li>
+          </ul>
+        </article>
+        <article class="skill-item">
+          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> IA y automatización</h3>
+          <ul class="skill-details">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code (agentes) <span class="ring" style="--v:80">80%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Prompting y contexto <span class="ring" style="--v:75">75%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Servidores MCP y conectores <span class="ring" style="--v:60">60%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Skills y flujos reutilizables <span class="ring" style="--v:55">55%</span></li>
           </ul>
         </article>
         <article class="skill-item">
@@ -294,6 +430,64 @@
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Teoría musical <span class="ring" style="--v:15">15%</span></li>
           </ul>
         </article>
+      </div>
+     </div>
+    </section>
+
+    <section id="aprendizajes" class="learning">
+     <div class="container">
+      <h2>Aprendizajes</h2>
+      <p class="section-lead">Lo que me han enseñado los proyectos de este año, más allá del código.</p>
+      <ol class="timeline">
+        <li class="reveal">
+          <time datetime="2026-11">Nov 2026</time>
+          <h3>Programar con agentes de IA</h3>
+          <p>Con Claude Code aprendí a delegar en agentes: darles buen contexto, dividir el trabajo en pasos verificables y revisar cada cambio. Las skills y los servidores MCP (Strava, documentos, despliegues) convierten tareas repetitivas en un comando.</p>
+        </li>
+        <li class="reveal">
+          <time datetime="2026">2026</time>
+          <h3>Tiempo real e IA dentro del producto — KhipuOps</h3>
+          <p>Modelar tickets en MongoDB, reflejar cambios en tiempo real sin recargar y conectar un asistente de IA a datos reales. Aprendí que la latencia y los estados de carga son parte del diseño.</p>
+        </li>
+        <li class="reveal">
+          <time datetime="2026">2026</time>
+          <h3>Software para mi comunidad — Copa Arrayanes</h3>
+          <p>Un torneo de vereda necesita algo simple que funcione bien en cualquier celular. Next.js desplegado en Cloudflare Pages y un panel de gestión para que los organizadores actualicen resultados sin depender de mí.</p>
+        </li>
+        <li class="reveal">
+          <time datetime="2026">2026</time>
+          <h3>Autenticación y datos compartidos — HogarSync</h3>
+          <p>Registro, sesiones y datos que comparten varias personas: pensar en permisos, en sincronización y en una interfaz sencilla para toda la familia.</p>
+        </li>
+        <li class="reveal">
+          <time datetime="2026-11">Nov 2026</time>
+          <h3>Rendimiento y buenas prácticas en este sitio</h3>
+          <p>De 21 MB a ~200 kB: imágenes WebP responsive, fuentes auto-alojadas, cero dependencias en tiempo de ejecución, modo oscuro sin parpadeo, accesibilidad y una plantilla de Blogger que se compila con Tailwind v4 y esbuild en GitHub Actions.</p>
+        </li>
+      </ol>
+     </div>
+    </section>
+
+    <section id="juego" class="game">
+     <div class="container">
+      <h2><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Zona de juego</h2>
+      <p class="section-lead">Aquí vivirá mi videojuego. Está en desarrollo… ¡pronto podrás jugarlo directamente desde esta página!</p>
+      <!--
+        ESPACIO PARA EL VIDEOJUEGO
+        Para instalarlo, reemplaza el <div class="game-placeholder"> por una de estas opciones:
+          · Juego publicado (itch.io, Godot web, Unity WebGL…):
+              <iframe src="games/mi-juego/index.html" title="Mi videojuego" allow="fullscreen; gamepad; autoplay" loading="lazy"></iframe>
+          · Juego propio en canvas:
+              <canvas id="game-canvas"></canvas>  + <script type="module" src="games/mi-juego/main.js"></script>
+        El contenedor .game-frame mantiene una proporción 16:9 y ocupa todo el ancho disponible.
+      -->
+      <div class="game-frame" id="game-root">
+        <div class="game-placeholder">
+          <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg>
+          <strong>PRÓXIMAMENTE</strong>
+          <span>Un juego hecho por d4vp</span>
+          <span class="press">▶ PRESS START</span>
+        </div>
       </div>
      </div>
     </section>
@@ -329,7 +523,7 @@
           <p><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"/></svg> +57 3XX XXX XXXX</p>
           <p><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-pin"/></svg> Popayán, Cauca, Colombia</p>
           <div class="socials">
-        <a href="#" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
+        <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
         <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
         <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
         <a href="#" aria-label="X"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
@@ -341,8 +535,90 @@
     </section>
   </main>
 
+  <section class="stack" aria-labelledby="stack-title">
+    <h2 id="stack-title">Herramientas, tools y skills con las que construyo</h2>
+    <div class="marquee">
+        <ul class="marquee-track">
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> HTML5</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> CSS · light-dark()</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> JavaScript</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> Next.js</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Vite</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS v4</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> esbuild</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Prism.js</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-aperture"/></svg> sharp (WebP)</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> Git · GitHub</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> GitHub Actions</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Render</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Cloudflare Pages</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Vercel</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Blogger</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> VS Code · WSL</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> HTML5</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> CSS · light-dark()</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> JavaScript</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> Next.js</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Vite</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS v4</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> esbuild</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Prism.js</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-aperture"/></svg> sharp (WebP)</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> Git · GitHub</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> GitHub Actions</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Render</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Cloudflare Pages</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Vercel</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Blogger</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> VS Code · WSL</li>
+        </ul>
+        <ul class="marquee-track reverse">
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code <small>agente</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Claude Opus <small>modelo</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Subagentes <small>agente</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> MCP <small>protocolo</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Strava MCP <small>conector</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Claude Docs <small>conector</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> artifact-design <small>skill</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> code-review <small>skill</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> security-review <small>skill</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> simplify <small>skill</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> dataviz <small>skill</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> skill-creator <small>skill</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Hooks <small>tool</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Bash · Edit · Read <small>tool</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg> WebFetch · WebSearch <small>tool</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Artifacts <small>tool</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code <small>agente</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Claude Opus <small>modelo</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Subagentes <small>agente</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> MCP <small>protocolo</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Strava MCP <small>conector</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Claude Docs <small>conector</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> artifact-design <small>skill</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> code-review <small>skill</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> security-review <small>skill</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> simplify <small>skill</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> dataviz <small>skill</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> skill-creator <small>skill</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Hooks <small>tool</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Bash · Edit · Read <small>tool</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg> WebFetch · WebSearch <small>tool</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Artifacts <small>tool</small></li>
+        </ul>
+    </div>
+  </section>
+
   <footer>
-    <p>&copy; 2025 David Pinchao | Blog Personal. Todos los derechos reservados.</p>
+    <p>&copy; 2026 David Pinchao · d4vp | Blog Personal. Todos los derechos reservados.</p>
   </footer>
 
   <script type="module">
@@ -369,7 +645,7 @@
     const reveal = new IntersectionObserver((entries) => {
       for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
     }, { threshold: 0.25 });
-    $$('.about-item, .ring').forEach((el) => reveal.observe(el));
+    $$('.about-item, .ring, .reveal').forEach((el) => reveal.observe(el));
 
     // ----- Efecto máquina de escribir -----
     const typed = $('#typed');
