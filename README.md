@@ -10,6 +10,10 @@ Página personal de David Pinchao. Sitio estático de un solo archivo (`index.ht
 - `assets/icons.svg` — sprite de iconos (Lucide + Simple Icons).
 - `*.png`, `agricultor.jpg` — originales de alta resolución; la página no los carga.
 
+## Instalar el videojuego
+
+La sección `#juego` de `index.html` tiene un contenedor 16:9 (`#game-root`) con un marcador "Próximamente". Copia el build web del juego en `games/<nombre>/` y sustituye el `<div class="game-placeholder">` por un `<iframe src="games/<nombre>/index.html" …>` o por un `<canvas>` con su script (el comentario en el HTML trae ambos ejemplos).
+
 ## Desarrollo
 
 ```bash
