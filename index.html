@@ -21,7 +21,7 @@
     "name": "David Pinchao",
     "alternateName": "d4vp",
     "description": "Estudiante de Ingeniería de Sistemas y desarrollador web full-stack que construye con agentes de IA.",
-    "sameAs": ["https://github.com/d4vp", "https://www.youtube.com/@ldavorappi", "https://www.tiktok.com/@soul.px", "https://www.strava.com/athletes/164622761"],
+    "sameAs": ["https://github.com/d4vp", "https://www.youtube.com/@ldavorappi", "https://www.tiktok.com/@soul.px", "https://www.strava.com/athletes/164622761", "https://x.com/pinchaoburgos", "https://d4vp.itch.io/popayan-maldito"],
     "address": { "@type": "PostalAddress", "addressLocality": "Popayán", "addressRegion": "Cauca", "addressCountry": "CO" },
     "knowsAbout": ["Desarrollo web", "React", "Next.js", "Node.js", "MongoDB", "Tailwind CSS", "Claude Code", "Model Context Protocol", "Fotografía", "Running", "Ciclismo", "Natación", "Baloncesto", "Guitarra", "Agricultura"]
   }
@@ -190,15 +190,6 @@
     .socials a:hover { color: var(--brand-ink); background: var(--surface-2); }
 
     /* ---------- Listas de actividades (Strava) ---------- */
-    .acts { list-style: none; display: grid; gap: .65rem; }
-    .acts a { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .75rem; min-height: 3.25rem; padding: .55rem .85rem; border-radius: var(--radius-sm); background: var(--surface-2); color: var(--text); text-decoration: none; transition: background-color .2s; }
-    .acts a:hover { background: var(--brand-soft); }
-    .acts .icon { color: var(--brand-ink); font-size: 1.1rem; }
-    .acts b { display: block; font-weight: 500; line-height: 1.3; }
-    .acts time, .acts small { font-size: .8rem; color: var(--muted); }
-    .acts .num { text-align: right; font-weight: 700; white-space: nowrap; }
-    .acts .num small { display: block; font-weight: 400; }
-    @media (min-width: 700px) { .acts--2 { grid-template-columns: 1fr 1fr; } }
     /* El widget de Strava mide 300 px fijos: se centra y, si la card es más alta, queda centrado en vertical */
     .strava-live { display: block; flex: none; width: 300px; max-width: 100%; height: 454px; margin: auto; border: 0; border-radius: var(--radius-sm); }
 
@@ -282,6 +273,17 @@
     .info-list { list-style: none; display: grid; gap: .75rem; color: var(--muted); }
     .info-list li { display: flex; align-items: center; gap: .75rem; }
     .info-list .icon { font-size: 1.2rem; color: var(--brand-ink); }
+    .info-list a { color: var(--text); text-decoration-color: var(--border); }
+    .info-list a:hover { color: var(--brand-ink); }
+    .btn--whatsapp { background: #25d366; border-color: #25d366; color: #0c0a09; }
+    .keys { display: grid; gap: .75rem; }
+    .keys > div { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .15rem 1rem; padding: .75rem 1rem; border-radius: var(--radius-sm); background: var(--surface-2); }
+    .keys dt { grid-column: 1; font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .keys dd:first-of-type { grid-column: 1; }
+    .keys dd:last-of-type { grid-column: 2; grid-row: 1 / span 2; }
+    .keys code { font-family: inherit; font-size: 1.15rem; font-weight: 700; color: var(--text); letter-spacing: .03em; }
+    .keys .btn { min-height: 2.75rem; padding-inline: 1rem; }
+    .alert--error { border-color: var(--danger); color: var(--danger); }
 
     /* ---------- Banner de herramientas ---------- */
     .stack { padding-block: 2.5rem 3rem; overflow: hidden; }
@@ -380,7 +382,8 @@
           <!-- Pon tu URL y quita "hidden" para mostrarlos. -->
           <a href="#" aria-label="Instagram" hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
           <a href="#" aria-label="Facebook" hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
-          <a href="#" aria-label="X" hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
+          <a href="https://x.com/pinchaoburgos" target="_blank" rel="noopener" aria-label="X @pinchaoburgos"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
+          <a href="https://wa.me/573142583380" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp"/></svg></a>
         </div>
       </div>
     </section>
@@ -456,17 +459,6 @@
             <div><h3 id="ciclismo-title">Ciclismo</h3><span class="card-tag">Carreteras y montañas del Cauca</span></div>
           </div>
           <p>Sobre dos ruedas exploro el Cauca, me pongo a prueba en los ascensos y desconecto del teclado.</p>
-
-          <h4><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg> Mis últimas salidas</h4>
-          <ul class="acts acts--2">
-            <li><a href="https://www.strava.com/activities/21029793230" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg><span><b>Bicicleta</b><time datetime="2026-11-09">9 nov 2026</time></span><span class="num">5,09 km<small>+90 m</small></span></a></li>
-            <li><a href="https://www.strava.com/activities/20885920921" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg><span><b>Regreso a casa</b><time datetime="2026-11-06">6 nov 2026</time></span><span class="num">4,23 km<small>+28 m</small></span></a></li>
-            <li><a href="https://www.strava.com/activities/20681248354" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg><span><b>A clases</b><time datetime="2026-10-21">21 oct 2026</time></span><span class="num">4,09 km<small>+47 m</small></span></a></li>
-            <li><a href="https://www.strava.com/activities/20667696353" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg><span><b>No nice</b><time datetime="2026-10-20">20 oct 2026</time></span><span class="num">4,47 km<small>+29 m</small></span></a></li>
-            <li><a href="https://www.strava.com/activities/20602409790" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg><span><b>CDU</b><time datetime="2026-10-15">15 oct 2026</time></span><span class="num">5,02 km<small>+28 m</small></span></a></li>
-            <li><a href="https://www.strava.com/activities/20545093872" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg><span><b>La Cascada</b><time datetime="2026-10-11">11 oct 2026</time></span><span class="num">38,23 km<small>+429 m</small></span></a></li>
-          </ul>
-          <p class="note">Datos de Strava al 21 nov 2026 · <a href="https://www.strava.com/athletes/164622761" target="_blank" rel="noopener">Ver todas en Strava</a></p>
 
           <h4><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mountain"/></svg> Rutas destacadas</h4>
           <div class="routes">
@@ -598,12 +590,11 @@
       </header>
       <div class="grid grid--3">
         <article class="card reveal">
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg></span><h3>Desarrollo web</h3></div>
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg></span><div><h3>Desarrollo web</h3><span class="card-tag">Frameworks y herramientas (HTML y CSS incluidos)</span></div></div>
           <ul class="skill-list">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-html"/></svg> HTML <span class="ring" style="--v:90">90%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> CSS / Tailwind <span class="ring" style="--v:80">80%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> JavaScript / TypeScript <span class="ring" style="--v:70">70%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React / Next.js <span class="ring" style="--v:75">75%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS <span class="ring" style="--v:80">80%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript / JavaScript <span class="ring" style="--v:70">70%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js / APIs <span class="ring" style="--v:70">70%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB / bases de datos <span class="ring" style="--v:60">60%</span></li>
           </ul>
@@ -615,8 +606,8 @@
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Prompting y contexto <span class="ring" style="--v:75">75%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Servidores MCP y conectores <span class="ring" style="--v:60">60%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Skills y flujos reutilizables <span class="ring" style="--v:55">55%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n (flujos de automatización) <span class="ring" style="--v:50">50%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> Bots de Telegram con BotFather <span class="ring" style="--v:50">50%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n (flujos de automatización) <span class="ring" style="--v:55">55%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> Bots de Telegram con BotFather <span class="ring" style="--v:55">55%</span></li>
           </ul>
         </article>
         <article class="card reveal">
@@ -751,7 +742,7 @@
         <p class="lead">Tu apoyo paga el hosting de mis proyectos y me ayuda a terminar el videojuego. Puedes <strong>apoyar gratis viendo un anuncio</strong>.</p>
       </header>
       <!-- Cards ocultas con "hidden" hasta tener los datos reales: pon tu usuario / llave / QR y quita el atributo hidden. -->
-      <div class="grid">
+      <div class="grid grid--2">
         <article class="card card--feature reveal">
           <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span><h3>Mira un anuncio</h3></div>
           <p>Gratis para ti: ves un anuncio corto y lo que paga el anunciante me llega a mí.</p>
@@ -772,12 +763,22 @@
           <p>Para quienes usan o siguen mis proyectos de código.</p>
           <div class="card-foot"><a class="btn" href="https://github.com/sponsors/d4vp" target="_blank" rel="noopener">Patrocinar</a></div>
         </article>
-        <article class="card reveal" hidden>
+        <article class="card reveal">
           <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-qr"/></svg></span><h3>Nequi / Bre-B</h3></div>
           <p>Desde Colombia, sin comisiones.</p>
-          <!-- Reemplaza este div por: <img class="qr" src="assets/img/qr-nequi.webp" alt="Código QR para donar por Nequi" width="140" height="140"> -->
-          <div class="qr"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-qr"/></svg><span>QR próximamente</span></div>
-          <div class="card-foot"><button type="button" class="btn btn--ghost" data-copy="TU_LLAVE"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span>Copiar llave</span></button></div>
+          <!-- Para añadir el QR: <img class="qr" src="assets/img/qr-nequi.webp" alt="Código QR para donar por Nequi" width="140" height="140"> -->
+          <dl class="keys">
+            <div>
+              <dt>Nequi</dt>
+              <dd><code>314 258 3380</code></dd>
+              <dd><button type="button" class="btn btn--ghost" data-copy="3142583380" aria-label="Copiar número de Nequi"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+            </div>
+            <div>
+              <dt>Llave Bre-B</dt>
+              <dd><code>@LPB897</code></dd>
+              <dd><button type="button" class="btn btn--ghost" data-copy="@LPB897" aria-label="Copiar llave Bre-B"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+            </div>
+          </dl>
         </article>
       </div>
      </div>
@@ -789,12 +790,15 @@
       <header class="section-head">
         <p class="eyebrow">Contacto</p>
         <h2 id="contacto-title">¿Hablamos?</h2>
-        <p class="lead">¿Una pregunta, una propuesta o solo un saludo? Escríbeme por el formulario o por mis redes.</p>
+        <p class="lead">¿Una pregunta, una propuesta o solo un saludo? Escríbeme por el formulario, por WhatsApp o por mis redes.</p>
       </header>
       <div class="grid grid--2">
         <div class="card reveal">
           <h3>Enviar un mensaje</h3>
-          <form id="contactForm" action="#" method="POST" novalidate>
+          <form id="contactForm" action="https://formspree.io/f/xoednwdn" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde el blog">
+            <!-- Trampa anti-spam de Formspree: los bots la rellenan, las personas no la ven -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
             <div class="field">
               <label for="nombre">Nombre</label>
               <input type="text" id="nombre" name="nombre" autocomplete="name" required minlength="2" aria-describedby="nombre-hint">
@@ -817,12 +821,13 @@
         <div class="card reveal">
           <h3>Información de contacto</h3>
           <ul class="info-list">
-            <!-- Pon tus datos reales y quita "hidden". -->
-            <li hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mail"/></svg> david.pinchao@email.com</li>
-            <li hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"/></svg> +57 3XX XXX XXXX</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mail"/></svg> <a href="mailto:ldpinchao1@gmail.com">ldpinchao1@gmail.com</a></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"/></svg> <a href="tel:+573142583380">+57 314 258 3380</a></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-pin"/></svg> Popayán, Cauca, Colombia</li>
           </ul>
+          <a class="btn btn--whatsapp" href="https://wa.me/573142583380?text=Hola%20David%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20escribirte." target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp"/></svg> Escríbeme por WhatsApp</a>
           <div class="card-foot socials">
+            <a href="https://x.com/pinchaoburgos" target="_blank" rel="noopener" aria-label="X @pinchaoburgos"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
             <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
             <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
             <a href="https://www.strava.com/athletes/164622761" target="_blank" rel="noopener" aria-label="Strava"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg></a>
@@ -929,8 +934,8 @@
     <p class="ad-status" role="status" aria-live="polite"></p>
     <div class="stack-actions">
       <button type="button" class="btn" id="watch-ad"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg> Ver anuncio</button>
-      <!-- Quita "hidden" cuando estén activas las cards de donación. -->
-      <a class="btn btn--ghost" href="#apoyame" data-close hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Otras formas de apoyar</a>
+      
+      <a class="btn btn--ghost" href="#apoyame" data-close><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Otras formas de apoyar</a>
     </div>
     <small>Los anuncios los sirve Google. Nunca tienes que hacer clic en ellos.</small>
   </dialog>
@@ -1016,18 +1021,35 @@
       mq.innerHTML = paused ? playIcon : pauseIcon;
     });
 
-    // ----- Formulario de contacto -----
-    // TODO: conectar a un backend real (p. ej. Formspree). Mientras tanto no envía nada y lo dice.
-    const form = $('#contactForm'), status = $('#form-status');
-    form.addEventListener('submit', (e) => {
+    // ----- Formulario de contacto (Formspree) -----
+    // Se envía sin salir de la página; muestra el estado (enviando / enviado / error) en #form-status.
+    const form = $('#contactForm'), status = $('#form-status'), sendBtn = $('button[type="submit"]', form);
+    const showStatus = (msg, isError = false) => { status.hidden = false; status.classList.toggle('alert--error', isError); status.textContent = msg; };
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) {
         form.querySelector(':invalid').focus();
         form.reportValidity();
         return;
       }
-      status.hidden = false;
-      status.textContent = 'Gracias por escribir. El formulario aún no está conectado: por ahora escríbeme por TikTok o GitHub.';
+      const label = sendBtn.textContent;
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Enviando…';
+      status.hidden = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.errors?.map((x) => x.message).join(' ') || 'No se pudo enviar.');
+        }
+        form.reset();
+        showStatus('¡Mensaje enviado! Te responderé pronto a tu correo.');
+      } catch (err) {
+        showStatus(`${err.message} Inténtalo de nuevo o escríbeme por WhatsApp.`, true);
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = label;
+      }
     });
 
     // ----- Apóyame: alcancía + anuncio con recompensa (Google H5 Games Ads / Ad Placement API) -----
