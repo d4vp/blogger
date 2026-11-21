@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>David Pinchao | Desarrollo web, IA y proyectos</title>
   <meta name="description" content="David Pinchao (d4vp): estudiante de Ingeniería de Sistemas en Popayán, Colombia. Construyo apps full-stack con IA: KhipuOps, Copa Arrayanes y HogarSync.">
+  <meta name="referrer" content="strict-origin-when-cross-origin"><!-- YouTube lo necesita para los videos insertados (evita el Error 153) -->
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="profile">
   <meta property="og:locale" content="es_CO">
   <meta property="og:title" content="David Pinchao | Blog Personal">
-  <meta property="og:description" content="Proyectos full-stack, desarrollo asistido por IA, fotografía, deporte, guitarra y agricultura: las distintas facetas de David Pinchao.">
+  <meta property="og:description" content="Proyectos full-stack, desarrollo asistido por IA, fotografía, running, ciclismo, guitarra y agricultura: las distintas facetas de David Pinchao.">
   <!-- og:url, og:image y <link rel="canonical"> requieren la URL pública absoluta del sitio. -->
   <script type="application/ld+json">
   {
@@ -20,11 +21,15 @@
     "name": "David Pinchao",
     "alternateName": "d4vp",
     "description": "Estudiante de Ingeniería de Sistemas y desarrollador web full-stack que construye con agentes de IA.",
-    "sameAs": ["https://github.com/d4vp", "https://www.youtube.com/@ldavorappi"],
+    "sameAs": ["https://github.com/d4vp", "https://www.youtube.com/@ldavorappi", "https://www.tiktok.com/@soul.px", "https://www.strava.com/athletes/164622761", "https://x.com/pinchaoburgos", "https://d4vp.itch.io/popayan-maldito"],
     "address": { "@type": "PostalAddress", "addressLocality": "Popayán", "addressRegion": "Cauca", "addressCountry": "CO" },
-    "knowsAbout": ["Desarrollo web", "React", "Next.js", "Node.js", "MongoDB", "Tailwind CSS", "Claude Code", "Model Context Protocol", "Fotografía", "Running", "Natación", "Baloncesto", "Guitarra", "Agricultura"]
+    "knowsAbout": ["Desarrollo web", "React", "Next.js", "Node.js", "MongoDB", "Tailwind CSS", "Claude Code", "Model Context Protocol", "Fotografía", "Running", "Ciclismo", "Natación", "Baloncesto", "Guitarra", "Agricultura"]
   }
   </script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="assets/site.webmanifest">
   <link rel="preload" href="assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script>
@@ -38,190 +43,290 @@
     @font-face { font-family: Poppins; font-weight: 700; font-display: swap; src: url(assets/fonts/poppins-latin-700-normal.woff2) format('woff2'); }
     @property --p { syntax: '<number>'; inherits: true; initial-value: 0; }
 
-    /* ---------- Tokens ---------- */
+    /* =========================================================
+       PALETA (ver README › Paleta de colores)
+       Neutros cálidos + un único acento de marca.
+       Todos los pares texto/fondo cumplen WCAG AA (≥ 4.5:1).
+       ========================================================= */
     :root {
       color-scheme: light dark;
-      --bg: light-dark(#f9f9f9, #121212);
-      --panel: light-dark(#ffffff, #121212);
-      --band: light-dark(#f9f9f9, #1b1b1b);
-      --card: light-dark(#ffffff, #262626);
-      --card-alt: light-dark(#f9f9f9, #262626);
-      --text: light-dark(#222222, #f3f3f3);
-      --muted: light-dark(#555555, #c4c4c4);
-      --border: light-dark(#d4d4d4, #4a4a4a);
-      --shadow: light-dark(rgb(0 0 0 / .1), rgb(0 0 0 / .5));
-      --accent: #ff6600;
-      --accent-text: light-dark(#c2410c, #ff8a3d);
-      --on-accent: #1a1a1a;
-      --info: light-dark(#007bff, #9ec5ff);
-      --nav-h: 3.75rem;
+      --brand:      #fb923c;                              /* rellenos: botones, iconos, foco (naranja suave) */
+      --on-brand:   #1c1917;                              /* texto sobre --brand (7.7:1) */
+      --brand-ink:  light-dark(#b43a0b, #fb923c);         /* texto y enlaces de acento */
+      --brand-soft: light-dark(#fff5ed, #2a1a0e);         /* fondos suaves de acento */
+      --bg:         light-dark(#fafaf9, #0c0a09);
+      --surface:    light-dark(#ffffff, #1c1917);         /* cards */
+      --surface-2:  light-dark(#f5f5f4, #292524);         /* cards anidadas, chips */
+      --border:     light-dark(#e7e5e4, #3a3532);
+      --text:       light-dark(#1c1917, #f5f5f4);
+      --muted:      light-dark(#57534e, #a8a29e);
+      --success:    light-dark(#15803d, #4ade80);
+      --danger:     light-dark(#b91c1c, #f87171);
+      --shadow:     light-dark(rgb(28 25 23 / .08), rgb(0 0 0 / .45));
+
+      --radius: 16px;
+      --radius-sm: 10px;
+      --gap: clamp(1.25rem, 2.5vw, 1.75rem);
+      --nav-h: 4rem;
     }
     :root[data-theme="light"] { color-scheme: light; }
     :root[data-theme="dark"] { color-scheme: dark; }
 
     /* ---------- Base ---------- */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 1rem); -webkit-text-size-adjust: 100%; }
     body { font-family: Poppins, system-ui, sans-serif; line-height: 1.6; background: var(--bg); color: var(--text); overflow-x: hidden; }
     img, iframe { max-width: 100%; }
-    a { color: inherit; }
-    :focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; border-radius: 4px; }
+    a { color: var(--brand-ink); text-underline-offset: 3px; }
+    h1, h2, h3, h4 { line-height: 1.2; text-wrap: balance; }
+    p { text-wrap: pretty; }
+    :focus-visible { outline: 3px solid var(--brand-ink); outline-offset: 3px; border-radius: 6px; }
     .icon { width: 1em; height: 1em; flex: none; vertical-align: -.125em; }
-    .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 200; padding: .5rem 1rem; background: var(--accent); color: var(--on-accent); border-radius: 0 0 8px 8px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+    .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 200; padding: .6rem 1rem; background: var(--brand); color: var(--on-brand); font-weight: 700; border-radius: 0 0 var(--radius-sm) var(--radius-sm); }
     .skip-link:focus { top: 0; }
+    [hidden] { display: none !important; }
+
+    /* ---------- Layout ---------- */
+    .container { width: min(1100px, 100% - 2.5rem); margin-inline: auto; }
+    .section { padding-block: clamp(4rem, 9vw, 7rem); }
+    .section + .section { border-top: 1px solid var(--border); }
+    .section-head { max-width: 62ch; margin-bottom: clamp(2rem, 5vw, 3rem); }
+    .eyebrow { display: inline-flex; align-items: center; gap: .4rem; margin-bottom: .5rem; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--brand-ink); }
+    .section-head h2 { font-size: clamp(1.75rem, 4vw, 2.4rem); }
+    .lead { margin-top: .75rem; color: var(--muted); font-size: 1.05rem; }
+    .grid { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+
+    /* ---------- Card (componente único del sitio) ---------- */
+    .card { position: relative; display: flex; flex-direction: column; gap: 1.1rem; padding: clamp(1.5rem, 3vw, 2rem); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .card > p, .card-body > p { color: var(--muted); }
+    .card h3 { font-size: 1.2rem; }
+    .card h4 { display: flex; align-items: center; gap: .5rem; font-size: 1rem; margin-top: .75rem; }
+    .card h4 .icon { color: var(--brand-ink); }
+    .card-head { display: flex; align-items: center; gap: 1rem; }
+    .card-head > div { min-width: 0; }
+    .card-tag { display: block; font-size: .85rem; color: var(--muted); }
+    .card-icon { display: grid; place-items: center; width: 3rem; height: 3rem; flex: none; border-radius: 12px; font-size: 1.4rem; color: var(--brand-ink); background: var(--brand-soft); }
+    .card-thumb { width: 3.5rem; height: 3.5rem; flex: none; border-radius: 12px; object-fit: cover; background: var(--surface-2); }
+    .card--feature { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand); }
+    .card--inset { background: var(--surface-2); padding: 0; overflow: hidden; gap: 0; }
+    .card--link { transition: border-color .2s, transform .2s, box-shadow .2s; }
+    .card--link:hover { border-color: var(--brand); transform: translateY(-3px); box-shadow: 0 12px 28px var(--shadow); }
+    .card-foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+    .stretched::after { content: ''; position: absolute; inset: 0; border-radius: inherit; } /* toda la card es clicable */
+    .note { font-size: .8rem; color: var(--muted); }
+
+    /* Grillas de escritorio sin huecos:
+       · .bento  → "Sobre mí": card alta (Running) a la izquierda y 4 cards cortas apiladas a la derecha.
+       · .grid--3 → 3 columnas que reparten la última fila (5 cards = 3 + 2, 4 = 3 + 1 a todo el ancho).
+       · .grid--2 → dos columnas (formulario más ancho que la info). */
+    @media (min-width: 900px) {
+      .bento, .grid--3 { grid-template-columns: repeat(6, 1fr); }
+      .bento > *, .grid--3 > * { grid-column: span 2; }
+      .bento > .span-3 { grid-column: span 3; }
+      .bento > .span-4 { grid-column: span 4; }
+      .bento > .span-6 { grid-column: span 6; }
+      .bento > .tall { grid-row: span 4; }
+      .grid--3 > :nth-child(3n+1):nth-last-child(2),
+      .grid--3 > :nth-child(3n+1):nth-last-child(2) + * { grid-column: span 3; }
+      .grid--3 > :nth-child(3n+1):last-child { grid-column: span 6; }
+      .grid--2 { grid-template-columns: 3fr 2fr; }
+    }
+
+    /* ---------- Botones, chips y enlaces ---------- */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: .65rem 1.35rem; background: var(--brand); color: var(--on-brand); border: 2px solid var(--brand); border-radius: 999px; font: inherit; font-weight: 700; cursor: pointer; text-decoration: none; transition: filter .2s, transform .2s, background-color .2s; }
+    .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn:disabled { opacity: .6; cursor: progress; transform: none; }
+    .btn--ghost { background: transparent; color: var(--text); }
+    .btn--ghost:hover { background: var(--brand-soft); filter: none; }
+    .chips { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; }
+    .chips li { padding: .2rem .7rem; font-size: .78rem; font-weight: 500; border-radius: 999px; background: var(--surface-2); color: var(--muted); }
+    .link { display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; text-decoration: none; }
+    .link:hover { text-decoration: underline; }
+    .links { display: flex; flex-wrap: wrap; gap: .5rem 1.1rem; font-size: .9rem; }
+    .live { display: inline-flex; align-items: center; gap: .35rem; margin-left: auto; font-size: .75rem; font-weight: 500; color: var(--success); white-space: nowrap; }
+    .live::before { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; }
+    .icon-btn { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; background: none; border: 0; border-radius: 50%; color: inherit; font-size: 1.25rem; cursor: pointer; }
+    .icon-btn:hover { background: var(--surface-2); }
 
     /* ---------- Navegación ---------- */
-    .site-header { position: sticky; top: 0; z-index: 100; background: var(--panel); box-shadow: 0 2px 5px var(--shadow); }
-    nav { display: flex; align-items: center; gap: 1rem; min-height: var(--nav-h); padding: 0 2rem; }
-    .logo { font-size: 1.5rem; font-weight: 700; margin-right: auto; }
-    .nav-links { display: flex; list-style: none; gap: 1.5rem; }
-    .nav-links a { text-decoration: none; font-weight: 500; padding: .5rem 0; }
-    .nav-links a:hover { color: var(--accent-text); }
-    .icon-btn { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; background: none; border: 0; border-radius: 50%; color: inherit; font-size: 1.25rem; cursor: pointer; }
-    .icon-btn:hover { color: var(--accent-text); }
+    .site-header { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    nav { display: flex; align-items: center; gap: .5rem; min-height: var(--nav-h); }
+    .logo { display: inline-flex; align-items: center; gap: .6rem; margin-right: auto; font-size: 1.1rem; font-weight: 700; color: var(--text); text-decoration: none; }
+    .logo img { border-radius: 8px; }
+    .nav-links { display: flex; list-style: none; gap: .25rem; }
+    .nav-links a { display: block; padding: .5rem .75rem; border-radius: 999px; color: var(--muted); font-size: .95rem; font-weight: 500; text-decoration: none; transition: color .2s, background-color .2s; }
+    .nav-links a:hover { color: var(--text); background: var(--surface-2); }
+    .nav-links a[aria-current="true"] { color: var(--text); background: var(--brand-soft); }
     #mode-toggle .i-sun, [aria-expanded="true"] .i-open, [aria-expanded="false"] .i-close { display: none; }
     @media (prefers-color-scheme: dark) { :root:not([data-theme]) #mode-toggle .i-sun { display: block; } :root:not([data-theme]) #mode-toggle .i-moon { display: none; } }
     [data-theme="dark"] #mode-toggle .i-sun { display: block; }
     [data-theme="dark"] #mode-toggle .i-moon { display: none; }
     .burger { display: none; }
     @media (max-width: 960px) {
-      nav { padding: 0 1rem; gap: .25rem; }
       .burger { display: grid; }
-      .nav-links { position: absolute; inset: 100% 0 auto; flex-direction: column; align-items: center; gap: 0; padding: 1rem 0; background: var(--panel); box-shadow: 0 6px 8px var(--shadow); visibility: hidden; opacity: 0; transform: translateY(-.5rem); transition: opacity .25s, transform .25s, visibility .25s; }
+      .nav-links { position: absolute; inset: 100% 0 auto; flex-direction: column; gap: .25rem; padding: .75rem 1.25rem 1.25rem; background: var(--bg); border-bottom: 1px solid var(--border); box-shadow: 0 12px 24px var(--shadow); visibility: hidden; opacity: 0; transform: translateY(-.5rem); transition: opacity .2s, transform .2s, visibility .2s; }
       .nav-links.open { visibility: visible; opacity: 1; transform: none; }
-      .nav-links a { display: block; padding: .75rem 2rem; font-size: 1.2rem; }
+      .nav-links a { padding: .75rem 1rem; font-size: 1.05rem; border-radius: var(--radius-sm); }
     }
 
     /* ---------- Hero ---------- */
-    .hero { position: relative; min-height: calc(100vh - var(--nav-h)); min-height: calc(100svh - var(--nav-h)); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+    .hero { position: relative; isolation: isolate; overflow: hidden; min-height: calc(100svh - var(--nav-h)); display: grid; place-items: center; padding-block: clamp(3.5rem, 10vw, 7rem); text-align: center; background: radial-gradient(60% 50% at 50% 0%, var(--brand-soft), transparent 70%); }
     #particles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-    .hero h1 { font-size: clamp(1.75rem, 5vw, 2.25rem); line-height: 1.3; }
-    .hero h1 span, #typed { color: var(--accent-text); }
-    .hero h2 { font-size: 1.5rem; min-height: 1.6em; }
-    #typed::after { content: '|'; margin-left: 2px; animation: blink 1s steps(1) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-    .avatar { margin-top: 2rem; width: 180px; height: 180px; border-radius: 50%; border: 5px solid var(--accent); object-fit: cover; }
-    .btn { display: inline-flex; align-items: center; gap: .5rem; margin-top: 2rem; padding: .8rem 1.5rem; background: var(--accent); color: var(--on-accent); border: 0; border-radius: 30px; font: inherit; font-weight: 700; cursor: pointer; text-decoration: none; transition: background-color .2s, transform .2s; }
-    .btn:hover { background: #ff7f2a; transform: translateY(-2px); }
-    .btn-rappi { margin-top: 1.25rem; background: #ff441f; box-shadow: 0 4px 15px rgb(255 68 31 / .3); }
-    .btn-rappi:hover { background: #ff5c3b; }
-    .socials { margin-top: 2rem; display: flex; justify-content: center; gap: .25rem; }
-    .socials a { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; font-size: 1.4rem; color: var(--muted); transition: color .3s; }
-    .socials a:hover { color: var(--accent-text); }
+    .hero .container { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+    .avatar { width: 132px; height: 132px; border-radius: 50%; object-fit: cover; border: 3px solid var(--surface); box-shadow: 0 0 0 3px var(--brand), 0 12px 28px var(--shadow); }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.25rem); letter-spacing: -.02em; }
+    .hero h1 span { color: var(--brand-ink); }
+    .hero .lead { max-width: 52ch; margin-top: 0; }
+    .hero .chips { justify-content: center; }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+    .hero-badge { display: inline-flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: .35rem 1rem .35rem .4rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: .9rem; text-decoration: none; box-shadow: 0 4px 14px var(--shadow); transition: border-color .2s, transform .2s; }
+    .hero-badge:hover { border-color: var(--brand); transform: translateY(-1px); }
+    .hero-badge strong { color: var(--brand-ink); }
+    .badge-new { padding: .2rem .6rem; border-radius: 999px; background: var(--brand); color: var(--on-brand); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+    .socials { display: flex; flex-wrap: wrap; gap: .25rem; }
+    .hero .socials { justify-content: center; }
+    .socials a { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; font-size: 1.3rem; color: var(--muted); transition: color .2s, background-color .2s; }
+    .socials a:hover { color: var(--brand-ink); background: var(--surface-2); }
 
-    /* ---------- Secciones ---------- */
-    section h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin-bottom: 1.25rem; }
-    .container { max-width: 1100px; margin-inline: auto; }
+    /* ---------- Listas de actividades (Strava) ---------- */
+    /* El widget de Strava mide 300 px fijos: se centra y, si la card es más alta, queda centrado en vertical */
+    .strava-live { display: block; flex: none; width: 300px; max-width: 100%; height: 454px; margin: auto; border: 0; border-radius: var(--radius-sm); }
 
-    .about { padding: 4rem 2rem; text-align: center; }
-    .about p { color: var(--muted); margin-bottom: 1rem; }
-    .about-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 2rem; }
-    .about-item.reversed { flex-direction: column-reverse; }
-    .about-image { width: 150px; height: 150px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 8px var(--shadow); }
-    .strava { display: block; margin: 1rem auto 0; border: 0; }
-    @media (min-width: 769px) {
-      .about { text-align: left; }
-      .about-item, .about-item.reversed { flex-direction: row; gap: 2rem; margin-bottom: 3rem; }
-      .about-item.reversed { flex-direction: row-reverse; }
-      .about-text { flex: 1; }
-      .about-image { width: 200px; height: 200px; }
-      .strava { margin-inline: 0; }
+    /* Rutas con video (TikTok bajo demanda): vertical en móvil, horizontal cuando la card es ancha */
+    .routes { display: grid; gap: var(--gap); }
+    @media (min-width: 1000px) { .routes { grid-template-columns: 1fr 1fr; } }
+    .route { container-type: inline-size; }
+    .route-media { background: #0c0a09; }
+    .route-body { display: flex; flex-direction: column; gap: .75rem; padding: 1.1rem 1.2rem 1.3rem; }
+    @container (min-width: 440px) {
+      .route-inner { display: grid; grid-template-columns: 190px 1fr; height: 100%; }
+      .route-media .video { width: 100%; height: 100%; }
+      .route-body { justify-content: center; }
     }
+    .route-body h5 { font-size: 1.1rem; }
+    .route-body p { color: var(--muted); font-size: .92rem; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: .5rem; }
+    .stats div { padding: .5rem .25rem; border-radius: var(--radius-sm); background: var(--surface); text-align: center; }
+    .stats dt { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    .stats dd { font-weight: 700; }
+    details summary { cursor: pointer; font-size: .9rem; font-weight: 500; color: var(--brand-ink); min-height: 2.75rem; display: flex; align-items: center; }
+    .video { position: relative; aspect-ratio: 9 / 16; width: min(100%, 300px); margin-inline: auto; background: #0c0a09; }
+    .video > * { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video button { display: grid; place-content: center; justify-items: center; gap: .75rem; padding: 1rem; color: #f5f5f4; font: inherit; cursor: pointer; text-align: center; background: radial-gradient(circle at 50% 38%, rgb(251 146 60 / .35), transparent 62%), #0c0a09; }
+    .video .play { display: grid; place-items: center; width: 4rem; height: 4rem; border-radius: 50%; background: var(--brand); color: var(--on-brand); font-size: 1.6rem; transition: transform .2s; }
+    .video button:hover .play, .video button:focus-visible .play { transform: scale(1.08); }
+    .video small { color: #d6d3d1; display: inline-flex; align-items: center; gap: .35rem; }
 
-    .skills { padding: 3rem 1.25rem; text-align: center; background: var(--band); }
-    .skills > .container > p { color: var(--muted); margin-bottom: 2rem; }
-    .skills-container { display: grid; gap: 30px; }
-    @media (min-width: 768px) { .skills-container { grid-template-columns: repeat(2, 1fr); } }
-    .skill-item { background: var(--card); padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px var(--shadow); text-align: left; }
-    .skill-item h3 { font-size: 1.6rem; margin-bottom: 1rem; }
-    .skill-details { list-style: none; }
-    .skill-details li { display: flex; align-items: center; gap: .9rem; padding-block: .45rem; color: var(--muted); font-size: .95rem; }
-    .skill-details .icon { font-size: 1.15rem; color: var(--info); }
-    .ring { --p: var(--v); position: relative; margin-left: auto; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font-size: .7rem; font-weight: 700; color: var(--text); background: conic-gradient(var(--info) calc(var(--p) * 1%), var(--border) 0); isolation: isolate; transition: --p .9s ease-out; }
-    .ring::before { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--card); z-index: -1; }
-
-    .contact { padding: 4rem 1.25rem; text-align: center; background: var(--panel); }
-    .contact > .container > p { color: var(--muted); margin-bottom: 2rem; }
-    .contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 40px; max-width: 1000px; margin-inline: auto; }
-    .contact-form, .contact-info { padding: 30px; background: var(--card-alt); border-radius: 8px; box-shadow: 0 2px 5px var(--shadow); text-align: left; }
-    .contact h3 { font-size: 1.6rem; margin-bottom: 1.25rem; text-align: center; }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-group label { display: block; font-weight: 700; margin-bottom: .3rem; color: var(--muted); }
-    .form-group :is(input, textarea) { width: 100%; padding: .65rem; border: 1px solid var(--border); border-radius: 4px; font: inherit; color: var(--text); background: light-dark(#fff, #333); }
-    .form-group textarea { resize: vertical; }
-    .contact-form .btn { margin-top: 0; }
-    .contact-info p { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; color: var(--muted); }
-    .contact-info p .icon { font-size: 1.2rem; color: var(--info); }
-    .alert { margin-top: 1rem; padding: 15px; border: 1px solid light-dark(#c3e6cb, #375e4b); border-radius: 4px; color: light-dark(#155724, #a7f3d0); background: light-dark(#d4edda, #1e2e24); }
+    /* ---------- Habilidades ---------- */
+    .skill-list { list-style: none; display: grid; }
+    .skill-list li { display: flex; align-items: center; gap: 1rem; padding-block: .8rem; color: var(--muted); font-size: .95rem; }
+    .skill-list li + li { border-top: 1px solid var(--border); }
+    .skill-list .icon { font-size: 1.1rem; color: var(--brand-ink); }
+    .ring { --p: var(--v); position: relative; margin-left: auto; display: grid; place-items: center; width: 48px; height: 48px; flex: none; border-radius: 50%; font-size: .72rem; font-weight: 700; color: var(--text); background: conic-gradient(var(--brand) calc(var(--p) * 1%), var(--surface-2) 0); isolation: isolate; transition: --p .9s ease-out; }
+    .ring::before { content: ''; position: absolute; inset: 5px; border-radius: 50%; background: var(--surface); z-index: -1; }
 
     /* ---------- Proyectos ---------- */
-    .section-lead { color: var(--muted); margin: 0 auto 2.5rem; max-width: 60ch; }
-    .projects { padding: 4rem 1.25rem; text-align: center; }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1.75rem; text-align: left; }
-    .project { position: relative; display: flex; flex-direction: column; gap: .9rem; padding: 1.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 2px 5px var(--shadow); transition: transform .25s, box-shadow .25s, border-color .25s; }
-    .project:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 28px var(--shadow); }
-    .project-head { display: flex; align-items: center; gap: .85rem; }
-    .project-icon { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 12px; font-size: 1.5rem; color: var(--on-accent); background: var(--accent); flex: none; }
-    .project h3 { font-size: 1.3rem; line-height: 1.2; }
-    .project-tag { font-size: .8rem; color: var(--muted); }
-    .project p { color: var(--muted); font-size: .95rem; }
-    .project ul.features { list-style: none; display: grid; gap: .35rem; font-size: .9rem; color: var(--muted); }
-    .project ul.features li { display: flex; gap: .5rem; align-items: baseline; }
-    .project ul.features .icon { color: var(--accent-text); }
-    .chips { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; margin-top: auto; }
-    .chips li { padding: .2rem .65rem; font-size: .75rem; font-weight: 500; border-radius: 999px; background: var(--band); border: 1px solid var(--border); }
-    .project-link { display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; color: var(--accent-text); text-decoration: none; }
-    .project-link::after { content: ''; position: absolute; inset: 0; border-radius: inherit; } /* toda la tarjeta es clicable */
-    .project-link:hover { text-decoration: underline; }
-    .live { display: inline-flex; align-items: center; gap: .35rem; margin-left: auto; font-size: .75rem; color: light-dark(#15803d, #4ade80); }
-    .live::before { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px light-dark(rgb(21 128 61 / .2), rgb(74 222 128 / .2)); }
+    .features { list-style: none; display: grid; gap: .35rem; font-size: .9rem; color: var(--muted); }
+    .features li { display: flex; gap: .5rem; align-items: baseline; }
+    .features .icon { color: var(--success); }
 
     /* ---------- Aprendizajes ---------- */
-    .learning { padding: 4rem 1.25rem; background: var(--panel); text-align: center; }
-    .timeline { list-style: none; max-width: 760px; margin-inline: auto; text-align: left; border-left: 2px solid var(--border); padding-left: 1.75rem; display: grid; gap: 1.75rem; }
-    .timeline li { position: relative; }
-    .timeline li::before { content: ''; position: absolute; left: calc(-1.75rem - 7px); top: .45rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--panel); }
-    .timeline time { font-size: .8rem; font-weight: 700; color: var(--accent-text); text-transform: uppercase; letter-spacing: .05em; }
-    .timeline h3 { font-size: 1.15rem; margin: .15rem 0 .35rem; }
-    .timeline p { color: var(--muted); font-size: .95rem; }
+    ol.grid { list-style: none; }
+    .card time.eyebrow { margin: 0; }
 
     /* ---------- Videojuego ---------- */
-    .game { padding: 4rem 1.25rem; text-align: center; background: var(--band); }
-    .game-frame { position: relative; max-width: 960px; margin-inline: auto; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #0d0d0d; border: 2px solid var(--accent); box-shadow: 0 0 0 6px rgb(255 102 0 / .12), 0 18px 40px var(--shadow); }
+    .game-layout { display: grid; gap: var(--gap); }
+    @media (min-width: 900px) { .game-layout { grid-template-columns: 2fr 1fr; align-items: stretch; } }
+    .game-trailer { padding: .75rem; justify-content: center; }
+    .game-info .download { display: grid; gap: .5rem; }
+    .game-info .download .btn { width: 100%; }
+    /* En pantallas táctiles (celular) no hace falta el aviso de "ábrelo en tu celular" */
+    @media (pointer: coarse) { .desktop-hint { display: none; } }
+    .game-frame { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius-sm); overflow: hidden; background: #0c0a09; }
     .game-frame > :is(iframe, canvas) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
-    .game-placeholder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .75rem; padding: 1.5rem; color: #f3f3f3; background: radial-gradient(circle at 50% 40%, rgb(255 102 0 / .18), transparent 60%), repeating-linear-gradient(0deg, rgb(255 255 255 / .03) 0 2px, transparent 2px 4px); font-family: ui-monospace, 'JetBrains Mono', monospace; }
-    .game-placeholder .icon { font-size: 3.5rem; color: var(--accent); }
-    .game-placeholder strong { font-size: clamp(1.1rem, 3vw, 1.6rem); letter-spacing: .1em; }
-    .game-placeholder span { color: #c4c4c4; font-size: .9rem; }
-    .game-placeholder .press { color: var(--accent); animation: blink 1.2s steps(1) infinite; }
+    .game-placeholder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .6rem; padding: 1.5rem; color: #f5f5f4; background: radial-gradient(circle at 50% 40%, rgb(251 146 60 / .2), transparent 60%); font-family: ui-monospace, 'JetBrains Mono', monospace; text-align: center; }
+    button.game-placeholder { width: 100%; border: 0; cursor: pointer; font-size: inherit; isolation: isolate; }
+    .game-placeholder .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(.45); }
+    .game-placeholder strong, .game-placeholder span { text-shadow: 0 2px 8px rgb(0 0 0 / .6); }
+    .game-placeholder .play { display: grid; place-items: center; width: 4.5rem; height: 4.5rem; border-radius: 50%; background: var(--brand); color: var(--on-brand); font-size: 1.8rem; transition: transform .2s; }
+    .game-placeholder:is(:hover, :focus-visible) .play { transform: scale(1.08); }
+    .game-placeholder strong { font-size: clamp(1.1rem, 3vw, 1.5rem); letter-spacing: .1em; }
+    .game-placeholder span { color: #d6d3d1; font-size: .9rem; }
+
+    /* ---------- Apóyame ---------- */
+    .grid:has(> .card--feature):not(:has(> .card:not(.card--feature):not([hidden]))) { max-width: 420px; }
+    .qr { display: grid; place-items: center; width: 140px; aspect-ratio: 1; margin: .25rem auto; border: 2px dashed var(--border); border-radius: 12px; color: var(--muted); font-size: .75rem; text-align: center; }
+    .qr .icon { font-size: 2.5rem; }
+
+    /* ---------- Contacto ---------- */
+    .field { display: grid; gap: .3rem; }
+    .field label { font-weight: 500; }
+    .field :is(input, textarea) { width: 100%; min-height: 2.75rem; padding: .65rem .8rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font: inherit; color: var(--text); background: var(--surface-2); transition: border-color .2s; }
+    .field :is(input, textarea):focus { border-color: var(--brand); outline: none; box-shadow: 0 0 0 3px var(--brand-soft); }
+    .field textarea { resize: vertical; }
+    .field .hint { font-size: .8rem; color: var(--muted); }
+    .field :is(input, textarea):user-invalid { border-color: var(--danger); }
+    .field:has(:user-invalid) .hint { color: var(--danger); }
+    form { display: grid; gap: 1rem; }
+    .alert { padding: .85rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--success); color: var(--success); background: var(--surface-2); }
+    .info-list { list-style: none; display: grid; gap: .75rem; color: var(--muted); }
+    .info-list li { display: flex; align-items: center; gap: .75rem; }
+    .info-list .icon { font-size: 1.2rem; color: var(--brand-ink); }
+    .info-list a { color: var(--text); text-decoration-color: var(--border); }
+    .info-list a:hover { color: var(--brand-ink); }
+    .btn--whatsapp { background: #25d366; border-color: #25d366; color: #0c0a09; }
+    .keys { display: grid; gap: .75rem; }
+    .keys > div { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .15rem 1rem; padding: .75rem 1rem; border-radius: var(--radius-sm); background: var(--surface-2); }
+    .keys dt { grid-column: 1; font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .keys dd:first-of-type { grid-column: 1; }
+    .keys dd:last-of-type { grid-column: 2; grid-row: 1 / span 2; }
+    .keys code { font-family: inherit; font-size: 1.15rem; font-weight: 700; color: var(--text); letter-spacing: .03em; }
+    .keys .btn { min-height: 2.75rem; padding-inline: 1rem; }
+    .alert--error { border-color: var(--danger); color: var(--danger); }
 
     /* ---------- Banner de herramientas ---------- */
-    .stack { padding: 2.5rem 0 3rem; background: var(--panel); border-top: 1px solid var(--border); text-align: center; overflow: hidden; }
-    .stack h2 { font-size: 1.1rem; font-weight: 500; color: var(--muted); margin-bottom: 1.25rem; padding-inline: 1.25rem; }
-    .marquee { display: grid; gap: .9rem; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-    .marquee-track { display: flex; width: max-content; gap: .75rem; list-style: none; animation: scroll 45s linear infinite; }
+    .stack { padding-block: 2.5rem 3rem; overflow: hidden; }
+    .stack-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
+    .stack h2 { font-size: 1rem; font-weight: 500; color: var(--muted); }
+    .marquee { display: grid; gap: .75rem; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+    .marquee-track { display: flex; width: max-content; gap: .6rem; list-style: none; animation: scroll 45s linear infinite; }
     .marquee-track.reverse { animation-direction: reverse; animation-duration: 55s; }
-    .marquee:hover .marquee-track { animation-play-state: paused; }
-    .marquee-track li { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; padding: .5rem 1rem; border-radius: 999px; background: var(--card); border: 1px solid var(--border); font-size: .9rem; font-weight: 500; }
+    .marquee:hover .marquee-track, .marquee:focus-within .marquee-track, .stack.paused .marquee-track { animation-play-state: paused; }
+    .marquee-track li { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; padding: .45rem .95rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: .88rem; font-weight: 500; }
     .marquee-track li small { font-size: .7rem; color: var(--muted); font-weight: 400; }
-    .marquee-track li .icon { color: var(--accent-text); }
-    @keyframes scroll { to { transform: translateX(calc(-50% - .375rem)); } }
+    .marquee-track li .icon { color: var(--brand-ink); }
+    @keyframes scroll { to { transform: translateX(calc(-50% - .3rem)); } }
     @media (prefers-reduced-motion: reduce) {
       .marquee { mask-image: none; -webkit-mask-image: none; }
-      .marquee-track { width: auto; flex-wrap: wrap; justify-content: center; padding-inline: 1rem; }
-      .marquee-track [aria-hidden="true"] { display: none; }
+      .marquee-track { width: auto; flex-wrap: wrap; justify-content: center; }
+      .marquee-track [aria-hidden="true"], #marquee-toggle { display: none; }
     }
 
-    footer { text-align: center; padding: 2rem; background: #111; color: #fff; }
+    /* ---------- Pie ---------- */
+    footer { padding-block: 2rem 6rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .9rem; }
+    footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem; }
 
-    /* ---------- Animaciones de entrada (solo con JS y sin reduced-motion) ---------- */
+    /* ---------- Alcancía flotante + diálogo ---------- */
+    .piggy-fab { position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 150; display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border: 0; border-radius: 50%; background: var(--brand); color: var(--on-brand); font-size: 1.6rem; cursor: pointer; box-shadow: 0 8px 20px rgb(251 146 60 / .35); transition: transform .2s; }
+    .piggy-fab:hover { transform: scale(1.06); }
+    .piggy-fab .tip { position: absolute; right: calc(100% + .6rem); white-space: nowrap; padding: .35rem .7rem; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: .8rem; font-weight: 500; opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; pointer-events: none; }
+    .piggy-fab:is(:hover, :focus-visible) .tip { opacity: 1; transform: none; }
+    .support-dialog { margin: auto; width: min(440px, calc(100% - 2rem)); padding: 1.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); box-shadow: 0 24px 60px rgb(0 0 0 / .35); text-align: center; }
+    .support-dialog::backdrop { background: rgb(12 10 9 / .6); backdrop-filter: blur(3px); }
+    .support-dialog .big { font-size: 2.75rem; color: var(--brand-ink); }
+    .support-dialog h2 { font-size: 1.35rem; margin: .25rem 0 .5rem; }
+    .support-dialog p { color: var(--muted); font-size: .92rem; margin-bottom: .75rem; }
+    .support-dialog .stack-actions { display: grid; gap: .6rem; margin-top: 1rem; }
+    .support-dialog .close { position: absolute; top: .5rem; right: .5rem; }
+    .support-dialog small { display: block; margin-top: .75rem; font-size: .75rem; color: var(--muted); }
+    .ad-status { min-height: 1.4em; font-weight: 500; color: var(--brand-ink) !important; }
+
+    /* ---------- Movimiento (solo con JS y sin reduced-motion) ---------- */
     @media (prefers-reduced-motion: no-preference) {
-      .js .about-item { opacity: 0; transform: translateX(-50px); transition: opacity .5s ease, transform .5s ease; }
-      .js .about-item.reversed { transform: translateX(50px); }
-      .js .about-item.in { opacity: 1; transform: none; }
-      .js .ring:not(.in) { --p: 0; }
-      .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+      .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
       .js .reveal.in { opacity: 1; transform: none; }
+      .js .ring:not(.in) { --p: 0; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -233,15 +338,15 @@
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site-header">
-    <nav aria-label="Principal">
-      <a class="logo" href="#" style="text-decoration:none">David Pinchao</a>
+    <nav class="container" aria-label="Principal">
+      <a class="logo" href="#inicio"><img src="assets/favicon.svg" width="28" height="28" alt=""> David Pinchao</a>
       <ul class="nav-links" id="nav-links">
-        <li><a href="#">Inicio</a></li>
         <li><a href="#sobre-mi">Sobre mí</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#habilidades">Habilidades</a></li>
         <li><a href="#aprendizajes">Aprendizajes</a></li>
-        <li><a href="#juego">Juego</a></li>
+        <li><a href="#juego">Videojuego</a></li>
+        <li><a href="#apoyame">Apóyame</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
       <button id="mode-toggle" class="icon-btn" type="button" aria-label="Cambiar entre modo claro y oscuro">
@@ -256,175 +361,276 @@
   </header>
 
   <main id="contenido">
-    <section class="hero">
+    <!-- ================= Inicio ================= -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
       <canvas id="particles" aria-hidden="true"></canvas>
-      <h1 lang="en">Hi there, I'm <span>David Pinchao</span></h1>
-      <h2 lang="en" aria-label="I Am Into Web Development, AI Agents, Sports, Photography, Music">I Am Into <span id="typed" data-strings="Web Development|AI Agents|Full-Stack Apps|Sports|Photography|Music">Web Development</span></h2>
-      <img class="avatar" src="assets/img/avatar-180.webp" srcset="assets/img/avatar-180.webp 1x, assets/img/avatar-360.webp 2x" width="180" height="180" alt="Avatar de David Pinchao" fetchpriority="high">
-      <div style="display:flex;flex-wrap:wrap;gap:0 1rem;justify-content:center">
-        <a href="#proyectos" class="btn">Ver proyectos</a>
-        <a href="#sobre-mi" class="btn" style="background:transparent;color:var(--text);box-shadow:inset 0 0 0 2px var(--accent)">Sobre mí</a>
-      </div>
-      <div class="socials">
-        <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
-        <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
-        <a href="#" aria-label="X"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
-        <a href="#" aria-label="TikTok"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
+      <div class="container">
+        <img class="avatar" src="assets/img/avatar-180.webp" srcset="assets/img/avatar-180.webp 1x, assets/img/avatar-360.webp 2x" width="132" height="132" alt="Foto de David Pinchao" fetchpriority="high">
+        <a class="hero-badge" href="#juego"><span class="badge-new">Nuevo</span> Descarga gratis mi videojuego <strong>Popayán Maldito</strong> <span aria-hidden="true">→</span></a>
+        <h1 id="hero-title">Hola, soy <span>David Pinchao</span></h1>
+        <p class="lead">Desarrollador web full-stack y estudiante de Ingeniería de Sistemas en Popayán. Construyo apps reales con agentes de IA y, lejos del teclado, pedaleo, corro y tomo fotos.</p>
+        <ul class="chips" aria-label="Intereses"><li>Desarrollo web</li><li>Agentes de IA</li><li>Ciclismo</li><li>Running</li><li>Fotografía</li><li>Música</li></ul>
+        <div class="actions">
+          <a href="#proyectos" class="btn">Ver proyectos</a>
+          <a href="#juego" class="btn btn--ghost"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Ver mi videojuego</a>
+        </div>
+        <div class="socials">
+          <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
+          <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
+          <a href="https://www.strava.com/athletes/164622761" target="_blank" rel="noopener" aria-label="Strava"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg></a>
+          <a href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg></a>
+          <!-- Pon tu URL y quita "hidden" para mostrarlos. -->
+          <a href="#" aria-label="Instagram" hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
+          <a href="#" aria-label="Facebook" hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
+          <a href="https://x.com/pinchaoburgos" target="_blank" rel="noopener" aria-label="X @pinchaoburgos"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
+          <a href="https://wa.me/573142583380" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp"/></svg></a>
+        </div>
       </div>
     </section>
 
-    <section id="sobre-mi" class="about">
+    <!-- ================= Sobre mí ================= -->
+    <section id="sobre-mi" class="section" aria-labelledby="sobre-mi-title">
      <div class="container">
-      <h2>¡Hola! Soy David Pinchao</h2>
+      <header class="section-head">
+        <p class="eyebrow">Sobre mí</p>
+        <h2 id="sobre-mi-title">Las facetas detrás del código</h2>
+        <p class="lead">Tecnología de día; deporte, fotografía, música y campo el resto del tiempo.</p>
+      </header>
 
-      <div class="about-item">
-        <div class="about-text">
-          <p>Soy estudiante de <strong>Ingeniería de Sistemas</strong> y desarrollador web <strong>full-stack</strong>. Paso de la idea al despliegue: diseño la interfaz, modelo los datos, construyo la API y la publico en la nube.</p>
-          <p>Hoy trabajo codo a codo con <strong>agentes de IA</strong> (Claude Code, servidores MCP y skills) para prototipar más rápido, revisar código y automatizar lo repetitivo. Así nacieron <a href="#proyectos">KhipuOps, Copa Arrayanes y HogarSync</a>: problemas reales de mi comunidad resueltos con software.</p>
-        </div>
-        <img class="about-image" src="assets/img/inge-200.webp" srcset="assets/img/inge-200.webp 1x, assets/img/inge-400.webp 2x" width="200" height="200" alt="Desarrollo Web" loading="lazy" decoding="async">
-      </div>
-      <div class="about-item reversed">
-        <div class="about-text">
-          <p>Aunque mi enfoque académico es la tecnología, mi corazón también late por la <strong>fotografía</strong>. Encuentro en ella una vía de expresión artística y una manera de capturar momentos únicos y perspectivas interesantes del mundo que me rodea.</p>
-        </div>
-        <img class="about-image" src="assets/img/fotografo-200.webp" srcset="assets/img/fotografo-200.webp 1x, assets/img/fotografo-400.webp 2x" width="200" height="200" alt="Fotografía" loading="lazy" decoding="async">
-      </div>
-      <div class="about-item">
-        <div class="about-text">
-          <p>En cuanto a deportes, soy entusiasta del <strong>running</strong>, la <strong>natación</strong> y el <strong>baloncesto</strong>. Disfruto de la disciplina y la energía que cada uno aporta, tanto a nivel físico como mental.</p>
-          <iframe class="strava" title="Actividad reciente en Strava" loading="lazy" width="300" height="454" src="https://www.strava.com/athletes/164622761/latest-rides/44a460fa1c2a4dfc1179d197f28e22fa1a6125a9"></iframe>
-        </div>
-        <img class="about-image" src="assets/img/run-200.webp" srcset="assets/img/run-200.webp 1x, assets/img/run-400.webp 2x" width="200" height="200" alt="Deportes" loading="lazy" decoding="async">
-      </div>
-      <div class="about-item reversed">
-        <div class="about-text">
-          <p>Además, un amateur en <strong>guitarra</strong>. Explorar el mundo de la música y aprender a tocar este instrumento es una actividad que me relaja y me permite desarrollar una nueva forma de creatividad.</p>
-        </div>
-        <img class="about-image" src="assets/img/guitar-200.webp" srcset="assets/img/guitar-200.webp 1x, assets/img/guitar-400.webp 2x" width="200" height="200" alt="Guitarra" loading="lazy" decoding="async">
-      </div>
-      <div class="about-item">
-        <div class="about-text">
-          <p>Mi conexión con la tierra se manifiesta en mi labor como <strong>agricultor</strong>. Disfruto del proceso de siembra y cosecha, cultivando alimentos frescos y valorando la importancia de la sostenibilidad y el respeto por el medio ambiente en el campo.</p>
-        </div>
-        <img class="about-image" src="assets/img/agricultor-200.webp" srcset="assets/img/agricultor-200.webp 1x, assets/img/agricultor-400.webp 2x" width="200" height="200" alt="Agricultura" loading="lazy" decoding="async">
-      </div>
-      <div class="about-item reversed">
-        <div class="about-text">
-          <p>En mis tiempos libres, también colaboro como <strong>repartidor de Rappi</strong>. Esta experiencia me permite interactuar con diversas personas de la ciudad y contribuir a la economía local, moviéndome de manera ágil para realizar entregas eficientes.</p>
-          <a href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" class="btn btn-rappi"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg> Ver canal de Rappi</a>
-        </div>
-        <img class="about-image" src="assets/img/repartidor_rappi-200.webp" srcset="assets/img/repartidor_rappi-200.webp 1x, assets/img/repartidor_rappi-400.webp 2x" width="200" height="200" alt="Repartidor de Rappi" loading="lazy" decoding="async">
-      </div>
+      <div class="grid bento">
+        <article class="card span-6 reveal">
+          <div class="card-head">
+            <img class="card-thumb" src="assets/img/inge-200.webp" width="56" height="56" alt="" loading="lazy" decoding="async">
+            <div><h3>Desarrollo web e IA</h3><span class="card-tag">Full-stack · Agentes de IA</span></div>
+          </div>
+          <p>Paso de la idea al despliegue: diseño la interfaz, modelo los datos, construyo la API y la publico en la nube.</p>
+          <p>Trabajo codo a codo con <strong>agentes de IA</strong> (Claude Code, servidores MCP y skills) para prototipar más rápido, revisar código y automatizar lo repetitivo. Así nacieron <a href="#proyectos">KhipuOps, Copa Arrayanes y HogarSync</a>.</p>
+        </article>
 
-      <p>Este espacio es una ventana a mis diferentes facetas: desde mis avances en el desarrollo web hasta mis exploraciones fotográficas, pasando por mi actividad deportiva, mis primeros pasos con la guitarra, mi labor en la agricultura y mis recorridos como repartidor. ¡Espero que disfrutes conociéndome un poco más!</p>
+        <!-- Running: card alta a la izquierda; a la derecha se apilan 4 cards cortas -->
+        <article class="card span-3 tall reveal" id="running" aria-labelledby="running-title">
+          <div class="card-head">
+            <img class="card-thumb" src="assets/img/run-200.webp" width="56" height="56" alt="" loading="lazy" decoding="async">
+            <div><h3 id="running-title">Running y deporte</h3><span class="card-tag">Running · Natación · Baloncesto</span></div>
+          </div>
+          <p>Disfruto de la disciplina y la energía que cada deporte aporta, tanto a nivel físico como mental.</p>
+          <iframe class="strava-live" title="Panel en vivo de Strava: mis últimas carreras" loading="lazy" width="300" height="454" src="https://www.strava.com/athletes/164622761/latest-rides/44a460fa1c2a4dfc1179d197f28e22fa1a6125a9"></iframe>
+          <p class="note">El panel de Strava se actualiza solo con mis últimas carreras.</p>
+        </article>
+
+        <article class="card span-3 reveal">
+          <div class="card-head">
+            <img class="card-thumb" src="assets/img/fotografo-200.webp" width="56" height="56" alt="" loading="lazy" decoding="async">
+            <div><h3>Fotografía</h3><span class="card-tag">Retrato · Paisaje</span></div>
+          </div>
+          <p>Mi vía de expresión artística: capturar momentos únicos y perspectivas del mundo que me rodea.</p>
+        </article>
+
+        <article class="card span-3 reveal">
+          <div class="card-head">
+            <img class="card-thumb" src="assets/img/guitar-200.webp" width="56" height="56" alt="" loading="lazy" decoding="async">
+            <div><h3>Guitarra</h3><span class="card-tag">Amateur</span></div>
+          </div>
+          <p>Aprender a tocar me relaja y me da una nueva forma de creatividad.</p>
+        </article>
+
+        <article class="card span-3 reveal">
+          <div class="card-head">
+            <img class="card-thumb" src="assets/img/agricultor-200.webp" width="56" height="56" alt="" loading="lazy" decoding="async">
+            <div><h3>Agricultura</h3><span class="card-tag">Siembra y cosecha</span></div>
+          </div>
+          <p>Cultivo alimentos frescos y valoro la sostenibilidad y el respeto por el campo.</p>
+        </article>
+
+        <article class="card span-3 reveal">
+          <div class="card-head">
+            <img class="card-thumb" src="assets/img/repartidor_rappi-200.webp" width="56" height="56" alt="" loading="lazy" decoding="async">
+            <div><h3>Repartidor de Rappi</h3><span class="card-tag">Tiempos libres</span></div>
+          </div>
+          <p>Recorro la ciudad, conozco a su gente y aporto a la economía local.</p>
+          <div class="card-foot">
+            <a class="link" href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg> Ver mi canal</a>
+          </div>
+        </article>
+        <!-- Ciclismo: card propia -->
+        <article class="card span-6 reveal" id="ciclismo" aria-labelledby="ciclismo-title">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg></span>
+            <div><h3 id="ciclismo-title">Ciclismo</h3><span class="card-tag">Carreteras y montañas del Cauca</span></div>
+          </div>
+          <p>Sobre dos ruedas exploro el Cauca, me pongo a prueba en los ascensos y desconecto del teclado.</p>
+
+          <h4><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mountain"/></svg> Rutas destacadas</h4>
+          <div class="routes">
+            <article class="card card--inset route" aria-labelledby="r-totoro">
+             <div class="route-inner">
+              <div class="route-media"><div class="video">
+                <button type="button" data-tiktok="7708885106630577428" aria-label="Reproducir el video de la ruta Piendamó – Silvia – Totoro">
+                  <span class="play"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span>
+                  <strong>Piendamó – Silvia – Totoro</strong>
+                  <small><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> Toca para ver el video</small>
+                </button>
+              </div></div>
+              <div class="route-body">
+                <h5 id="r-totoro">Piendamó – Silvia – Totoro</h5>
+                <p><time datetime="2026-07-13">13 jul 2026</time> · Más de 7 horas pedaleando por la montaña caucana.</p>
+                <dl class="stats">
+                  <div><dt>Distancia</dt><dd>116,2 km</dd></div>
+                  <div><dt>Desnivel</dt><dd>2.250 m</dd></div>
+                  <div><dt>Tiempo</dt><dd>7 h 34 min</dd></div>
+                </dl>
+                <details data-strava>
+                  <summary>Ver la ruta en el mapa</summary>
+                  <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="19300862171" data-style="standard" data-from-embed="false" data-token="L1_iRQYWvFqjPCEXx_2lASMxTE-PU4vQrd-J47HIV_4"></div>
+                </details>
+                <div class="links">
+                  <a class="link" href="https://www.strava.com/activities/19300862171" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Strava</a>
+                  <a class="link" href="https://www.tiktok.com/@soul.px/video/7708885106630577428" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> TikTok</a>
+                </div>
+              </div>
+             </div>
+            </article>
+
+            <article class="card card--inset route" aria-labelledby="r-coconuco">
+             <div class="route-inner">
+              <div class="route-media"><div class="video">
+                <button type="button" data-tiktok="7708833397417774337" aria-label="Reproducir el video de la ruta a Coconuco">
+                  <span class="play"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span>
+                  <strong>Coconuco</strong>
+                  <small><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> Toca para ver el video</small>
+                </button>
+              </div></div>
+              <div class="route-body">
+                <h5 id="r-coconuco">Coconuco: ascenso y bajada</h5>
+                <p><time datetime="2026-06-19">19 jun 2026</time> · Subida desde Popayán hacia Coconuco y regreso, en dos tramos.</p>
+                <dl class="stats">
+                  <div><dt>Distancia</dt><dd>85,5 km</dd></div>
+                  <div><dt>Desnivel</dt><dd>1.499 m</dd></div>
+                  <div><dt>Tiempo</dt><dd>5 h 09 min</dd></div>
+                </dl>
+                <div class="links">
+                  <a class="link" href="https://www.strava.com/activities/18987007689" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Ascenso</a>
+                  <a class="link" href="https://www.strava.com/activities/18987615989" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Bajada</a>
+                  <a class="link" href="https://www.tiktok.com/@soul.px/video/7708833397417774337" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> TikTok</a>
+                </div>
+              </div>
+             </div>
+            </article>
+          </div>
+        </article>
+      </div>
      </div>
     </section>
 
-    <section id="proyectos" class="projects">
+    <!-- ================= Proyectos ================= -->
+    <section id="proyectos" class="section" aria-labelledby="proyectos-title">
      <div class="container">
-      <h2>Proyectos</h2>
-      <p class="section-lead">Aplicaciones reales, desplegadas y en uso. Cada una nació de una necesidad concreta y se construyó de punta a punta con ayuda de agentes de IA.</p>
-      <div class="projects-grid">
-        <article class="project reveal">
-          <div class="project-head">
-            <span class="project-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headset"/></svg></span>
-            <div><h3>KhipuOps</h3><span class="project-tag">Mesa de ayuda · Render</span></div>
+      <header class="section-head">
+        <p class="eyebrow">Proyectos</p>
+        <h2 id="proyectos-title">Aplicaciones reales, desplegadas y en uso</h2>
+        <p class="lead">Cada una nació de una necesidad concreta y se construyó de punta a punta con ayuda de agentes de IA.</p>
+      </header>
+      <div class="grid grid--3">
+        <article class="card card--link reveal">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headset"/></svg></span>
+            <div><h3>KhipuOps</h3><span class="card-tag">Mesa de ayuda · Render</span></div>
             <span class="live">En línea</span>
           </div>
-          <p>Plataforma de mesa de ayuda (help desk) para gestionar tickets de soporte, con actualizaciones en tiempo real y un asistente de IA integrado.</p>
+          <p>Plataforma de mesa de ayuda para gestionar tickets de soporte, con actualizaciones en tiempo real y un asistente de IA integrado.</p>
           <ul class="features">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tickets y estados sincronizados en tiempo real</li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Asistente de IA integrado</li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Panel con métricas y gráficas</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Modo claro / oscuro</li>
           </ul>
-          <ul class="chips" aria-label="Tecnologías"><li>React</li><li>Vite</li><li>Node.js</li><li>MongoDB</li><li>Tiempo real</li><li>IA</li></ul>
-          <a class="project-link" href="https://khipuops.onrender.com" target="_blank" rel="noopener">khipuops.onrender.com <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a>
+          <ul class="chips" aria-label="Tecnologías"><li>React</li><li>Vite</li><li>Node.js</li><li>MongoDB</li><li>IA</li></ul>
+          <div class="card-foot"><a class="link stretched" href="https://khipuops.onrender.com" target="_blank" rel="noopener">khipuops.onrender.com <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a></div>
         </article>
-        <article class="project reveal">
-          <div class="project-head">
-            <span class="project-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-trophy"/></svg></span>
-            <div><h3>Copa Arrayanes</h3><span class="project-tag">Torneo comunitario · Cloudflare Pages</span></div>
+        <article class="card card--link reveal">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-trophy"/></svg></span>
+            <div><h3>Copa Arrayanes</h3><span class="card-tag">Torneo comunitario · Cloudflare</span></div>
             <span class="live">En línea</span>
           </div>
-          <p>Sitio oficial del campeonato de la vereda Los Arrayanes (Córdoba, Nariño): partidos, resultados, tabla de posiciones y estadísticas.</p>
+          <p>Sitio oficial del campeonato de la vereda Los Arrayanes (Córdoba, Nariño): partidos, resultados, posiciones y estadísticas.</p>
           <ul class="features">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Fixture y resultados al día</li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tabla de posiciones automática</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Equipos y patrocinadores</li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Panel de gestión para organizadores</li>
           </ul>
           <ul class="chips" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Cloudflare Pages</li><li>Mobile-first</li></ul>
-          <a class="project-link" href="https://copa-arrayanes.pages.dev" target="_blank" rel="noopener">copa-arrayanes.pages.dev <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a>
+          <div class="card-foot"><a class="link stretched" href="https://copa-arrayanes.pages.dev" target="_blank" rel="noopener">copa-arrayanes.pages.dev <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a></div>
         </article>
-        <article class="project reveal">
-          <div class="project-head">
-            <span class="project-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-home"/></svg></span>
-            <div><h3>HogarSync</h3><span class="project-tag">Organización del hogar · Vercel</span></div>
+        <article class="card card--link reveal">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-home"/></svg></span>
+            <div><h3>HogarSync</h3><span class="card-tag">Organización del hogar · Vercel</span></div>
             <span class="live">En línea</span>
           </div>
-          <p>“Horarios y pendientes del hogar, en sincronía.” App para que quienes viven en una casa compartan tareas y horarios.</p>
+          <p>Horarios y pendientes del hogar, en sincronía: quienes viven en una casa comparten tareas y horarios.</p>
           <ul class="features">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Cuentas con registro e inicio de sesión</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Registro e inicio de sesión</li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tareas y horarios compartidos</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Sincronización entre miembros del hogar</li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Pensada para el celular</li>
           </ul>
           <ul class="chips" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Auth</li><li>Vercel</li></ul>
-          <a class="project-link" href="https://hogarsync-woad.vercel.app" target="_blank" rel="noopener">hogarsync-woad.vercel.app <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a>
+          <div class="card-foot"><a class="link stretched" href="https://hogarsync-woad.vercel.app" target="_blank" rel="noopener">hogarsync-woad.vercel.app <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a></div>
         </article>
       </div>
      </div>
     </section>
 
-    <section id="habilidades" class="skills">
+    <!-- ================= Habilidades ================= -->
+    <section id="habilidades" class="section" aria-labelledby="habilidades-title">
      <div class="container">
-      <h2><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Mis Habilidades</h2>
-      <p>Una autoevaluación honesta de dónde estoy hoy en cada área. Los números suben con cada proyecto.</p>
-      <div class="skills-container">
-        <article class="skill-item">
-          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Desarrollo Web</h3>
-          <ul class="skill-details">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-html"/></svg> HTML <span class="ring" style="--v:90">90%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> CSS / Tailwind <span class="ring" style="--v:80">80%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> JavaScript / TypeScript <span class="ring" style="--v:70">70%</span></li>
+      <header class="section-head">
+        <p class="eyebrow">Habilidades</p>
+        <h2 id="habilidades-title">Dónde estoy hoy</h2>
+        <p class="lead">Una autoevaluación honesta. Los números suben con cada proyecto.</p>
+      </header>
+      <div class="grid grid--3">
+        <article class="card reveal">
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg></span><div><h3>Desarrollo web</h3><span class="card-tag">Frameworks y herramientas (HTML y CSS incluidos)</span></div></div>
+          <ul class="skill-list">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React / Next.js <span class="ring" style="--v:75">75%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS <span class="ring" style="--v:80">80%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript / JavaScript <span class="ring" style="--v:70">70%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js / APIs <span class="ring" style="--v:70">70%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB / bases de datos <span class="ring" style="--v:60">60%</span></li>
           </ul>
         </article>
-        <article class="skill-item">
-          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> IA y automatización</h3>
-          <ul class="skill-details">
+        <article class="card reveal">
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg></span><h3>IA y automatización</h3></div>
+          <ul class="skill-list">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code (agentes) <span class="ring" style="--v:80">80%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Prompting y contexto <span class="ring" style="--v:75">75%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Servidores MCP y conectores <span class="ring" style="--v:60">60%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Skills y flujos reutilizables <span class="ring" style="--v:55">55%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n (flujos de automatización) <span class="ring" style="--v:55">55%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> Bots de Telegram con BotFather <span class="ring" style="--v:55">55%</span></li>
           </ul>
         </article>
-        <article class="skill-item">
-          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-camera"/></svg> Fotografía</h3>
-          <ul class="skill-details">
+        <article class="card reveal">
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-camera"/></svg></span><h3>Fotografía</h3></div>
+          <ul class="skill-list">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-aperture"/></svg> Composición <span class="ring" style="--v:80">80%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-brush"/></svg> Edición <span class="ring" style="--v:75">75%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-portrait"/></svg> Fotografía de retrato <span class="ring" style="--v:90">90%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mountain"/></svg> Fotografía de paisaje <span class="ring" style="--v:85">85%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-portrait"/></svg> Retrato <span class="ring" style="--v:90">90%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mountain"/></svg> Paisaje <span class="ring" style="--v:85">85%</span></li>
           </ul>
         </article>
-        <article class="skill-item">
-          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Deportes</h3>
-          <ul class="skill-details">
+        <article class="card reveal">
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg></span><h3>Deportes</h3></div>
+          <ul class="skill-list">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-run"/></svg> Running <span class="ring" style="--v:60">60%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-swim"/></svg> Natación <span class="ring" style="--v:65">65%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-ball"/></svg> Baloncesto <span class="ring" style="--v:55">55%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-dumbbell"/></svg> Acondicionamiento físico <span class="ring" style="--v:10">10%</span></li>
           </ul>
         </article>
-        <article class="skill-item">
-          <h3><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-guitar"/></svg> Guitarra</h3>
-          <ul class="skill-details">
+        <article class="card reveal">
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-guitar"/></svg></span><h3>Guitarra</h3></div>
+          <ul class="skill-list">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-music"/></svg> Acordes básicos <span class="ring" style="--v:40">40%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headphones"/></svg> Ritmos sencillos <span class="ring" style="--v:20">20%</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Teoría musical <span class="ring" style="--v:15">15%</span></li>
@@ -434,100 +640,198 @@
      </div>
     </section>
 
-    <section id="aprendizajes" class="learning">
+    <!-- ================= Aprendizajes ================= -->
+    <section id="aprendizajes" class="section" aria-labelledby="aprendizajes-title">
      <div class="container">
-      <h2>Aprendizajes</h2>
-      <p class="section-lead">Lo que me han enseñado los proyectos de este año, más allá del código.</p>
-      <ol class="timeline">
-        <li class="reveal">
-          <time datetime="2026-11">Nov 2026</time>
+      <header class="section-head">
+        <p class="eyebrow">Aprendizajes</p>
+        <h2 id="aprendizajes-title">Lo que me dejaron los proyectos</h2>
+        <p class="lead">Lecciones de este año, más allá del código.</p>
+      </header>
+      <ol class="grid grid--3">
+        <li class="card reveal">
+          <time class="eyebrow" datetime="2026-11">Nov 2026</time>
           <h3>Programar con agentes de IA</h3>
-          <p>Con Claude Code aprendí a delegar en agentes: darles buen contexto, dividir el trabajo en pasos verificables y revisar cada cambio. Las skills y los servidores MCP (Strava, documentos, despliegues) convierten tareas repetitivas en un comando.</p>
+          <p>Con Claude Code aprendí a delegar en agentes: darles buen contexto, dividir el trabajo en pasos verificables y revisar cada cambio. Las skills y los servidores MCP convierten tareas repetitivas en un comando.</p>
         </li>
-        <li class="reveal">
-          <time datetime="2026">2026</time>
-          <h3>Tiempo real e IA dentro del producto — KhipuOps</h3>
-          <p>Modelar tickets en MongoDB, reflejar cambios en tiempo real sin recargar y conectar un asistente de IA a datos reales. Aprendí que la latencia y los estados de carga son parte del diseño.</p>
+        <li class="card reveal">
+          <time class="eyebrow" datetime="2026">2026 · KhipuOps</time>
+          <h3>Tiempo real e IA dentro del producto</h3>
+          <p>Modelar tickets en MongoDB, reflejar cambios sin recargar y conectar un asistente de IA a datos reales. La latencia y los estados de carga son parte del diseño.</p>
         </li>
-        <li class="reveal">
-          <time datetime="2026">2026</time>
-          <h3>Software para mi comunidad — Copa Arrayanes</h3>
-          <p>Un torneo de vereda necesita algo simple que funcione bien en cualquier celular. Next.js desplegado en Cloudflare Pages y un panel de gestión para que los organizadores actualicen resultados sin depender de mí.</p>
+        <li class="card reveal">
+          <time class="eyebrow" datetime="2026">2026 · Copa Arrayanes</time>
+          <h3>Software para mi comunidad</h3>
+          <p>Un torneo de vereda necesita algo simple que funcione en cualquier celular, y un panel para que los organizadores actualicen resultados sin depender de mí.</p>
         </li>
-        <li class="reveal">
-          <time datetime="2026">2026</time>
-          <h3>Autenticación y datos compartidos — HogarSync</h3>
-          <p>Registro, sesiones y datos que comparten varias personas: pensar en permisos, en sincronización y en una interfaz sencilla para toda la familia.</p>
+        <li class="card reveal">
+          <time class="eyebrow" datetime="2026">2026 · HogarSync</time>
+          <h3>Autenticación y datos compartidos</h3>
+          <p>Registro, sesiones y datos de varias personas: pensar en permisos, sincronización y una interfaz sencilla para toda la familia.</p>
         </li>
-        <li class="reveal">
-          <time datetime="2026-11">Nov 2026</time>
-          <h3>Rendimiento y buenas prácticas en este sitio</h3>
-          <p>De 21 MB a ~200 kB: imágenes WebP responsive, fuentes auto-alojadas, cero dependencias en tiempo de ejecución, modo oscuro sin parpadeo, accesibilidad y una plantilla de Blogger que se compila con Tailwind v4 y esbuild en GitHub Actions.</p>
+        <li class="card reveal">
+          <time class="eyebrow" datetime="2026-11">Nov 2026 · Este sitio</time>
+          <h3>Rendimiento, accesibilidad y diseño</h3>
+          <p>De 21 MB a ~200 kB, cero dependencias en tiempo de ejecución, contraste AA, embeds bajo demanda y un sistema de cards con una sola paleta.</p>
         </li>
       </ol>
      </div>
     </section>
 
-    <section id="juego" class="game">
+    <!-- ================= Juego ================= -->
+    <section id="juego" class="section" aria-labelledby="juego-title">
      <div class="container">
-      <h2><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Zona de juego</h2>
-      <p class="section-lead">Aquí vivirá mi videojuego. Está en desarrollo… ¡pronto podrás jugarlo directamente desde esta página!</p>
+      <header class="section-head">
+        <p class="eyebrow"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Videojuego</p>
+        <h2 id="juego-title">Popayán Maldito</h2>
+        <p class="lead">¡La Ciudad Blanca ha caído bajo una oscura maldición! Mi primer videojuego ya está disponible gratis para Android.</p>
+      </header>
       <!--
-        ESPACIO PARA EL VIDEOJUEGO
-        Para instalarlo, reemplaza el <div class="game-placeholder"> por una de estas opciones:
+        Cuando el juego esté listo, reemplaza el contenido de .game-frame por:
           · Juego publicado (itch.io, Godot web, Unity WebGL…):
               <iframe src="games/mi-juego/index.html" title="Mi videojuego" allow="fullscreen; gamepad; autoplay" loading="lazy"></iframe>
           · Juego propio en canvas:
               <canvas id="game-canvas"></canvas>  + <script type="module" src="games/mi-juego/main.js"></script>
-        El contenedor .game-frame mantiene una proporción 16:9 y ocupa todo el ancho disponible.
       -->
-      <div class="game-frame" id="game-root">
-        <div class="game-placeholder">
-          <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg>
-          <strong>PRÓXIMAMENTE</strong>
-          <span>Un juego hecho por d4vp</span>
-          <span class="press">▶ PRESS START</span>
-        </div>
+      <div class="game-layout">
+        <!-- Tráiler -->
+        <article class="card game-trailer reveal" aria-label="Tráiler oficial de Popayán Maldito">
+          <div class="game-frame" id="game-root">
+            <!-- data-youtube = ID del video: los 11 caracteres después de youtu.be/ (cámbialo también en el enlace "Ver en YouTube") -->
+            <button type="button" class="game-placeholder" data-youtube="DMkpc5r3BcI" aria-label="Reproducir el tráiler oficial de Popayán Maldito">
+              <img class="poster" src="https://i.ytimg.com/vi/DMkpc5r3BcI/hqdefault.jpg" width="480" height="360" alt="" loading="lazy" decoding="async">
+              <span class="play"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span>
+              <strong>POPAYÁN MALDITO</strong>
+              <span>Tráiler oficial</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Ficha del juego + descarga -->
+        <article class="card card--feature game-info reveal" aria-labelledby="game-title" id="descargar">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg></span>
+            <div><h3 id="game-title">Popayán Maldito</h3><span class="card-tag">Acción y aventura · Android</span></div>
+          </div>
+          <p>Jueves Santo en Popayán: los cargueros de la procesión se han convertido en zombis. Estilo retro hecho en Unity, con joystick y botón de acción táctiles.</p>
+          <ul class="chips" aria-label="Etiquetas"><li>2D</li><li>Retro</li><li>Zombis</li><li>Fantasía</li><li>Unity</li></ul>
+          <!--
+            DESCARGA: hoy lleva a la página de itch.io (allí es un clic en "Download").
+            Para descarga directa con un solo clic, sube el APK a GitHub Releases y cambia el href por:
+              https://github.com/d4vp/REPO/releases/latest/download/PopayanMaldito.apk   (y añade el atributo download)
+          -->
+          <div class="download">
+            <a class="btn" href="https://d4vp.itch.io/popayan-maldito" target="_blank" rel="noopener" aria-describedby="download-note"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-download"/></svg> Descargar gratis</a>
+            <p class="note" id="download-note">Android · APK de 55 MB · Se descarga desde itch.io. <span class="desktop-hint">Ábrelo en tu celular para instalarlo.</span></p>
+          </div>
+          <div class="card-foot links">
+            <a class="link" href="https://d4vp.itch.io/popayan-maldito" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Página en itch.io</a>
+            <a class="link" href="https://youtu.be/DMkpc5r3BcI" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg> Tráiler en YouTube</a>
+          </div>
+        </article>
       </div>
      </div>
     </section>
 
-    <section id="contacto" class="contact">
+    <!-- ================= Apóyame ================= -->
+    <section id="apoyame" class="section" aria-labelledby="apoyame-title">
      <div class="container">
-      <h2>¡Contáctame!</h2>
-      <p>¿Tienes alguna pregunta, propuesta o simplemente quieres saludar? ¡No dudes en ponerte en contacto conmigo a través del formulario o mis redes sociales!</p>
+      <header class="section-head">
+        <p class="eyebrow"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Apóyame</p>
+        <h2 id="apoyame-title">Ayúdame a mantener todo en línea</h2>
+        <p class="lead">Tu apoyo paga el hosting de mis proyectos y me ayuda a terminar el videojuego. Puedes <strong>apoyar gratis viendo un anuncio</strong>.</p>
+      </header>
+      <!-- Cards ocultas con "hidden" hasta tener los datos reales: pon tu usuario / llave / QR y quita el atributo hidden. -->
+      <div class="grid grid--2">
+        <article class="card card--feature reveal">
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span><h3>Mira un anuncio</h3></div>
+          <p>Gratis para ti: ves un anuncio corto y lo que paga el anunciante me llega a mí.</p>
+          <div class="card-foot"><button type="button" class="btn" data-open-support aria-haspopup="dialog"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg> Apoyar con un anuncio</button></div>
+        </article>
+        <article class="card reveal" hidden>
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-coffee"/></svg></span><h3>Ko-fi</h3></div>
+          <p>Invítame un café desde cualquier país, con tarjeta o PayPal.</p>
+          <div class="card-foot"><a class="btn" href="https://ko-fi.com/TU_USUARIO" target="_blank" rel="noopener">Invitar un café</a></div>
+        </article>
+        <article class="card reveal" hidden>
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-wallet"/></svg></span><h3>PayPal</h3></div>
+          <p>Un aporte del monto que quieras.</p>
+          <div class="card-foot"><a class="btn" href="https://paypal.me/TU_USUARIO" target="_blank" rel="noopener">Donar con PayPal</a></div>
+        </article>
+        <article class="card reveal" hidden>
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></span><h3>GitHub Sponsors</h3></div>
+          <p>Para quienes usan o siguen mis proyectos de código.</p>
+          <div class="card-foot"><a class="btn" href="https://github.com/sponsors/d4vp" target="_blank" rel="noopener">Patrocinar</a></div>
+        </article>
+        <article class="card reveal">
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-qr"/></svg></span><h3>Nequi / Bre-B</h3></div>
+          <p>Desde Colombia, sin comisiones.</p>
+          <!-- Para añadir el QR: <img class="qr" src="assets/img/qr-nequi.webp" alt="Código QR para donar por Nequi" width="140" height="140"> -->
+          <dl class="keys">
+            <div>
+              <dt>Nequi</dt>
+              <dd><code>314 258 3380</code></dd>
+              <dd><button type="button" class="btn btn--ghost" data-copy="3142583380" aria-label="Copiar número de Nequi"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+            </div>
+            <div>
+              <dt>Llave Bre-B</dt>
+              <dd><code>@LPB897</code></dd>
+              <dd><button type="button" class="btn btn--ghost" data-copy="@LPB897" aria-label="Copiar llave Bre-B"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+     </div>
+    </section>
 
-      <div class="contact-container">
-        <div class="contact-form">
+    <!-- ================= Contacto ================= -->
+    <section id="contacto" class="section" aria-labelledby="contacto-title">
+     <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Contacto</p>
+        <h2 id="contacto-title">¿Hablamos?</h2>
+        <p class="lead">¿Una pregunta, una propuesta o solo un saludo? Escríbeme por el formulario, por WhatsApp o por mis redes.</p>
+      </header>
+      <div class="grid grid--2">
+        <div class="card reveal">
           <h3>Enviar un mensaje</h3>
-          <form id="contactForm" action="#" method="POST">
-            <div class="form-group">
+          <form id="contactForm" action="https://formspree.io/f/xoednwdn" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde el blog">
+            <!-- Trampa anti-spam de Formspree: los bots la rellenan, las personas no la ven -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+            <div class="field">
               <label for="nombre">Nombre</label>
-              <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" required minlength="2" aria-describedby="nombre-hint">
+              <span class="hint" id="nombre-hint">Cómo quieres que te llame.</span>
             </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" autocomplete="email" required>
+            <div class="field">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required aria-describedby="email-hint">
+              <span class="hint" id="email-hint">Por ejemplo, nombre@correo.com. Solo lo uso para responderte.</span>
             </div>
-            <div class="form-group">
+            <div class="field">
               <label for="mensaje">Mensaje</label>
-              <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+              <textarea id="mensaje" name="mensaje" rows="5" required minlength="10" aria-describedby="mensaje-hint"></textarea>
+              <span class="hint" id="mensaje-hint">Mínimo 10 caracteres.</span>
             </div>
-            <button type="submit" class="btn">Enviar Mensaje</button>
+            <div><button type="submit" class="btn">Enviar mensaje</button></div>
+            <div id="form-status" class="alert" role="status" hidden></div>
           </form>
-          <div id="alert-success" class="alert" role="status" hidden>¡Mensaje enviado correctamente!</div>
         </div>
-        <div class="contact-info">
-          <h3>Información de Contacto</h3>
-          <p><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mail"/></svg> david.pinchao@email.com</p>
-          <p><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"/></svg> +57 3XX XXX XXXX</p>
-          <p><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-pin"/></svg> Popayán, Cauca, Colombia</p>
-          <div class="socials">
-        <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
-        <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
-        <a href="#" aria-label="X"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
-        <a href="#" aria-label="TikTok"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
+        <div class="card reveal">
+          <h3>Información de contacto</h3>
+          <ul class="info-list">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mail"/></svg> <a href="mailto:ldpinchao1@gmail.com">ldpinchao1@gmail.com</a></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"/></svg> <a href="tel:+573142583380">+57 314 258 3380</a></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-pin"/></svg> Popayán, Cauca, Colombia</li>
+          </ul>
+          <a class="btn btn--whatsapp" href="https://wa.me/573142583380?text=Hola%20David%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20escribirte." target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp"/></svg> Escríbeme por WhatsApp</a>
+          <div class="card-foot socials">
+            <a href="https://x.com/pinchaoburgos" target="_blank" rel="noopener" aria-label="X @pinchaoburgos"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
+            <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
+            <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
+            <a href="https://www.strava.com/athletes/164622761" target="_blank" rel="noopener" aria-label="Strava"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg></a>
+            <a href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg></a>
           </div>
         </div>
       </div>
@@ -536,7 +840,12 @@
   </main>
 
   <section class="stack" aria-labelledby="stack-title">
-    <h2 id="stack-title">Herramientas, tools y skills con las que construyo</h2>
+    <div class="container stack-head">
+      <h2 id="stack-title">Herramientas, tools y skills con las que construyo</h2>
+      <button type="button" class="icon-btn" id="marquee-toggle" aria-pressed="false" aria-label="Pausar la animación del banner">
+        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      </button>
+    </div>
     <div class="marquee">
         <ul class="marquee-track">
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> HTML5</li>
@@ -550,13 +859,9 @@
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB</li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS v4</li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> esbuild</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Prism.js</li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-aperture"/></svg> sharp (WebP)</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> Git · GitHub</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> GitHub Actions</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Render</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Cloudflare Pages</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Vercel</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> Git · GitHub Actions</li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Render · Cloudflare · Vercel</li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Blogger</li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> VS Code · WSL</li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> HTML5</li>
@@ -570,13 +875,9 @@
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB</li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS v4</li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> esbuild</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Prism.js</li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-aperture"/></svg> sharp (WebP)</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> Git · GitHub</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> GitHub Actions</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Render</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Cloudflare Pages</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Vercel</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> Git · GitHub Actions</li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Render · Cloudflare · Vercel</li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Blogger</li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> VS Code · WSL</li>
         </ul>
@@ -585,47 +886,64 @@
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Claude Opus <small>modelo</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Subagentes <small>agente</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> MCP <small>protocolo</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n <small>automatización</small></li>
+          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> BotFather <small>Telegram</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Strava MCP <small>conector</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Claude Docs <small>conector</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> artifact-design <small>skill</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> code-review <small>skill</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> security-review <small>skill</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> simplify <small>skill</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> dataviz <small>skill</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> skill-creator <small>skill</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Hooks <small>tool</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Bash · Edit · Read <small>tool</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg> WebFetch · WebSearch <small>tool</small></li>
           <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Artifacts <small>tool</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code <small>agente</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Claude Opus <small>modelo</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Subagentes <small>agente</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> MCP <small>protocolo</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n <small>automatización</small></li>
+          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> BotFather <small>Telegram</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Strava MCP <small>conector</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Claude Docs <small>conector</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> artifact-design <small>skill</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> code-review <small>skill</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> security-review <small>skill</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> simplify <small>skill</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> dataviz <small>skill</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> skill-creator <small>skill</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Hooks <small>tool</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Bash · Edit · Read <small>tool</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg> WebFetch · WebSearch <small>tool</small></li>
           <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Artifacts <small>tool</small></li>
         </ul>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2026 David Pinchao · d4vp | Blog Personal. Todos los derechos reservados.</p>
+    <div class="container">
+      <p>&copy; 2026 David Pinchao · d4vp</p>
+      <a href="#inicio">Volver arriba ↑</a>
+    </div>
   </footer>
+
+  <button type="button" class="piggy-fab" data-open-support aria-haspopup="dialog" aria-label="Apóyame viendo un anuncio">
+    <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg>
+    <span class="tip" aria-hidden="true">¡Apóyame gratis!</span>
+  </button>
+
+  <dialog class="support-dialog" id="support-dialog" aria-labelledby="support-title">
+    <button type="button" class="icon-btn close" data-close aria-label="Cerrar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-close"/></svg></button>
+    <div class="big"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg></div>
+    <h2 id="support-title">Apóyame viendo un anuncio</h2>
+    <p>Mirar un anuncio corto no te cuesta nada y me ayuda a mantener mis proyectos en línea. ¡Gracias por echar una moneda a la alcancía!</p>
+    <p class="ad-status" role="status" aria-live="polite"></p>
+    <div class="stack-actions">
+      <button type="button" class="btn" id="watch-ad"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg> Ver anuncio</button>
+      
+      <a class="btn btn--ghost" href="#apoyame" data-close><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Otras formas de apoyar</a>
+    </div>
+    <small>Los anuncios los sirve Google. Nunca tienes que hacer clic en ellos.</small>
+  </dialog>
 
   <script type="module">
     const $ = (s, el = document) => el.querySelector(s);
     const $$ = (s, el = document) => [...el.querySelectorAll(s)];
     const root = document.documentElement;
-    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isDark = () => (root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark';
 
     // ----- Tema claro/oscuro (persistente) -----
@@ -639,42 +957,165 @@
     const setMenu = (open) => { navLinks.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); };
     burger.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
     navLinks.addEventListener('click', (e) => e.target.closest('a') && setMenu(false));
-    addEventListener('keydown', (e) => e.key === 'Escape' && setMenu(false));
+    addEventListener('keydown', (e) => { if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') { setMenu(false); burger.focus(); } });
+
+    // ----- Sección actual en el menú (visibilidad del estado del sistema) -----
+    const navMap = new Map($$('a', navLinks).map((a) => [a.hash.slice(1), a]));
+    const spy = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) {
+        navMap.forEach((a) => a.removeAttribute('aria-current'));
+        navMap.get(e.target.id)?.setAttribute('aria-current', 'true');
+      }
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    navMap.forEach((_, id) => { const s = document.getElementById(id); s && spy.observe(s); });
+
+    // ----- Enlaces externos: avisa a lectores de pantalla que abren otra pestaña -----
+    $$('a[target="_blank"]').forEach((a) => a.insertAdjacentHTML('beforeend', '<span class="sr-only"> (se abre en una pestaña nueva)</span>'));
 
     // ----- Animaciones de entrada (una sola vez por elemento) -----
     const reveal = new IntersectionObserver((entries) => {
-      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
-    }, { threshold: 0.25 });
-    $$('.about-item, .ring, .reveal').forEach((el) => reveal.observe(el));
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); $$('.ring', e.target).forEach((r) => r.classList.add('in')); reveal.unobserve(e.target); }
+    }, { threshold: 0.08 });
+    $$('.reveal').forEach((el) => reveal.observe(el));
 
-    // ----- Efecto máquina de escribir -----
-    const typed = $('#typed');
-    if (!reducedMotion) {
-      const words = typed.dataset.strings.split('|');
-      let w = 0, n = words[0].length, dir = -1;
-      const tick = () => {
-        n += dir;
-        typed.textContent = words[w].slice(0, n);
-        let delay = dir > 0 ? 60 : 30;
-        if (n === words[w].length) { dir = -1; delay = 1400; }
-        else if (n === 0) { dir = 1; w = (w + 1) % words.length; delay = 300; }
-        setTimeout(tick, delay);
-      };
-      setTimeout(tick, 1400);
-    }
+    // ----- Embeds de terceros bajo demanda (no cargan nada hasta que se piden) -----
+    $$('[data-tiktok]').forEach((b) => b.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = `https://www.tiktok.com/player/v1/${b.dataset.tiktok}?autoplay=1&rel=0&description=0&music_info=0`;
+      f.title = b.getAttribute('aria-label').replace('Reproducir el', 'El');
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      f.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
+      f.allowFullscreen = true;
+      b.replaceWith(f);
+      f.focus();
+    }));
+    // YouTube exige saber desde qué sitio se inserta el video (cabecera Referer); sin ella muestra el "Error 153".
+    $$('[data-youtube]').forEach((b) => b.addEventListener('click', () => {
+      const id = b.dataset.youtube;
+      // Abierto como archivo (file://) no hay Referer posible: se abre el video en YouTube.
+      if (!location.protocol.startsWith('http')) { open(`https://www.youtube.com/watch?v=${id}`, '_blank', 'noopener'); return; }
+      const f = document.createElement('iframe');
+      f.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&playsinline=1&origin=${encodeURIComponent(location.origin)}`;
+      f.title = 'Tráiler oficial de Popayán Maldito';
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen = true;
+      b.replaceWith(f);
+      f.focus();
+    }));
+    $$('details[data-strava]').forEach((d) => d.addEventListener('toggle', () => {
+      if (!d.open || document.querySelector('script[src*="strava-embeds"]')) return;
+      const sc = document.createElement('script');
+      sc.src = 'https://strava-embeds.com/embed.js';
+      document.body.append(sc);
+    }));
 
-    // ----- Formulario de contacto -----
-    // La validación la hace el navegador (required / type=email).
-    // TODO: conectar a un backend real (p. ej. Formspree); por ahora el envío es simulado.
-    const form = $('#contactForm'), ok = $('#alert-success');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      form.reset();
-      ok.hidden = false;
-      setTimeout(() => { ok.hidden = true; }, 5000);
+    // ----- Banner: botón de pausa (WCAG 2.2.2) -----
+    const stack = $('.stack'), mq = $('#marquee-toggle');
+    const pauseIcon = mq.innerHTML;
+    const playIcon = '<svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg>';
+    mq.addEventListener('click', () => {
+      const paused = stack.classList.toggle('paused');
+      mq.setAttribute('aria-pressed', paused);
+      mq.setAttribute('aria-label', paused ? 'Reanudar la animación del banner' : 'Pausar la animación del banner');
+      mq.innerHTML = paused ? playIcon : pauseIcon;
     });
 
-    // ----- Fondo de partículas (reemplaza particles.js) -----
+    // ----- Formulario de contacto (Formspree) -----
+    // Se envía sin salir de la página; muestra el estado (enviando / enviado / error) en #form-status.
+    const form = $('#contactForm'), status = $('#form-status'), sendBtn = $('button[type="submit"]', form);
+    const showStatus = (msg, isError = false) => { status.hidden = false; status.classList.toggle('alert--error', isError); status.textContent = msg; };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.querySelector(':invalid').focus();
+        form.reportValidity();
+        return;
+      }
+      const label = sendBtn.textContent;
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Enviando…';
+      status.hidden = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.errors?.map((x) => x.message).join(' ') || 'No se pudo enviar.');
+        }
+        form.reset();
+        showStatus('¡Mensaje enviado! Te responderé pronto a tu correo.');
+      } catch (err) {
+        showStatus(`${err.message} Inténtalo de nuevo o escríbeme por WhatsApp.`, true);
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = label;
+      }
+    });
+
+    // ----- Apóyame: alcancía + anuncio con recompensa (Google H5 Games Ads / Ad Placement API) -----
+    // Para activarlo: pon tu ID de editor de AdSense (ca-pub-…) en ADSENSE_CLIENT.
+    // Mientras ADS_TEST sea true, Google muestra anuncios de prueba (no generan ingresos).
+    const ADSENSE_CLIENT = '';
+    const ADS_TEST = true;
+    const dlg = $('#support-dialog'), adStatus = $('.ad-status', dlg), watchBtn = $('#watch-ad');
+    $$('[data-open-support]').forEach((b) => b.addEventListener('click', () => { adStatus.textContent = ''; dlg.showModal(); }));
+    $$('[data-close]', dlg).forEach((b) => b.addEventListener('click', () => dlg.close()));
+    dlg.addEventListener('click', (e) => e.target === dlg && dlg.close());
+
+    let adsReady = null;
+    const loadAds = () => adsReady ??= new Promise((resolve, reject) => {
+      if (!ADSENSE_CLIENT) return reject(new Error('sin-config'));
+      const sc = document.createElement('script');
+      sc.async = true;
+      sc.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT;
+      sc.crossOrigin = 'anonymous';
+      sc.dataset.adClient = ADSENSE_CLIENT;
+      if (ADS_TEST) sc.dataset.adbreakTest = 'on';
+      sc.onload = () => {
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adBreak = window.adConfig = (o) => window.adsbygoogle.push(o);
+        window.adConfig({ preloadAdBreaks: 'on', sound: 'on', onReady: resolve });
+      };
+      sc.onerror = () => reject(new Error('bloqueado'));
+      document.head.append(sc);
+    });
+
+    watchBtn.addEventListener('click', async () => {
+      watchBtn.disabled = true;
+      adStatus.textContent = 'Cargando anuncio…';
+      try {
+        await loadAds();
+        let shown = false;
+        window.adBreak({
+          type: 'reward',
+          name: 'apoyo-alcancia',
+          beforeReward: (showAdFn) => { shown = true; showAdFn(); },
+          adViewed: () => { adStatus.textContent = '¡Moneda en la alcancía! 🪙 Muchas gracias.'; },
+          adDismissed: () => { adStatus.textContent = 'Cerraste el anuncio antes de terminar. ¡Igual gracias!'; },
+          adBreakDone: () => {
+            if (!shown) adStatus.textContent = 'No hay anuncios disponibles ahora. Inténtalo más tarde 🙏';
+            watchBtn.disabled = false;
+          },
+        });
+      } catch (err) {
+        adStatus.textContent = err.message === 'bloqueado'
+          ? 'Parece que un bloqueador de anuncios lo impidió. Gracias igual por la intención 💛'
+          : 'Los anuncios todavía no están activos. ¡Muy pronto podrás echar tu moneda a la alcancía! 🪙';
+        watchBtn.disabled = false;
+      }
+    });
+
+    // Copiar llave de Nequi / Bre-B
+    $$('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
+      const label = $('span', b), prev = label.textContent;
+      try { await navigator.clipboard.writeText(b.dataset.copy); label.textContent = '¡Copiada!'; }
+      catch { label.textContent = b.dataset.copy; }
+      setTimeout(() => { label.textContent = prev; }, 2000);
+    }));
+
+    // ----- Fondo del inicio: red de nodos conectados -----
+    // Solo anima mientras se ve; con "reducir movimiento" dibuja un único fotograma estático.
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const canvas = $('#particles'), ctx = canvas.getContext('2d');
     const LINK = 150, SPEED = 0.6;
     let dots = [], W = 0, H = 0, raf = 0, visible = true;
@@ -690,18 +1131,20 @@
       }));
     };
     const draw = () => {
-      const rgb = isDark() ? '255 255 255' : '0 0 0';
+      const line = isDark() ? '245 245 244' : '28 25 23';   // --text de la paleta
       ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = `rgb(${rgb} / .3)`;
+      ctx.fillStyle = 'rgb(251 146 60 / .55)';              // --brand: nodos en naranja suave
       for (const [i, d] of dots.entries()) {
-        d.x += d.vx; d.y += d.vy;
-        if (d.x < 0 || d.x > W) d.vx *= -1;
-        if (d.y < 0 || d.y > H) d.vy *= -1;
+        if (!reducedMotion) {
+          d.x += d.vx; d.y += d.vy;
+          if (d.x < 0 || d.x > W) d.vx *= -1;
+          if (d.y < 0 || d.y > H) d.vy *= -1;
+        }
         ctx.beginPath(); ctx.arc(d.x, d.y, 3, 0, 6.2832); ctx.fill();
         for (let j = i + 1; j < dots.length; j++) {
           const o = dots[j], dist = Math.hypot(d.x - o.x, d.y - o.y);
           if (dist < LINK) {
-            ctx.strokeStyle = `rgb(${rgb} / ${0.2 * (1 - dist / LINK)})`;
+            ctx.strokeStyle = `rgb(${line} / ${0.18 * (1 - dist / LINK)})`;
             ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(o.x, o.y); ctx.stroke();
           }
         }
@@ -710,8 +1153,8 @@
     const loop = () => { draw(); raf = requestAnimationFrame(loop); };
     const sync = () => {
       cancelAnimationFrame(raf);
-      if (reducedMotion) draw();                       // un único fotograma estático
-      else if (visible && !document.hidden) loop();    // solo anima mientras se ve
+      if (reducedMotion) draw();
+      else if (visible && !document.hidden) loop();
     };
     (window.requestIdleCallback ?? setTimeout)(() => {
       resize();
