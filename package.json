@@ -7,7 +7,8 @@
     "dev": "npx --yes serve .",
     "theme:dev": "node scripts/build.mjs --watch",
     "theme:build": "node scripts/build.mjs --minify",
-    "theme:validate": "node scripts/validate.mjs"
+    "theme:validate": "node scripts/validate.mjs",
+    "icons": "node scripts/make-icons.mjs"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.5",

@@ -4,7 +4,7 @@
 <head>
   <!-- @include partials/head.xml -->
 </head>
-<body class='min-h-screen bg-white font-sans text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100'>
+<body class='min-h-screen bg-neutral-50 font-sans text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100'>
   <a class='sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-neutral-950' href='#contenido'>Saltar al contenido</a>
 
   <!-- @include partials/header.xml -->

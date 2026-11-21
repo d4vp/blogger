@@ -30,6 +30,26 @@ npm install
 npm run images
 ```
 
+## Diseño: paleta y cards
+
+Minimalista: neutros cálidos (escala *stone*) y **un solo acento** de marca. La misma paleta vive en `index.html` (variables `--*`) y en la plantilla de Blogger (`src/styles/main.css`, `@theme`). Todos los pares de texto cumplen WCAG AA (≥ 4.5:1).
+
+| Token | Claro | Oscuro | Uso |
+|---|---|---|---|
+| `--brand` | `#fb923c` | `#fb923c` | Botones, iconos rellenos, foco |
+| `--on-brand` | `#1c1917` | `#1c1917` | Texto sobre `--brand` (7.7:1) |
+| `--brand-ink` | `#b43a0b` | `#fb923c` | Enlaces y texto de acento |
+| `--brand-soft` | `#fff5ed` | `#2a1a0e` | Fondos suaves de acento |
+| `--bg` | `#fafaf9` | `#0c0a09` | Fondo de página |
+| `--surface` | `#ffffff` | `#1c1917` | Cards |
+| `--surface-2` | `#f5f5f4` | `#292524` | Cards anidadas, chips, campos |
+| `--border` | `#e7e5e4` | `#3a3532` | Bordes |
+| `--text` | `#1c1917` | `#f5f5f4` | Texto principal |
+| `--muted` | `#57534e` | `#a8a29e` | Texto secundario |
+| `--success` / `--danger` | `#15803d` / `#b91c1c` | `#4ade80` / `#f87171` | Estados |
+
+Todo el contenido usa el componente **`.card`** (variantes `card--link`, `card--feature`, `card--inset`); en Blogger, las entradas usan la misma clase `.card`.
+
 ## Plantilla de Blogger (`src/` → `dist/theme.xml`)
 
 Plantilla modular: fragmentos XML, Tailwind CSS v4 y JS se compilan en un único `.xml` que se sube en *Blogger → Tema → Editar HTML*.
