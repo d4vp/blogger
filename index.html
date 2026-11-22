@@ -11,14 +11,24 @@
   <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="profile">
   <meta property="og:locale" content="es_CO">
-  <meta property="og:title" content="David Pinchao | Blog Personal">
-  <meta property="og:description" content="Proyectos full-stack, desarrollo asistido por IA, fotografía, running, ciclismo, guitarra y agricultura: las distintas facetas de David Pinchao.">
-  <!-- og:url, og:image y <link rel="canonical"> requieren la URL pública absoluta del sitio. -->
+  <meta property="og:title" content="David Pinchao | Desarrollo web, IA y proyectos">
+  <meta property="og:description" content="Desarrollador web full-stack en Popayán, Colombia. Apps reales construidas con agentes de IA: KhipuOps, Copa Arrayanes y HogarSync.">
+  <!-- Si cambias de dominio, actualiza estas tres URLs (y "url" en el JSON-LD). -->
+  <link rel="canonical" href="https://d4vp.github.io/">
+  <meta property="og:url" content="https://d4vp.github.io/">
+  <meta property="og:image" content="https://d4vp.github.io/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="David Pinchao, desarrollador web full-stack que construye con agentes de IA">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@pinchaoburgos">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "David Pinchao",
+    "url": "https://d4vp.github.io/",
+    "image": "https://d4vp.github.io/assets/og.png",
     "alternateName": "d4vp",
     "description": "Estudiante de Ingeniería de Sistemas y desarrollador web full-stack que construye con agentes de IA.",
     "sameAs": ["https://github.com/d4vp", "https://www.youtube.com/@ldavorappi", "https://www.tiktok.com/@soul.px", "https://www.strava.com/athletes/164622761", "https://x.com/pinchaoburgos", "https://d4vp.itch.io/popayan-maldito"],
@@ -41,7 +51,6 @@
     @font-face { font-family: Poppins; font-weight: 400; font-display: swap; src: url(assets/fonts/poppins-latin-400-normal.woff2) format('woff2'); }
     @font-face { font-family: Poppins; font-weight: 500; font-display: swap; src: url(assets/fonts/poppins-latin-500-normal.woff2) format('woff2'); }
     @font-face { font-family: Poppins; font-weight: 700; font-display: swap; src: url(assets/fonts/poppins-latin-700-normal.woff2) format('woff2'); }
-    @property --p { syntax: '<number>'; inherits: true; initial-value: 0; }
 
     /* =========================================================
        PALETA (ver README › Paleta de colores)
@@ -98,7 +107,7 @@
     .grid { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 
     /* ---------- Card (componente único del sitio) ---------- */
-    .card { position: relative; display: flex; flex-direction: column; gap: 1.1rem; padding: clamp(1.5rem, 3vw, 2rem); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .card { --pad: clamp(1.5rem, 3vw, 2rem); position: relative; display: flex; flex-direction: column; gap: 1.1rem; padding: var(--pad); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
     .card > p, .card-body > p { color: var(--muted); }
     .card h3 { font-size: 1.2rem; }
     .card h4 { display: flex; align-items: center; gap: .5rem; font-size: 1rem; margin-top: .75rem; }
@@ -109,15 +118,18 @@
     .card-icon { display: grid; place-items: center; width: 3rem; height: 3rem; flex: none; border-radius: 12px; font-size: 1.4rem; color: var(--brand-ink); background: var(--brand-soft); }
     .card-thumb { width: 3.5rem; height: 3.5rem; flex: none; border-radius: 12px; object-fit: cover; background: var(--surface-2); }
     .card--feature { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand); }
-    .card--inset { background: var(--surface-2); padding: 0; overflow: hidden; gap: 0; }
+    .card--media { padding: 0; overflow: hidden; gap: 0; }
     .card--link { transition: border-color .2s, transform .2s, box-shadow .2s; }
     .card--link:hover { border-color: var(--brand); transform: translateY(-3px); box-shadow: 0 12px 28px var(--shadow); }
+    /* Captura a sangre en la parte superior de la card */
+    .card-shot { display: block; width: calc(100% + 2 * var(--pad)); max-width: none; height: auto; aspect-ratio: 16 / 10; margin: calc(-1 * var(--pad)) calc(-1 * var(--pad)) 0; object-fit: cover; object-position: top; border-bottom: 1px solid var(--border); border-radius: var(--radius) var(--radius) 0 0; background: var(--surface-2); }
     .card-foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+    .card-foot a:not(.stretched) { position: relative; z-index: 1; } /* enlaces secundarios por encima del enlace que cubre la card */
     .stretched::after { content: ''; position: absolute; inset: 0; border-radius: inherit; } /* toda la card es clicable */
     .note { font-size: .8rem; color: var(--muted); }
 
     /* Grillas de escritorio sin huecos:
-       · .bento  → "Sobre mí": card alta (Running) a la izquierda y 4 cards cortas apiladas a la derecha.
+       · .bento  → "Sobre mí": card alta (Running + Strava) a la izquierda y 4 cards cortas apiladas a la derecha.
        · .grid--3 → 3 columnas que reparten la última fila (5 cards = 3 + 2, 4 = 3 + 1 a todo el ancho).
        · .grid--2 → dos columnas (formulario más ancho que la info). */
     @media (min-width: 900px) {
@@ -189,7 +201,7 @@
     .socials a { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; font-size: 1.3rem; color: var(--muted); transition: color .2s, background-color .2s; }
     .socials a:hover { color: var(--brand-ink); background: var(--surface-2); }
 
-    /* ---------- Listas de actividades (Strava) ---------- */
+    /* ---------- Strava y rutas en bici ---------- */
     /* El widget de Strava mide 300 px fijos: se centra y, si la card es más alta, queda centrado en vertical */
     .strava-live { display: block; flex: none; width: 300px; max-width: 100%; height: 454px; margin: auto; border: 0; border-radius: var(--radius-sm); }
 
@@ -198,16 +210,16 @@
     @media (min-width: 1000px) { .routes { grid-template-columns: 1fr 1fr; } }
     .route { container-type: inline-size; }
     .route-media { background: #0c0a09; }
-    .route-body { display: flex; flex-direction: column; gap: .75rem; padding: 1.1rem 1.2rem 1.3rem; }
+    .route-body { display: flex; flex-direction: column; gap: .75rem; padding: 1.25rem 1.35rem 1.4rem; }
     @container (min-width: 440px) {
       .route-inner { display: grid; grid-template-columns: 190px 1fr; height: 100%; }
       .route-media .video { width: 100%; height: 100%; }
       .route-body { justify-content: center; }
     }
-    .route-body h5 { font-size: 1.1rem; }
+    .route-body h3 { font-size: 1.1rem; }
     .route-body p { color: var(--muted); font-size: .92rem; }
     .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: .5rem; }
-    .stats div { padding: .5rem .25rem; border-radius: var(--radius-sm); background: var(--surface); text-align: center; }
+    .stats div { padding: .5rem .25rem; border-radius: var(--radius-sm); background: var(--surface-2); text-align: center; }
     .stats dt { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
     .stats dd { font-weight: 700; }
     details summary { cursor: pointer; font-size: .9rem; font-weight: 500; color: var(--brand-ink); min-height: 2.75rem; display: flex; align-items: center; }
@@ -223,8 +235,10 @@
     .skill-list li { display: flex; align-items: center; gap: 1rem; padding-block: .8rem; color: var(--muted); font-size: .95rem; }
     .skill-list li + li { border-top: 1px solid var(--border); }
     .skill-list .icon { font-size: 1.1rem; color: var(--brand-ink); }
-    .ring { --p: var(--v); position: relative; margin-left: auto; display: grid; place-items: center; width: 48px; height: 48px; flex: none; border-radius: 50%; font-size: .72rem; font-weight: 700; color: var(--text); background: conic-gradient(var(--brand) calc(var(--p) * 1%), var(--surface-2) 0); isolation: isolate; transition: --p .9s ease-out; }
-    .ring::before { content: ''; position: absolute; inset: 5px; border-radius: 50%; background: var(--surface); z-index: -1; }
+    /* Nivel en texto (sin porcentajes): uso diario > con soltura > aprendiendo */
+    .level { margin-left: auto; flex: none; padding: .15rem .6rem; border-radius: 999px; font-size: .75rem; font-weight: 500; white-space: nowrap; background: var(--surface-2); color: var(--muted); }
+    .level--daily { background: var(--brand-soft); color: var(--brand-ink); font-weight: 700; }
+    .level--fluent { color: var(--text); }
 
     /* ---------- Proyectos ---------- */
     .features { list-style: none; display: grid; gap: .35rem; font-size: .9rem; color: var(--muted); }
@@ -254,11 +268,6 @@
     .game-placeholder strong { font-size: clamp(1.1rem, 3vw, 1.5rem); letter-spacing: .1em; }
     .game-placeholder span { color: #d6d3d1; font-size: .9rem; }
 
-    /* ---------- Apóyame ---------- */
-    .grid:has(> .card--feature):not(:has(> .card:not(.card--feature):not([hidden]))) { max-width: 420px; }
-    .qr { display: grid; place-items: center; width: 140px; aspect-ratio: 1; margin: .25rem auto; border: 2px dashed var(--border); border-radius: 12px; color: var(--muted); font-size: .75rem; text-align: center; }
-    .qr .icon { font-size: 2.5rem; }
-
     /* ---------- Contacto ---------- */
     .field { display: grid; gap: .3rem; }
     .field label { font-weight: 500; }
@@ -285,48 +294,14 @@
     .keys .btn { min-height: 2.75rem; padding-inline: 1rem; }
     .alert--error { border-color: var(--danger); color: var(--danger); }
 
-    /* ---------- Banner de herramientas ---------- */
-    .stack { padding-block: 2.5rem 3rem; overflow: hidden; }
-    .stack-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
-    .stack h2 { font-size: 1rem; font-weight: 500; color: var(--muted); }
-    .marquee { display: grid; gap: .75rem; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-    .marquee-track { display: flex; width: max-content; gap: .6rem; list-style: none; animation: scroll 45s linear infinite; }
-    .marquee-track.reverse { animation-direction: reverse; animation-duration: 55s; }
-    .marquee:hover .marquee-track, .marquee:focus-within .marquee-track, .stack.paused .marquee-track { animation-play-state: paused; }
-    .marquee-track li { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; padding: .45rem .95rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: .88rem; font-weight: 500; }
-    .marquee-track li small { font-size: .7rem; color: var(--muted); font-weight: 400; }
-    .marquee-track li .icon { color: var(--brand-ink); }
-    @keyframes scroll { to { transform: translateX(calc(-50% - .3rem)); } }
-    @media (prefers-reduced-motion: reduce) {
-      .marquee { mask-image: none; -webkit-mask-image: none; }
-      .marquee-track { width: auto; flex-wrap: wrap; justify-content: center; }
-      .marquee-track [aria-hidden="true"], #marquee-toggle { display: none; }
-    }
-
     /* ---------- Pie ---------- */
     footer { padding-block: 2rem 6rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .9rem; }
     footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem; }
-
-    /* ---------- Alcancía flotante + diálogo ---------- */
-    .piggy-fab { position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 150; display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border: 0; border-radius: 50%; background: var(--brand); color: var(--on-brand); font-size: 1.6rem; cursor: pointer; box-shadow: 0 8px 20px rgb(251 146 60 / .35); transition: transform .2s; }
-    .piggy-fab:hover { transform: scale(1.06); }
-    .piggy-fab .tip { position: absolute; right: calc(100% + .6rem); white-space: nowrap; padding: .35rem .7rem; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: .8rem; font-weight: 500; opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; pointer-events: none; }
-    .piggy-fab:is(:hover, :focus-visible) .tip { opacity: 1; transform: none; }
-    .support-dialog { margin: auto; width: min(440px, calc(100% - 2rem)); padding: 1.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); box-shadow: 0 24px 60px rgb(0 0 0 / .35); text-align: center; }
-    .support-dialog::backdrop { background: rgb(12 10 9 / .6); backdrop-filter: blur(3px); }
-    .support-dialog .big { font-size: 2.75rem; color: var(--brand-ink); }
-    .support-dialog h2 { font-size: 1.35rem; margin: .25rem 0 .5rem; }
-    .support-dialog p { color: var(--muted); font-size: .92rem; margin-bottom: .75rem; }
-    .support-dialog .stack-actions { display: grid; gap: .6rem; margin-top: 1rem; }
-    .support-dialog .close { position: absolute; top: .5rem; right: .5rem; }
-    .support-dialog small { display: block; margin-top: .75rem; font-size: .75rem; color: var(--muted); }
-    .ad-status { min-height: 1.4em; font-weight: 500; color: var(--brand-ink) !important; }
 
     /* ---------- Movimiento (solo con JS y sin reduced-motion) ---------- */
     @media (prefers-reduced-motion: no-preference) {
       .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
       .js .reveal.in { opacity: 1; transform: none; }
-      .js .ring:not(.in) { --p: 0; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -341,12 +316,11 @@
     <nav class="container" aria-label="Principal">
       <a class="logo" href="#inicio"><img src="assets/favicon.svg" width="28" height="28" alt=""> David Pinchao</a>
       <ul class="nav-links" id="nav-links">
-        <li><a href="#sobre-mi">Sobre mí</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
         <li><a href="#habilidades">Habilidades</a></li>
         <li><a href="#aprendizajes">Aprendizajes</a></li>
         <li><a href="#juego">Videojuego</a></li>
-        <li><a href="#apoyame">Apóyame</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
       <button id="mode-toggle" class="icon-btn" type="button" aria-label="Cambiar entre modo claro y oscuro">
@@ -369,23 +343,83 @@
         <a class="hero-badge" href="#juego"><span class="badge-new">Nuevo</span> Descarga gratis mi videojuego <strong>Popayán Maldito</strong> <span aria-hidden="true">→</span></a>
         <h1 id="hero-title">Hola, soy <span>David Pinchao</span></h1>
         <p class="lead">Desarrollador web full-stack y estudiante de Ingeniería de Sistemas en Popayán. Construyo apps reales con agentes de IA y, lejos del teclado, pedaleo, corro y tomo fotos.</p>
-        <ul class="chips" aria-label="Intereses"><li>Desarrollo web</li><li>Agentes de IA</li><li>Ciclismo</li><li>Running</li><li>Fotografía</li><li>Música</li></ul>
         <div class="actions">
           <a href="#proyectos" class="btn">Ver proyectos</a>
           <a href="#juego" class="btn btn--ghost"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Ver mi videojuego</a>
         </div>
         <div class="socials">
           <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
-          <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
-          <a href="https://www.strava.com/athletes/164622761" target="_blank" rel="noopener" aria-label="Strava"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg></a>
-          <a href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg></a>
-          <!-- Pon tu URL y quita "hidden" para mostrarlos. -->
-          <a href="#" aria-label="Instagram" hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-instagram"/></svg></a>
-          <a href="#" aria-label="Facebook" hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-facebook"/></svg></a>
           <a href="https://x.com/pinchaoburgos" target="_blank" rel="noopener" aria-label="X @pinchaoburgos"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
+          <a href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg></a>
+          <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
           <a href="https://wa.me/573142583380" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp"/></svg></a>
         </div>
       </div>
+    </section>
+
+    <!-- ================= Proyectos ================= -->
+    <section id="proyectos" class="section" aria-labelledby="proyectos-title">
+     <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Proyectos</p>
+        <h2 id="proyectos-title">Aplicaciones reales, desplegadas y en uso</h2>
+        <p class="lead">Cada una nació de una necesidad concreta. Las diseñé, programé y desplegué de punta a punta con ayuda de agentes de IA.</p>
+      </header>
+      <div class="grid grid--3">
+        <article class="card card--link reveal">
+          <img class="card-shot" src="assets/img/khipuops-640.webp" srcset="assets/img/khipuops-640.webp 640w, assets/img/khipuops-1280.webp 1280w" sizes="(min-width: 900px) 360px, 100vw" width="640" height="400" alt="Pantalla de inicio de sesión de KhipuOps" loading="lazy" decoding="async">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headset"/></svg></span>
+            <div><h3>KhipuOps</h3><span class="card-tag">Mesa de ayuda · Render</span></div>
+            <span class="live">En línea</span>
+          </div>
+          <p>Plataforma de mesa de ayuda para gestionar tickets de soporte, con actualizaciones en tiempo real y un asistente de IA integrado.</p>
+          <ul class="features">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tickets y estados sincronizados en tiempo real</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Asistente de IA integrado</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Panel con métricas y gráficas</li>
+          </ul>
+          <ul class="chips" aria-label="Tecnologías"><li>React</li><li>Vite</li><li>Node.js</li><li>MongoDB</li><li>IA</li></ul>
+          <div class="card-foot"><a class="link stretched" href="https://khipuops.onrender.com" target="_blank" rel="noopener">khipuops.onrender.com <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a></div>
+          <p class="note">Alojada en el plan gratuito de Render: si lleva rato sin visitas, tarda unos 30 s en despertar.</p>
+        </article>
+        <article class="card card--link reveal">
+          <img class="card-shot" src="assets/img/copa-arrayanes-640.webp" srcset="assets/img/copa-arrayanes-640.webp 640w, assets/img/copa-arrayanes-1280.webp 1280w" sizes="(min-width: 900px) 360px, 100vw" width="640" height="400" alt="Pantalla de bienvenida de Copa Arrayanes" loading="lazy" decoding="async">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-trophy"/></svg></span>
+            <div><h3>Copa Arrayanes</h3><span class="card-tag">Torneo comunitario · Cloudflare</span></div>
+            <span class="live">En línea</span>
+          </div>
+          <p>Sitio oficial del campeonato de la vereda Los Arrayanes (Córdoba, Nariño): partidos, resultados, posiciones y estadísticas.</p>
+          <ul class="features">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Fixture y resultados al día</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tabla de posiciones automática</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Panel de gestión para organizadores</li>
+          </ul>
+          <ul class="chips" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Cloudflare Pages</li><li>Mobile-first</li></ul>
+          <div class="card-foot">
+            <a class="link stretched" href="https://copa-arrayanes.pages.dev" target="_blank" rel="noopener">copa-arrayanes.pages.dev <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a>
+            <a class="link" href="https://github.com/d4vp/copa-arrayanes" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> Código</a>
+          </div>
+        </article>
+        <article class="card card--link reveal">
+          <img class="card-shot" src="assets/img/hogarsync-640.webp" srcset="assets/img/hogarsync-640.webp 640w, assets/img/hogarsync-1280.webp 1280w" sizes="(min-width: 900px) 360px, 100vw" width="640" height="400" alt="Pantalla de inicio de sesión de HogarSync" loading="lazy" decoding="async">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-home"/></svg></span>
+            <div><h3>HogarSync</h3><span class="card-tag">Organización del hogar · Vercel</span></div>
+            <span class="live">En línea</span>
+          </div>
+          <p>Horarios y pendientes del hogar, en sincronía: quienes viven en una casa comparten tareas y horarios.</p>
+          <ul class="features">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Registro e inicio de sesión</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tareas y horarios compartidos</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Pensada para el celular · demo sin cuenta</li>
+          </ul>
+          <ul class="chips" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Auth</li><li>Vercel</li></ul>
+          <div class="card-foot"><a class="link stretched" href="https://hogarsync-woad.vercel.app" target="_blank" rel="noopener">hogarsync-woad.vercel.app <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a></div>
+        </article>
+      </div>
+     </div>
     </section>
 
     <!-- ================= Sobre mí ================= -->
@@ -407,15 +441,25 @@
           <p>Trabajo codo a codo con <strong>agentes de IA</strong> (Claude Code, servidores MCP y skills) para prototipar más rápido, revisar código y automatizar lo repetitivo. Así nacieron <a href="#proyectos">KhipuOps, Copa Arrayanes y HogarSync</a>.</p>
         </article>
 
-        <!-- Running: card alta a la izquierda; a la derecha se apilan 4 cards cortas -->
+        <!-- Running: card alta a la izquierda (con el panel de Strava); a la derecha se apilan 4 cards cortas -->
         <article class="card span-3 tall reveal" id="running" aria-labelledby="running-title">
           <div class="card-head">
             <img class="card-thumb" src="assets/img/run-200.webp" width="56" height="56" alt="" loading="lazy" decoding="async">
             <div><h3 id="running-title">Running y deporte</h3><span class="card-tag">Running · Natación · Baloncesto</span></div>
           </div>
           <p>Disfruto de la disciplina y la energía que cada deporte aporta, tanto a nivel físico como mental.</p>
+          <!-- Aunque la URL diga "latest-rides", este widget muestra las últimas carreras a pie -->
           <iframe class="strava-live" title="Panel en vivo de Strava: mis últimas carreras" loading="lazy" width="300" height="454" src="https://www.strava.com/athletes/164622761/latest-rides/44a460fa1c2a4dfc1179d197f28e22fa1a6125a9"></iframe>
           <p class="note">El panel de Strava se actualiza solo con mis últimas carreras.</p>
+        </article>
+
+        <article class="card span-3 reveal" id="ciclismo" aria-labelledby="ciclismo-title">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg></span>
+            <div><h3 id="ciclismo-title">Ciclismo</h3><span class="card-tag">Carreteras y montañas del Cauca</span></div>
+          </div>
+          <p>Sobre dos ruedas exploro el Cauca, me pongo a prueba en los ascensos y desconecto del teclado.</p>
+          <div class="card-foot"><a class="link" href="#rutas"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mountain"/></svg> Ver mis rutas destacadas</a></div>
         </article>
 
         <article class="card span-3 reveal">
@@ -442,139 +486,13 @@
           <p>Cultivo alimentos frescos y valoro la sostenibilidad y el respeto por el campo.</p>
         </article>
 
-        <article class="card span-3 reveal">
+        <article class="card span-6 reveal">
           <div class="card-head">
             <img class="card-thumb" src="assets/img/repartidor_rappi-200.webp" width="56" height="56" alt="" loading="lazy" decoding="async">
             <div><h3>Repartidor de Rappi</h3><span class="card-tag">Tiempos libres</span></div>
+            <a class="link" href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" style="margin-left:auto"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg> Ver mi canal</a>
           </div>
-          <p>Recorro la ciudad, conozco a su gente y aporto a la economía local.</p>
-          <div class="card-foot">
-            <a class="link" href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg> Ver mi canal</a>
-          </div>
-        </article>
-        <!-- Ciclismo: card propia -->
-        <article class="card span-6 reveal" id="ciclismo" aria-labelledby="ciclismo-title">
-          <div class="card-head">
-            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg></span>
-            <div><h3 id="ciclismo-title">Ciclismo</h3><span class="card-tag">Carreteras y montañas del Cauca</span></div>
-          </div>
-          <p>Sobre dos ruedas exploro el Cauca, me pongo a prueba en los ascensos y desconecto del teclado.</p>
-
-          <h4><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mountain"/></svg> Rutas destacadas</h4>
-          <div class="routes">
-            <article class="card card--inset route" aria-labelledby="r-totoro">
-             <div class="route-inner">
-              <div class="route-media"><div class="video">
-                <button type="button" data-tiktok="7708885106630577428" aria-label="Reproducir el video de la ruta Piendamó – Silvia – Totoro">
-                  <span class="play"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span>
-                  <strong>Piendamó – Silvia – Totoro</strong>
-                  <small><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> Toca para ver el video</small>
-                </button>
-              </div></div>
-              <div class="route-body">
-                <h5 id="r-totoro">Piendamó – Silvia – Totoro</h5>
-                <p><time datetime="2026-07-13">13 jul 2026</time> · Más de 7 horas pedaleando por la montaña caucana.</p>
-                <dl class="stats">
-                  <div><dt>Distancia</dt><dd>116,2 km</dd></div>
-                  <div><dt>Desnivel</dt><dd>2.250 m</dd></div>
-                  <div><dt>Tiempo</dt><dd>7 h 34 min</dd></div>
-                </dl>
-                <details data-strava>
-                  <summary>Ver la ruta en el mapa</summary>
-                  <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="19300862171" data-style="standard" data-from-embed="false" data-token="L1_iRQYWvFqjPCEXx_2lASMxTE-PU4vQrd-J47HIV_4"></div>
-                </details>
-                <div class="links">
-                  <a class="link" href="https://www.strava.com/activities/19300862171" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Strava</a>
-                  <a class="link" href="https://www.tiktok.com/@soul.px/video/7708885106630577428" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> TikTok</a>
-                </div>
-              </div>
-             </div>
-            </article>
-
-            <article class="card card--inset route" aria-labelledby="r-coconuco">
-             <div class="route-inner">
-              <div class="route-media"><div class="video">
-                <button type="button" data-tiktok="7708833397417774337" aria-label="Reproducir el video de la ruta a Coconuco">
-                  <span class="play"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span>
-                  <strong>Coconuco</strong>
-                  <small><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> Toca para ver el video</small>
-                </button>
-              </div></div>
-              <div class="route-body">
-                <h5 id="r-coconuco">Coconuco: ascenso y bajada</h5>
-                <p><time datetime="2026-06-19">19 jun 2026</time> · Subida desde Popayán hacia Coconuco y regreso, en dos tramos.</p>
-                <dl class="stats">
-                  <div><dt>Distancia</dt><dd>85,5 km</dd></div>
-                  <div><dt>Desnivel</dt><dd>1.499 m</dd></div>
-                  <div><dt>Tiempo</dt><dd>5 h 09 min</dd></div>
-                </dl>
-                <div class="links">
-                  <a class="link" href="https://www.strava.com/activities/18987007689" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Ascenso</a>
-                  <a class="link" href="https://www.strava.com/activities/18987615989" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Bajada</a>
-                  <a class="link" href="https://www.tiktok.com/@soul.px/video/7708833397417774337" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> TikTok</a>
-                </div>
-              </div>
-             </div>
-            </article>
-          </div>
-        </article>
-      </div>
-     </div>
-    </section>
-
-    <!-- ================= Proyectos ================= -->
-    <section id="proyectos" class="section" aria-labelledby="proyectos-title">
-     <div class="container">
-      <header class="section-head">
-        <p class="eyebrow">Proyectos</p>
-        <h2 id="proyectos-title">Aplicaciones reales, desplegadas y en uso</h2>
-        <p class="lead">Cada una nació de una necesidad concreta y se construyó de punta a punta con ayuda de agentes de IA.</p>
-      </header>
-      <div class="grid grid--3">
-        <article class="card card--link reveal">
-          <div class="card-head">
-            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headset"/></svg></span>
-            <div><h3>KhipuOps</h3><span class="card-tag">Mesa de ayuda · Render</span></div>
-            <span class="live">En línea</span>
-          </div>
-          <p>Plataforma de mesa de ayuda para gestionar tickets de soporte, con actualizaciones en tiempo real y un asistente de IA integrado.</p>
-          <ul class="features">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tickets y estados sincronizados en tiempo real</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Asistente de IA integrado</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Panel con métricas y gráficas</li>
-          </ul>
-          <ul class="chips" aria-label="Tecnologías"><li>React</li><li>Vite</li><li>Node.js</li><li>MongoDB</li><li>IA</li></ul>
-          <div class="card-foot"><a class="link stretched" href="https://khipuops.onrender.com" target="_blank" rel="noopener">khipuops.onrender.com <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a></div>
-        </article>
-        <article class="card card--link reveal">
-          <div class="card-head">
-            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-trophy"/></svg></span>
-            <div><h3>Copa Arrayanes</h3><span class="card-tag">Torneo comunitario · Cloudflare</span></div>
-            <span class="live">En línea</span>
-          </div>
-          <p>Sitio oficial del campeonato de la vereda Los Arrayanes (Córdoba, Nariño): partidos, resultados, posiciones y estadísticas.</p>
-          <ul class="features">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Fixture y resultados al día</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tabla de posiciones automática</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Panel de gestión para organizadores</li>
-          </ul>
-          <ul class="chips" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Cloudflare Pages</li><li>Mobile-first</li></ul>
-          <div class="card-foot"><a class="link stretched" href="https://copa-arrayanes.pages.dev" target="_blank" rel="noopener">copa-arrayanes.pages.dev <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a></div>
-        </article>
-        <article class="card card--link reveal">
-          <div class="card-head">
-            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-home"/></svg></span>
-            <div><h3>HogarSync</h3><span class="card-tag">Organización del hogar · Vercel</span></div>
-            <span class="live">En línea</span>
-          </div>
-          <p>Horarios y pendientes del hogar, en sincronía: quienes viven en una casa comparten tareas y horarios.</p>
-          <ul class="features">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Registro e inicio de sesión</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Tareas y horarios compartidos</li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-check"/></svg> Pensada para el celular</li>
-          </ul>
-          <ul class="chips" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Auth</li><li>Vercel</li></ul>
-          <div class="card-foot"><a class="link stretched" href="https://hogarsync-woad.vercel.app" target="_blank" rel="noopener">hogarsync-woad.vercel.app <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-external"/></svg></a></div>
+          <p>Recorro Popayán repartiendo y lo cuento en mi canal de YouTube.</p>
         </article>
       </div>
      </div>
@@ -586,55 +504,33 @@
       <header class="section-head">
         <p class="eyebrow">Habilidades</p>
         <h2 id="habilidades-title">Dónde estoy hoy</h2>
-        <p class="lead">Una autoevaluación honesta. Los números suben con cada proyecto.</p>
+        <p class="lead">Una autoevaluación honesta en tres niveles: <strong>uso diario</strong>, <strong>con soltura</strong> y <strong>aprendiendo</strong>.</p>
       </header>
       <div class="grid grid--3">
         <article class="card reveal">
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg></span><div><h3>Desarrollo web</h3><span class="card-tag">Frameworks y herramientas (HTML y CSS incluidos)</span></div></div>
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg></span><div><h3>Desarrollo web</h3><span class="card-tag">Frameworks y lenguajes</span></div></div>
           <ul class="skill-list">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React / Next.js <span class="ring" style="--v:75">75%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS <span class="ring" style="--v:80">80%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript / JavaScript <span class="ring" style="--v:70">70%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js / APIs <span class="ring" style="--v:70">70%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB / bases de datos <span class="ring" style="--v:60">60%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React / Next.js <span class="level level--daily">Uso diario</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS <span class="level level--daily">Uso diario</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript / JavaScript <span class="level level--fluent">Con soltura</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js / APIs <span class="level level--fluent">Con soltura</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB / bases de datos <span class="level level--fluent">Con soltura</span></li>
           </ul>
         </article>
         <article class="card reveal">
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg></span><h3>IA y automatización</h3></div>
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg></span><div><h3>IA y automatización</h3><span class="card-tag">Agentes, conectores y flujos</span></div></div>
           <ul class="skill-list">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code (agentes) <span class="ring" style="--v:80">80%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Prompting y contexto <span class="ring" style="--v:75">75%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Servidores MCP y conectores <span class="ring" style="--v:60">60%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Skills y flujos reutilizables <span class="ring" style="--v:55">55%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n (flujos de automatización) <span class="ring" style="--v:55">55%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> Bots de Telegram con BotFather <span class="ring" style="--v:55">55%</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code (agentes) <span class="level level--daily">Uso diario</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Prompting y contexto <span class="level level--daily">Uso diario</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Servidores MCP y conectores <span class="level level--fluent">Con soltura</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Skills y flujos reutilizables <span class="level">Aprendiendo</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n (automatización) <span class="level">Aprendiendo</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> Bots de Telegram <span class="level">Aprendiendo</span></li>
           </ul>
         </article>
         <article class="card reveal">
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-camera"/></svg></span><h3>Fotografía</h3></div>
-          <ul class="skill-list">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-aperture"/></svg> Composición <span class="ring" style="--v:80">80%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-brush"/></svg> Edición <span class="ring" style="--v:75">75%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-portrait"/></svg> Retrato <span class="ring" style="--v:90">90%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mountain"/></svg> Paisaje <span class="ring" style="--v:85">85%</span></li>
-          </ul>
-        </article>
-        <article class="card reveal">
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg></span><h3>Deportes</h3></div>
-          <ul class="skill-list">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-run"/></svg> Running <span class="ring" style="--v:60">60%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-swim"/></svg> Natación <span class="ring" style="--v:65">65%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-ball"/></svg> Baloncesto <span class="ring" style="--v:55">55%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-dumbbell"/></svg> Acondicionamiento físico <span class="ring" style="--v:10">10%</span></li>
-          </ul>
-        </article>
-        <article class="card reveal">
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-guitar"/></svg></span><h3>Guitarra</h3></div>
-          <ul class="skill-list">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-music"/></svg> Acordes básicos <span class="ring" style="--v:40">40%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headphones"/></svg> Ritmos sencillos <span class="ring" style="--v:20">20%</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Teoría musical <span class="ring" style="--v:15">15%</span></li>
-          </ul>
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></span><div><h3>Herramientas</h3><span class="card-tag">Lo que uso para construir y publicar</span></div></div>
+          <ul class="chips" aria-label="Herramientas"><li>HTML y CSS</li><li>Vite</li><li>Git</li><li>GitHub</li><li>GitHub Actions</li><li>Render</li><li>Cloudflare Pages</li><li>Vercel</li><li>Formspree</li><li>sharp</li><li>VS Code</li><li>WSL</li><li>Unity</li></ul>
         </article>
       </div>
      </div>
@@ -733,52 +629,68 @@
      </div>
     </section>
 
-    <!-- ================= Apóyame ================= -->
-    <section id="apoyame" class="section" aria-labelledby="apoyame-title">
+    <!-- ================= Rutas en bici ================= -->
+    <section id="rutas" class="section" aria-labelledby="rutas-title">
      <div class="container">
       <header class="section-head">
-        <p class="eyebrow"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Apóyame</p>
-        <h2 id="apoyame-title">Ayúdame a mantener todo en línea</h2>
-        <p class="lead">Tu apoyo paga el hosting de mis proyectos y me ayuda a terminar el videojuego. Puedes <strong>apoyar gratis viendo un anuncio</strong>.</p>
+        <p class="eyebrow"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bike"/></svg> Fuera del teclado</p>
+        <h2 id="rutas-title">Rutas en bici por el Cauca</h2>
+        <p class="lead">Mis salidas más exigentes, con video y datos de Strava.</p>
       </header>
-      <!-- Cards ocultas con "hidden" hasta tener los datos reales: pon tu usuario / llave / QR y quita el atributo hidden. -->
-      <div class="grid grid--2">
-        <article class="card card--feature reveal">
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span><h3>Mira un anuncio</h3></div>
-          <p>Gratis para ti: ves un anuncio corto y lo que paga el anunciante me llega a mí.</p>
-          <div class="card-foot"><button type="button" class="btn" data-open-support aria-haspopup="dialog"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg> Apoyar con un anuncio</button></div>
-        </article>
-        <article class="card reveal" hidden>
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-coffee"/></svg></span><h3>Ko-fi</h3></div>
-          <p>Invítame un café desde cualquier país, con tarjeta o PayPal.</p>
-          <div class="card-foot"><a class="btn" href="https://ko-fi.com/TU_USUARIO" target="_blank" rel="noopener">Invitar un café</a></div>
-        </article>
-        <article class="card reveal" hidden>
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-wallet"/></svg></span><h3>PayPal</h3></div>
-          <p>Un aporte del monto que quieras.</p>
-          <div class="card-foot"><a class="btn" href="https://paypal.me/TU_USUARIO" target="_blank" rel="noopener">Donar con PayPal</a></div>
-        </article>
-        <article class="card reveal" hidden>
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></span><h3>GitHub Sponsors</h3></div>
-          <p>Para quienes usan o siguen mis proyectos de código.</p>
-          <div class="card-foot"><a class="btn" href="https://github.com/sponsors/d4vp" target="_blank" rel="noopener">Patrocinar</a></div>
-        </article>
-        <article class="card reveal">
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-qr"/></svg></span><h3>Nequi / Bre-B</h3></div>
-          <p>Desde Colombia, sin comisiones.</p>
-          <!-- Para añadir el QR: <img class="qr" src="assets/img/qr-nequi.webp" alt="Código QR para donar por Nequi" width="140" height="140"> -->
-          <dl class="keys">
-            <div>
-              <dt>Nequi</dt>
-              <dd><code>314 258 3380</code></dd>
-              <dd><button type="button" class="btn btn--ghost" data-copy="3142583380" aria-label="Copiar número de Nequi"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+      <div class="routes">
+        <article class="card card--media route reveal" aria-labelledby="r-totoro">
+         <div class="route-inner">
+          <div class="route-media"><div class="video">
+            <button type="button" data-tiktok="7708885106630577428" aria-label="Reproducir el video de la ruta Piendamó – Silvia – Totoro">
+              <span class="play"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span>
+              <strong>Piendamó – Silvia – Totoro</strong>
+              <small><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> Toca para ver el video</small>
+            </button>
+          </div></div>
+          <div class="route-body">
+            <h3 id="r-totoro">Piendamó – Silvia – Totoro</h3>
+            <p><time datetime="2026-07-13">13 jul 2026</time> · Más de 7 horas pedaleando por la montaña caucana.</p>
+            <dl class="stats">
+              <div><dt>Distancia</dt><dd>116,2 km</dd></div>
+              <div><dt>Desnivel</dt><dd>2.250 m</dd></div>
+              <div><dt>Tiempo</dt><dd>7 h 34 min</dd></div>
+            </dl>
+            <details data-strava>
+              <summary>Ver la ruta en el mapa</summary>
+              <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="19300862171" data-style="standard" data-from-embed="false" data-token="L1_iRQYWvFqjPCEXx_2lASMxTE-PU4vQrd-J47HIV_4"></div>
+            </details>
+            <div class="links">
+              <a class="link" href="https://www.strava.com/activities/19300862171" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Strava</a>
+              <a class="link" href="https://www.tiktok.com/@soul.px/video/7708885106630577428" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> TikTok</a>
             </div>
-            <div>
-              <dt>Llave Bre-B</dt>
-              <dd><code>@LPB897</code></dd>
-              <dd><button type="button" class="btn btn--ghost" data-copy="@LPB897" aria-label="Copiar llave Bre-B"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+          </div>
+         </div>
+        </article>
+
+        <article class="card card--media route reveal" aria-labelledby="r-coconuco">
+         <div class="route-inner">
+          <div class="route-media"><div class="video">
+            <button type="button" data-tiktok="7708833397417774337" aria-label="Reproducir el video de la ruta a Coconuco">
+              <span class="play"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span>
+              <strong>Coconuco</strong>
+              <small><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> Toca para ver el video</small>
+            </button>
+          </div></div>
+          <div class="route-body">
+            <h3 id="r-coconuco">Coconuco: ascenso y bajada</h3>
+            <p><time datetime="2026-06-19">19 jun 2026</time> · Subida desde Popayán hacia Coconuco y regreso, en dos tramos.</p>
+            <dl class="stats">
+              <div><dt>Distancia</dt><dd>85,5 km</dd></div>
+              <div><dt>Desnivel</dt><dd>1.499 m</dd></div>
+              <div><dt>Tiempo</dt><dd>5 h 09 min</dd></div>
+            </dl>
+            <div class="links">
+              <a class="link" href="https://www.strava.com/activities/18987007689" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Ascenso</a>
+              <a class="link" href="https://www.strava.com/activities/18987615989" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Bajada</a>
+              <a class="link" href="https://www.tiktok.com/@soul.px/video/7708833397417774337" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg> TikTok</a>
             </div>
-          </dl>
+          </div>
+         </div>
         </article>
       </div>
      </div>
@@ -796,7 +708,7 @@
         <div class="card reveal">
           <h3>Enviar un mensaje</h3>
           <form id="contactForm" action="https://formspree.io/f/xoednwdn" method="POST" novalidate>
-            <input type="hidden" name="_subject" value="Nuevo mensaje desde el blog">
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde el portafolio">
             <!-- Trampa anti-spam de Formspree: los bots la rellenan, las personas no la ven -->
             <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
             <div class="field">
@@ -822,97 +734,37 @@
           <h3>Información de contacto</h3>
           <ul class="info-list">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-mail"/></svg> <a href="mailto:ldpinchao1@gmail.com">ldpinchao1@gmail.com</a></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"/></svg> <a href="tel:+573142583380">+57 314 258 3380</a></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-pin"/></svg> Popayán, Cauca, Colombia</li>
           </ul>
           <a class="btn btn--whatsapp" href="https://wa.me/573142583380?text=Hola%20David%2C%20vi%20tu%20p%C3%A1gina%20y%20quiero%20escribirte." target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp"/></svg> Escríbeme por WhatsApp</a>
-          <div class="card-foot socials">
+          <div class="socials">
             <a href="https://x.com/pinchaoburgos" target="_blank" rel="noopener" aria-label="X @pinchaoburgos"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
             <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
             <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
             <a href="https://www.strava.com/athletes/164622761" target="_blank" rel="noopener" aria-label="Strava"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg></a>
             <a href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg></a>
           </div>
+
+          <!-- Apoyo: Nequi / Bre-B (sin comisiones desde Colombia) -->
+          <h4 id="apoyame"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> ¿Te sirvió algo de lo que hago?</h4>
+          <p>Un aporte me ayuda a pagar el hosting de mis proyectos. Desde Colombia, sin comisiones:</p>
+          <dl class="keys">
+            <div>
+              <dt>Nequi</dt>
+              <dd><code>314 258 3380</code></dd>
+              <dd><button type="button" class="btn btn--ghost" data-copy="3142583380" aria-label="Copiar número de Nequi"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+            </div>
+            <div>
+              <dt>Llave Bre-B</dt>
+              <dd><code>@LPB897</code></dd>
+              <dd><button type="button" class="btn btn--ghost" data-copy="@LPB897" aria-label="Copiar llave Bre-B"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+            </div>
+          </dl>
         </div>
       </div>
      </div>
     </section>
   </main>
-
-  <section class="stack" aria-labelledby="stack-title">
-    <div class="container stack-head">
-      <h2 id="stack-title">Herramientas, tools y skills con las que construyo</h2>
-      <button type="button" class="icon-btn" id="marquee-toggle" aria-pressed="false" aria-label="Pausar la animación del banner">
-        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-      </button>
-    </div>
-    <div class="marquee">
-        <ul class="marquee-track">
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> HTML5</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> CSS · light-dark()</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> JavaScript</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> Next.js</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Vite</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS v4</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> esbuild</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-aperture"/></svg> sharp (WebP)</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> Git · GitHub Actions</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Render · Cloudflare · Vercel</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Blogger</li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> VS Code · WSL</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> HTML5</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> CSS · light-dark()</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> JavaScript</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> Next.js</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Vite</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS v4</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> esbuild</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-aperture"/></svg> sharp (WebP)</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg> Git · GitHub Actions</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Render · Cloudflare · Vercel</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Blogger</li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> VS Code · WSL</li>
-        </ul>
-        <ul class="marquee-track reverse">
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code <small>agente</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Claude Opus <small>modelo</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Subagentes <small>agente</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> MCP <small>protocolo</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n <small>automatización</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> BotFather <small>Telegram</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Strava MCP <small>conector</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Claude Docs <small>conector</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> artifact-design <small>skill</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> code-review <small>skill</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> security-review <small>skill</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> simplify <small>skill</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Hooks <small>tool</small></li>
-          <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Artifacts <small>tool</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code <small>agente</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Claude Opus <small>modelo</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Subagentes <small>agente</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> MCP <small>protocolo</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n <small>automatización</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> BotFather <small>Telegram</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg> Strava MCP <small>conector</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Claude Docs <small>conector</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> artifact-design <small>skill</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> code-review <small>skill</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> security-review <small>skill</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> simplify <small>skill</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Hooks <small>tool</small></li>
-          <li aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Artifacts <small>tool</small></li>
-        </ul>
-    </div>
-  </section>
 
   <footer>
     <div class="container">
@@ -920,25 +772,6 @@
       <a href="#inicio">Volver arriba ↑</a>
     </div>
   </footer>
-
-  <button type="button" class="piggy-fab" data-open-support aria-haspopup="dialog" aria-label="Apóyame viendo un anuncio">
-    <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg>
-    <span class="tip" aria-hidden="true">¡Apóyame gratis!</span>
-  </button>
-
-  <dialog class="support-dialog" id="support-dialog" aria-labelledby="support-title">
-    <button type="button" class="icon-btn close" data-close aria-label="Cerrar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-close"/></svg></button>
-    <div class="big"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-piggy"/></svg></div>
-    <h2 id="support-title">Apóyame viendo un anuncio</h2>
-    <p>Mirar un anuncio corto no te cuesta nada y me ayuda a mantener mis proyectos en línea. ¡Gracias por echar una moneda a la alcancía!</p>
-    <p class="ad-status" role="status" aria-live="polite"></p>
-    <div class="stack-actions">
-      <button type="button" class="btn" id="watch-ad"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg> Ver anuncio</button>
-      
-      <a class="btn btn--ghost" href="#apoyame" data-close><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Otras formas de apoyar</a>
-    </div>
-    <small>Los anuncios los sirve Google. Nunca tienes que hacer clic en ellos.</small>
-  </dialog>
 
   <script type="module">
     const $ = (s, el = document) => el.querySelector(s);
@@ -974,7 +807,7 @@
 
     // ----- Animaciones de entrada (una sola vez por elemento) -----
     const reveal = new IntersectionObserver((entries) => {
-      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); $$('.ring', e.target).forEach((r) => r.classList.add('in')); reveal.unobserve(e.target); }
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
     }, { threshold: 0.08 });
     $$('.reveal').forEach((el) => reveal.observe(el));
 
@@ -1010,17 +843,6 @@
       document.body.append(sc);
     }));
 
-    // ----- Banner: botón de pausa (WCAG 2.2.2) -----
-    const stack = $('.stack'), mq = $('#marquee-toggle');
-    const pauseIcon = mq.innerHTML;
-    const playIcon = '<svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg>';
-    mq.addEventListener('click', () => {
-      const paused = stack.classList.toggle('paused');
-      mq.setAttribute('aria-pressed', paused);
-      mq.setAttribute('aria-label', paused ? 'Reanudar la animación del banner' : 'Pausar la animación del banner');
-      mq.innerHTML = paused ? playIcon : pauseIcon;
-    });
-
     // ----- Formulario de contacto (Formspree) -----
     // Se envía sin salir de la página; muestra el estado (enviando / enviado / error) en #form-status.
     const form = $('#contactForm'), status = $('#form-status'), sendBtn = $('button[type="submit"]', form);
@@ -1052,60 +874,7 @@
       }
     });
 
-    // ----- Apóyame: alcancía + anuncio con recompensa (Google H5 Games Ads / Ad Placement API) -----
-    // Para activarlo: pon tu ID de editor de AdSense (ca-pub-…) en ADSENSE_CLIENT.
-    // Mientras ADS_TEST sea true, Google muestra anuncios de prueba (no generan ingresos).
-    const ADSENSE_CLIENT = '';
-    const ADS_TEST = true;
-    const dlg = $('#support-dialog'), adStatus = $('.ad-status', dlg), watchBtn = $('#watch-ad');
-    $$('[data-open-support]').forEach((b) => b.addEventListener('click', () => { adStatus.textContent = ''; dlg.showModal(); }));
-    $$('[data-close]', dlg).forEach((b) => b.addEventListener('click', () => dlg.close()));
-    dlg.addEventListener('click', (e) => e.target === dlg && dlg.close());
-
-    let adsReady = null;
-    const loadAds = () => adsReady ??= new Promise((resolve, reject) => {
-      if (!ADSENSE_CLIENT) return reject(new Error('sin-config'));
-      const sc = document.createElement('script');
-      sc.async = true;
-      sc.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_CLIENT;
-      sc.crossOrigin = 'anonymous';
-      sc.dataset.adClient = ADSENSE_CLIENT;
-      if (ADS_TEST) sc.dataset.adbreakTest = 'on';
-      sc.onload = () => {
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adBreak = window.adConfig = (o) => window.adsbygoogle.push(o);
-        window.adConfig({ preloadAdBreaks: 'on', sound: 'on', onReady: resolve });
-      };
-      sc.onerror = () => reject(new Error('bloqueado'));
-      document.head.append(sc);
-    });
-
-    watchBtn.addEventListener('click', async () => {
-      watchBtn.disabled = true;
-      adStatus.textContent = 'Cargando anuncio…';
-      try {
-        await loadAds();
-        let shown = false;
-        window.adBreak({
-          type: 'reward',
-          name: 'apoyo-alcancia',
-          beforeReward: (showAdFn) => { shown = true; showAdFn(); },
-          adViewed: () => { adStatus.textContent = '¡Moneda en la alcancía! 🪙 Muchas gracias.'; },
-          adDismissed: () => { adStatus.textContent = 'Cerraste el anuncio antes de terminar. ¡Igual gracias!'; },
-          adBreakDone: () => {
-            if (!shown) adStatus.textContent = 'No hay anuncios disponibles ahora. Inténtalo más tarde 🙏';
-            watchBtn.disabled = false;
-          },
-        });
-      } catch (err) {
-        adStatus.textContent = err.message === 'bloqueado'
-          ? 'Parece que un bloqueador de anuncios lo impidió. Gracias igual por la intención 💛'
-          : 'Los anuncios todavía no están activos. ¡Muy pronto podrás echar tu moneda a la alcancía! 🪙';
-        watchBtn.disabled = false;
-      }
-    });
-
-    // Copiar llave de Nequi / Bre-B
+    // ----- Copiar llave de Nequi / Bre-B -----
     $$('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
       const label = $('span', b), prev = label.textContent;
       try { await navigator.clipboard.writeText(b.dataset.copy); label.textContent = '¡Copiada!'; }

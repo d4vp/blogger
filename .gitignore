@@ -1,2 +1,7 @@
 node_modules/
 dist/
+# Originales en alta resolución: viven fuera de git (npm run images los convierte a WebP)
+originales/
+# Videos pesados (GitHub rechaza archivos > 50 MB)
+*.mp4
+*.mov
