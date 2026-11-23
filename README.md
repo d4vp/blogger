@@ -2,7 +2,7 @@
 
 Página de presentación personal: proyectos, habilidades, videojuego y contacto. Sitio estático de un solo archivo (`index.html`), sin dependencias en tiempo de ejecución ni paso de compilación.
 
-URL pública prevista: **https://d4vp.github.io/** (usada en `canonical`, `og:url`, `og:image` y el JSON-LD de `index.html`; si cambia el dominio, actualízalas ahí).
+URL pública: **https://d4vp.github.io/blogger/** (usada en `canonical`, `og:url`, `og:image` y el JSON-LD de `index.html`; si cambia el dominio, actualízalas ahí).
 
 ## Estructura
 
@@ -37,8 +37,7 @@ npm run og
 
 ## Publicar en GitHub Pages
 
-1. En GitHub, renombra el repositorio a `d4vp.github.io` (*Settings → General → Repository name*).
-2. En *Settings → Pages*, elige *Deploy from a branch*, rama `master` y carpeta `/ (root)`.
+Se publica desde la rama `master` (carpeta raíz) en *Settings → Pages* del repo `blogger`: **https://d4vp.github.io/blogger/**.
 
 ## Diseño: paleta y cards
 
