@@ -191,11 +191,6 @@
     .hero .lead { max-width: 52ch; margin-top: 0; }
     .hero .chips { justify-content: center; }
     .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
-    .hero-badge { display: inline-flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: .35rem 1rem .35rem .4rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: .9rem; text-decoration: none; box-shadow: 0 4px 14px var(--shadow); transition: border-color .2s, transform .2s; }
-    .hero-badge:hover { border-color: var(--brand); transform: translateY(-1px); }
-    .hero-badge strong { color: var(--brand-ink); }
-    .badge-cta { font-weight: 700; color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
-    .badge-new { display: inline-flex; align-items: center; gap: .3rem; padding: .2rem .6rem; border-radius: 999px; background: var(--brand); color: var(--on-brand); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
     .socials { display: flex; flex-wrap: wrap; gap: .25rem; }
     .hero .socials { justify-content: center; }
     .socials a { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; font-size: 1.3rem; color: var(--muted); transition: color .2s, background-color .2s; }
@@ -349,7 +344,6 @@
       <canvas id="particles" aria-hidden="true"></canvas>
       <div class="container">
         <img class="avatar" src="assets/img/avatar-180.webp" srcset="assets/img/avatar-180.webp 1x, assets/img/avatar-360.webp 2x" width="132" height="132" alt="Foto de David Pinchao" fetchpriority="high">
-        <a class="hero-badge" href="#juego"><span class="badge-new"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bell"/></svg> Nuevo</span> Mi videojuego <strong>Guardianes del Sur</strong> <span class="badge-cta">Ver <span aria-hidden="true">→</span></span></a>
         <h1 id="hero-title">Hola, soy <span>David Pinchao</span></h1>
         <p class="lead">Desarrollador web full-stack y estudiante de Ingeniería de Sistemas en Popayán. Construyo apps reales con agentes de IA y, lejos del teclado, pedaleo, corro y tomo fotos.</p>
         <div class="actions">
