@@ -13,7 +13,6 @@ const IMAGES = [
   ['run.png', 'run', 200, 200],
   ['guitar.png', 'guitar', 200, 200],
   ['agricultor.jpg', 'agricultor', 200, 200],
-  ['repartidor_rappi.png', 'repartidor_rappi', 200, 200],
   // Capturas de los proyectos (1280×800, 16:10)
   ['khipuops.png', 'khipuops', 640, 400],
   ['copa-arrayanes.png', 'copa-arrayanes', 640, 400],

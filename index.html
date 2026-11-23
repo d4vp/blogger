@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>David Pinchao | Desarrollo web, IA y proyectos</title>
   <meta name="description" content="David Pinchao (d4vp): estudiante de Ingeniería de Sistemas en Popayán, Colombia. Construyo apps full-stack con IA: KhipuOps, Copa Arrayanes y HogarSync.">
-  <meta name="referrer" content="strict-origin-when-cross-origin"><!-- YouTube lo necesita para los videos insertados (evita el Error 153) -->
+  <meta name="referrer" content="strict-origin-when-cross-origin"><!-- Los videos de TikTok insertados necesitan el origen en la cabecera Referer -->
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
@@ -31,7 +31,7 @@
     "image": "https://d4vp.github.io/assets/og.png",
     "alternateName": "d4vp",
     "description": "Estudiante de Ingeniería de Sistemas y desarrollador web full-stack que construye con agentes de IA.",
-    "sameAs": ["https://github.com/d4vp", "https://www.youtube.com/@ldavorappi", "https://www.tiktok.com/@soul.px", "https://www.strava.com/athletes/164622761", "https://x.com/pinchaoburgos", "https://d4vp.itch.io/popayan-maldito"],
+    "sameAs": ["https://github.com/d4vp", "https://www.tiktok.com/@soul.px", "https://www.strava.com/athletes/164622761", "https://x.com/pinchaoburgos"],
     "address": { "@type": "PostalAddress", "addressLocality": "Popayán", "addressRegion": "Cauca", "addressCountry": "CO" },
     "knowsAbout": ["Desarrollo web", "React", "Next.js", "Node.js", "MongoDB", "Tailwind CSS", "Claude Code", "Model Context Protocol", "Fotografía", "Running", "Ciclismo", "Natación", "Baloncesto", "Guitarra", "Agricultura"]
   }
@@ -195,7 +195,8 @@
     .hero-badge { display: inline-flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: .35rem 1rem .35rem .4rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: .9rem; text-decoration: none; box-shadow: 0 4px 14px var(--shadow); transition: border-color .2s, transform .2s; }
     .hero-badge:hover { border-color: var(--brand); transform: translateY(-1px); }
     .hero-badge strong { color: var(--brand-ink); }
-    .badge-new { padding: .2rem .6rem; border-radius: 999px; background: var(--brand); color: var(--on-brand); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+    .badge-cta { font-weight: 700; color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
+    .badge-new { display: inline-flex; align-items: center; gap: .3rem; padding: .2rem .6rem; border-radius: 999px; background: var(--brand); color: var(--on-brand); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
     .socials { display: flex; flex-wrap: wrap; gap: .25rem; }
     .hero .socials { justify-content: center; }
     .socials a { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; font-size: 1.3rem; color: var(--muted); transition: color .2s, background-color .2s; }
@@ -235,7 +236,7 @@
     .skill-list li { display: flex; align-items: center; gap: 1rem; padding-block: .8rem; color: var(--muted); font-size: .95rem; }
     .skill-list li + li { border-top: 1px solid var(--border); }
     .skill-list .icon { font-size: 1.1rem; color: var(--brand-ink); }
-    /* Nivel en texto (sin porcentajes): uso diario > con soltura > aprendiendo */
+    /* Nivel en texto (sin porcentajes): uso diario > manejo bien > aprendiendo */
     .level { margin-left: auto; flex: none; padding: .15rem .6rem; border-radius: 999px; font-size: .75rem; font-weight: 500; white-space: nowrap; background: var(--surface-2); color: var(--muted); }
     .level--daily { background: var(--brand-soft); color: var(--brand-ink); font-weight: 700; }
     .level--fluent { color: var(--text); }
@@ -250,32 +251,22 @@
     .card time.eyebrow { margin: 0; }
 
     /* ---------- Videojuego ---------- */
-    .game-layout { display: grid; gap: var(--gap); }
-    @media (min-width: 900px) { .game-layout { grid-template-columns: 2fr 1fr; align-items: stretch; } }
-    .game-trailer { padding: .75rem; justify-content: center; }
-    .game-info .download { display: grid; gap: .5rem; }
-    .game-info .download .btn { width: 100%; }
-    /* En pantallas táctiles (celular) no hace falta el aviso de "ábrelo en tu celular" */
-    @media (pointer: coarse) { .desktop-hint { display: none; } }
-    .game-frame { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius-sm); overflow: hidden; background: #0c0a09; }
-    .game-frame > :is(iframe, canvas) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
-    .game-placeholder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .6rem; padding: 1.5rem; color: #f5f5f4; background: radial-gradient(circle at 50% 40%, rgb(251 146 60 / .2), transparent 60%); font-family: ui-monospace, 'JetBrains Mono', monospace; text-align: center; }
-    button.game-placeholder { width: 100%; border: 0; cursor: pointer; font-size: inherit; isolation: isolate; }
-    .game-placeholder .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(.45); }
-    .game-placeholder strong, .game-placeholder span { text-shadow: 0 2px 8px rgb(0 0 0 / .6); }
-    .game-placeholder .play { display: grid; place-items: center; width: 4.5rem; height: 4.5rem; border-radius: 50%; background: var(--brand); color: var(--on-brand); font-size: 1.8rem; transition: transform .2s; }
-    .game-placeholder:is(:hover, :focus-visible) .play { transform: scale(1.08); }
-    .game-placeholder strong { font-size: clamp(1.1rem, 3vw, 1.5rem); letter-spacing: .1em; }
-    .game-placeholder span { color: #d6d3d1; font-size: .9rem; }
+    .pill { margin-left: auto; align-self: start; padding: .25rem .7rem; border-radius: 999px; background: var(--brand-soft); color: var(--brand-ink); font-size: .75rem; font-weight: 700; text-align: center; }
+    .regions { list-style: none; display: grid; gap: .5rem; }
+    .regions li { display: flex; align-items: center; gap: .75rem; padding: .55rem .85rem; border-radius: var(--radius-sm); background: var(--surface-2); }
+    .regions small { color: var(--muted); font-size: .8rem; }
+    .regions .level { background: var(--surface); }
+    .regions .level--daily { background: var(--brand-soft); }
+    .opt { font-weight: 400; color: var(--muted); font-size: .85rem; }
 
     /* ---------- Contacto ---------- */
     .field { display: grid; gap: .3rem; }
     .field label { font-weight: 500; }
-    .field :is(input, textarea) { width: 100%; min-height: 2.75rem; padding: .65rem .8rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font: inherit; color: var(--text); background: var(--surface-2); transition: border-color .2s; }
-    .field :is(input, textarea):focus { border-color: var(--brand); outline: none; box-shadow: 0 0 0 3px var(--brand-soft); }
+    .field :is(input, textarea, select) { width: 100%; min-height: 2.75rem; padding: .65rem .8rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font: inherit; color: var(--text); background: var(--surface-2); transition: border-color .2s; }
+    .field :is(input, textarea, select):focus { border-color: var(--brand); outline: none; box-shadow: 0 0 0 3px var(--brand-soft); }
     .field textarea { resize: vertical; }
     .field .hint { font-size: .8rem; color: var(--muted); }
-    .field :is(input, textarea):user-invalid { border-color: var(--danger); }
+    .field :is(input, textarea, select):user-invalid { border-color: var(--danger); }
     .field:has(:user-invalid) .hint { color: var(--danger); }
     form { display: grid; gap: 1rem; }
     .alert { padding: .85rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--success); color: var(--success); background: var(--surface-2); }
@@ -340,17 +331,15 @@
       <canvas id="particles" aria-hidden="true"></canvas>
       <div class="container">
         <img class="avatar" src="assets/img/avatar-180.webp" srcset="assets/img/avatar-180.webp 1x, assets/img/avatar-360.webp 2x" width="132" height="132" alt="Foto de David Pinchao" fetchpriority="high">
-        <a class="hero-badge" href="#juego"><span class="badge-new">Nuevo</span> Descarga gratis mi videojuego <strong>Popayán Maldito</strong> <span aria-hidden="true">→</span></a>
+        <a class="hero-badge" href="#juego"><span class="badge-new"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bell"/></svg> Nuevo</span> Mi videojuego <strong>Guardianes del Sur</strong> <span class="badge-cta">Ver <span aria-hidden="true">→</span></span></a>
         <h1 id="hero-title">Hola, soy <span>David Pinchao</span></h1>
         <p class="lead">Desarrollador web full-stack y estudiante de Ingeniería de Sistemas en Popayán. Construyo apps reales con agentes de IA y, lejos del teclado, pedaleo, corro y tomo fotos.</p>
         <div class="actions">
           <a href="#proyectos" class="btn">Ver proyectos</a>
-          <a href="#juego" class="btn btn--ghost"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Ver mi videojuego</a>
         </div>
         <div class="socials">
           <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
           <a href="https://x.com/pinchaoburgos" target="_blank" rel="noopener" aria-label="X @pinchaoburgos"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg></a>
-          <a href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg></a>
           <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
           <a href="https://wa.me/573142583380" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp"/></svg></a>
         </div>
@@ -438,7 +427,7 @@
             <div><h3>Desarrollo web e IA</h3><span class="card-tag">Full-stack · Agentes de IA</span></div>
           </div>
           <p>Paso de la idea al despliegue: diseño la interfaz, modelo los datos, construyo la API y la publico en la nube.</p>
-          <p>Trabajo codo a codo con <strong>agentes de IA</strong> (Claude Code, servidores MCP y skills) para prototipar más rápido, revisar código y automatizar lo repetitivo. Así nacieron <a href="#proyectos">KhipuOps, Copa Arrayanes y HogarSync</a>.</p>
+          <p>Trabajo codo a codo con <strong>agentes de IA</strong>: Claude Code con buenos prompts y skills, y servidores MCP que lo conectan a mis herramientas. Así prototipo más rápido, reviso código y automatizo lo repetitivo. Así nacieron <a href="#proyectos">KhipuOps, Copa Arrayanes y HogarSync</a>.</p>
         </article>
 
         <!-- Running: card alta a la izquierda (con el panel de Strava); a la derecha se apilan 4 cards cortas -->
@@ -485,15 +474,6 @@
           </div>
           <p>Cultivo alimentos frescos y valoro la sostenibilidad y el respeto por el campo.</p>
         </article>
-
-        <article class="card span-6 reveal">
-          <div class="card-head">
-            <img class="card-thumb" src="assets/img/repartidor_rappi-200.webp" width="56" height="56" alt="" loading="lazy" decoding="async">
-            <div><h3>Repartidor de Rappi</h3><span class="card-tag">Tiempos libres</span></div>
-            <a class="link" href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" style="margin-left:auto"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg> Ver mi canal</a>
-          </div>
-          <p>Recorro Popayán repartiendo y lo cuento en mi canal de YouTube.</p>
-        </article>
       </div>
      </div>
     </section>
@@ -504,7 +484,7 @@
       <header class="section-head">
         <p class="eyebrow">Habilidades</p>
         <h2 id="habilidades-title">Dónde estoy hoy</h2>
-        <p class="lead">Una autoevaluación honesta en tres niveles: <strong>uso diario</strong>, <strong>con soltura</strong> y <strong>aprendiendo</strong>.</p>
+        <p class="lead">Una autoevaluación honesta en tres niveles: <strong>uso diario</strong>, <strong>manejo bien</strong> y <strong>aprendiendo</strong>.</p>
       </header>
       <div class="grid grid--3">
         <article class="card reveal">
@@ -512,18 +492,17 @@
           <ul class="skill-list">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-react"/></svg> React / Next.js <span class="level level--daily">Uso diario</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-css"/></svg> Tailwind CSS <span class="level level--daily">Uso diario</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript / JavaScript <span class="level level--fluent">Con soltura</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js / APIs <span class="level level--fluent">Con soltura</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB / bases de datos <span class="level level--fluent">Con soltura</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-js"/></svg> TypeScript / JavaScript <span class="level level--fluent">Manejo bien</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-node"/></svg> Node.js / APIs <span class="level level--fluent">Manejo bien</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-database"/></svg> MongoDB / bases de datos <span class="level level--fluent">Manejo bien</span></li>
           </ul>
         </article>
         <article class="card reveal">
-          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg></span><div><h3>IA y automatización</h3><span class="card-tag">Agentes, conectores y flujos</span></div></div>
+          <div class="card-head"><span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg></span><div><h3>IA y automatización</h3><span class="card-tag">Agentes, prompts y MCP</span></div></div>
           <ul class="skill-list">
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bot"/></svg> Claude Code (agentes) <span class="level level--daily">Uso diario</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Prompting y contexto <span class="level level--daily">Uso diario</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Servidores MCP y conectores <span class="level level--fluent">Con soltura</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"/></svg> Skills y flujos reutilizables <span class="level">Aprendiendo</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sparkles"/></svg> Prompts y skills <span class="level level--daily">Uso diario</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-code"/></svg> Servidores MCP y conectores <span class="level level--fluent">Manejo bien</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-workflow"/></svg> n8n (automatización) <span class="level">Aprendiendo</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-send"/></svg> Bots de Telegram <span class="level">Aprendiendo</span></li>
           </ul>
@@ -574,56 +553,115 @@
      </div>
     </section>
 
-    <!-- ================= Juego ================= -->
+    <!-- ================= Videojuego ================= -->
     <section id="juego" class="section" aria-labelledby="juego-title">
      <div class="container">
       <header class="section-head">
-        <p class="eyebrow"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Videojuego</p>
-        <h2 id="juego-title">Popayán Maldito</h2>
-        <p class="lead">¡La Ciudad Blanca ha caído bajo una oscura maldición! Mi primer videojuego ya está disponible gratis para Android.</p>
+        <p class="eyebrow"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Videojuego · En desarrollo</p>
+        <h2 id="juego-title">Guardianes del Sur</h2>
+        <p class="lead">Mi primer videojuego, desarrollado mientras estudio en la universidad. <strong>Próximamente en Google Play.</strong></p>
       </header>
-      <!--
-        Cuando el juego esté listo, reemplaza el contenido de .game-frame por:
-          · Juego publicado (itch.io, Godot web, Unity WebGL…):
-              <iframe src="games/mi-juego/index.html" title="Mi videojuego" allow="fullscreen; gamepad; autoplay" loading="lazy"></iframe>
-          · Juego propio en canvas:
-              <canvas id="game-canvas"></canvas>  + <script type="module" src="games/mi-juego/main.js"></script>
-      -->
-      <div class="game-layout">
-        <!-- Tráiler -->
-        <article class="card game-trailer reveal" aria-label="Tráiler oficial de Popayán Maldito">
-          <div class="game-frame" id="game-root">
-            <!-- data-youtube = ID del video: los 11 caracteres después de youtu.be/ (cámbialo también en el enlace "Ver en YouTube") -->
-            <button type="button" class="game-placeholder" data-youtube="DMkpc5r3BcI" aria-label="Reproducir el tráiler oficial de Popayán Maldito">
-              <img class="poster" src="https://i.ytimg.com/vi/DMkpc5r3BcI/hqdefault.jpg" width="480" height="360" alt="" loading="lazy" decoding="async">
-              <span class="play"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-play"/></svg></span>
-              <strong>POPAYÁN MALDITO</strong>
-              <span>Tráiler oficial</span>
-            </button>
+      <div class="grid grid--2">
+        <!-- Ficha del juego -->
+        <article class="card card--feature reveal" aria-labelledby="game-title">
+          <div class="card-head">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg></span>
+            <div><h3 id="game-title">Guardianes del Sur</h3><span class="card-tag">Acción y aventura 2D · Android</span></div>
+            <span class="pill">Próximamente en Google Play</span>
+          </div>
+          <p>Las regiones del sur de Colombia han caído bajo hechizos, maldiciones y fuerzas místicas. Un caballero las recorre combatiendo para liberarlas, una por una.</p>
+
+          <h4><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-pin"/></svg> Regiones</h4>
+          <ul class="regions">
+            <li><span><strong>Ciudad Blanca</strong> <small>Popayán</small></span><span class="level level--daily">Lanzamiento</span></li>
+            <li><span><strong>Ciudad Sorpresa</strong> <small>Pasto</small></span><span class="level level--daily">Lanzamiento</span></li>
+            <li><span><strong>Mocoa</strong> <small>Putumayo</small></span><span class="level level--daily">Lanzamiento</span></li>
+            <li><span><strong>Sucursal del Cielo</strong> <small>Cali</small></span><span class="level">Después</span></li>
+            <li><span><strong>Huila</strong></span><span class="level">Después</span></li>
+          </ul>
+
+          <ul class="chips" aria-label="Características"><li>2D</li><li>Unity</li><li>Tinky PixelArt</li><li>Acción</li><li>Fantasía</li></ul>
+          <div class="card-foot">
+            <a class="btn" href="#apoyar"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Apoyar el desarrollo</a>
+            <a class="link" href="#tester-title"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bug"/></svg> Ser tester</a>
           </div>
         </article>
 
-        <!-- Ficha del juego + descarga -->
-        <article class="card card--feature game-info reveal" aria-labelledby="game-title" id="descargar">
+        <!-- Formulario de tester -->
+        <div class="card reveal" aria-labelledby="tester-title">
           <div class="card-head">
-            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg></span>
-            <div><h3 id="game-title">Popayán Maldito</h3><span class="card-tag">Acción y aventura · Android</span></div>
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-bug"/></svg></span>
+            <div><h3 id="tester-title">Ayúdame como tester</h3><span class="card-tag">Toma 1 minuto</span></div>
           </div>
-          <p>Jueves Santo en Popayán: los cargueros de la procesión se han convertido en zombis. Estilo retro hecho en Unity, con joystick y botón de acción táctiles.</p>
-          <ul class="chips" aria-label="Etiquetas"><li>2D</li><li>Retro</li><li>Zombis</li><li>Fantasía</li><li>Unity</li></ul>
-          <!--
-            DESCARGA: hoy lleva a la página de itch.io (allí es un clic en "Download").
-            Para descarga directa con un solo clic, sube el APK a GitHub Releases y cambia el href por:
-              https://github.com/d4vp/REPO/releases/latest/download/PopayanMaldito.apk   (y añade el atributo download)
-          -->
-          <div class="download">
-            <a class="btn" href="https://d4vp.itch.io/popayan-maldito" target="_blank" rel="noopener" aria-describedby="download-note"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-download"/></svg> Descargar gratis</a>
-            <p class="note" id="download-note">Android · APK de 55 MB · Se descarga desde itch.io. <span class="desktop-hint">Ábrelo en tu celular para instalarlo.</span></p>
-          </div>
-          <div class="card-foot links">
-            <a class="link" href="https://d4vp.itch.io/popayan-maldito" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-gamepad"/></svg> Página en itch.io</a>
-            <a class="link" href="https://youtu.be/DMkpc5r3BcI" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg> Tráiler en YouTube</a>
-          </div>
+          <form id="testerForm" action="https://formspree.io/f/xoednwdn" method="POST" novalidate data-formspree data-success="¡Gracias, guardián! Tu reporte ya me llegó.">
+            <input type="hidden" name="_subject" value="Tester · Guardianes del Sur">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+            <div class="field">
+              <label for="t-region">Tu región</label>
+              <select id="t-region" name="region" required>
+                <option value="">Elige una…</option>
+                <option>Cauca</option>
+                <option>Nariño</option>
+                <option>Putumayo</option>
+                <option>Valle del Cauca</option>
+                <option>Huila</option>
+                <option>Otra</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="t-fallas">¿Encontraste fallas? <span class="opt">(opcional)</span></label>
+              <textarea id="t-fallas" name="fallas" rows="3" aria-describedby="t-fallas-hint"></textarea>
+              <span class="hint" id="t-fallas-hint">Qué pasó, en qué nivel y en qué celular.</span>
+            </div>
+            <div class="field">
+              <label for="t-idea">¿Qué mapa, lugar o nivel agregarías a tu región?</label>
+              <textarea id="t-idea" name="idea" rows="3" required minlength="5" aria-describedby="t-idea-hint"></textarea>
+              <span class="hint" id="t-idea-hint">Un sitio, una leyenda o un personaje de tu tierra.</span>
+            </div>
+            <div class="field">
+              <label for="t-email">Correo <span class="opt">(opcional)</span></label>
+              <input type="email" id="t-email" name="email" autocomplete="email" inputmode="email" aria-describedby="t-email-hint">
+              <span class="hint" id="t-email-hint">Solo si quieres que te avise cuando salga.</span>
+            </div>
+            <div><button type="submit" class="btn">Enviar reporte</button></div>
+            <div class="alert" role="status" hidden></div>
+          </form>
+        </div>
+      </div>
+     </div>
+    </section>
+
+    <!-- ================= Apoyar ================= -->
+    <section id="apoyar" class="section" aria-labelledby="apoyar-title">
+     <div class="container">
+      <header class="section-head">
+        <p class="eyebrow"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> Apoyar</p>
+        <h2 id="apoyar-title">Un aporte de estudiante a estudiante</h2>
+        <p class="lead">Cualquier monto cuenta.</p>
+      </header>
+      <div class="grid grid--2">
+        <article class="card card--feature reveal">
+          <h3>¿Por qué apoyar?</h3>
+          <p>Soy estudiante universitario <strong>foráneo</strong>: estudio lejos de casa y desarrollo <strong>Guardianes del Sur</strong> en las horas que me dejan las clases.</p>
+          <p>Tu aporte me ayuda a cubrir el hosting de mis proyectos, la publicación en Google Play y a dedicarle más horas al juego para terminarlo antes.</p>
+          <p>¿No puedes aportar dinero? También ayudas mucho <a href="#tester-title">probándolo y contándome qué agregarías</a> o compartiendo esta página.</p>
+        </article>
+        <article class="card reveal">
+          <h3>Nequi / Bre-B</h3>
+          <p>Desde Colombia, sin comisiones. Copia el dato y transfiere desde tu app.</p>
+          <dl class="keys">
+            <div>
+              <dt>Nequi</dt>
+              <dd><code>314 258 3380</code></dd>
+              <dd><button type="button" class="btn btn--ghost" data-copy="3142583380" aria-label="Copiar número de Nequi"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+            </div>
+            <div>
+              <dt>Llave Bre-B</dt>
+              <dd><code>@LPB897</code></dd>
+              <dd><button type="button" class="btn btn--ghost" data-copy="@LPB897" aria-label="Copiar llave Bre-B"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
+            </div>
+          </dl>
+          <p class="note">¡Gracias de corazón!</p>
         </article>
       </div>
      </div>
@@ -707,7 +745,7 @@
       <div class="grid grid--2">
         <div class="card reveal">
           <h3>Enviar un mensaje</h3>
-          <form id="contactForm" action="https://formspree.io/f/xoednwdn" method="POST" novalidate>
+          <form id="contactForm" action="https://formspree.io/f/xoednwdn" method="POST" novalidate data-formspree data-success="¡Mensaje enviado! Te responderé pronto a tu correo.">
             <input type="hidden" name="_subject" value="Nuevo mensaje desde el portafolio">
             <!-- Trampa anti-spam de Formspree: los bots la rellenan, las personas no la ven -->
             <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
@@ -727,7 +765,7 @@
               <span class="hint" id="mensaje-hint">Mínimo 10 caracteres.</span>
             </div>
             <div><button type="submit" class="btn">Enviar mensaje</button></div>
-            <div id="form-status" class="alert" role="status" hidden></div>
+            <div class="alert" role="status" hidden></div>
           </form>
         </div>
         <div class="card reveal">
@@ -742,24 +780,8 @@
             <a href="https://github.com/d4vp" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"/></svg></a>
             <a href="https://www.tiktok.com/@soul.px" target="_blank" rel="noopener" aria-label="TikTok @soul.px"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-tiktok"/></svg></a>
             <a href="https://www.strava.com/athletes/164622761" target="_blank" rel="noopener" aria-label="Strava"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-activity"/></svg></a>
-            <a href="https://www.youtube.com/@ldavorappi" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-youtube"/></svg></a>
           </div>
 
-          <!-- Apoyo: Nequi / Bre-B (sin comisiones desde Colombia) -->
-          <h4 id="apoyame"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"/></svg> ¿Te sirvió algo de lo que hago?</h4>
-          <p>Un aporte me ayuda a pagar el hosting de mis proyectos. Desde Colombia, sin comisiones:</p>
-          <dl class="keys">
-            <div>
-              <dt>Nequi</dt>
-              <dd><code>314 258 3380</code></dd>
-              <dd><button type="button" class="btn btn--ghost" data-copy="3142583380" aria-label="Copiar número de Nequi"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
-            </div>
-            <div>
-              <dt>Llave Bre-B</dt>
-              <dd><code>@LPB897</code></dd>
-              <dd><button type="button" class="btn btn--ghost" data-copy="@LPB897" aria-label="Copiar llave Bre-B"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-copy"/></svg> <span aria-live="polite">Copiar</span></button></dd>
-            </div>
-          </dl>
         </div>
       </div>
      </div>
@@ -822,20 +844,6 @@
       b.replaceWith(f);
       f.focus();
     }));
-    // YouTube exige saber desde qué sitio se inserta el video (cabecera Referer); sin ella muestra el "Error 153".
-    $$('[data-youtube]').forEach((b) => b.addEventListener('click', () => {
-      const id = b.dataset.youtube;
-      // Abierto como archivo (file://) no hay Referer posible: se abre el video en YouTube.
-      if (!location.protocol.startsWith('http')) { open(`https://www.youtube.com/watch?v=${id}`, '_blank', 'noopener'); return; }
-      const f = document.createElement('iframe');
-      f.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&playsinline=1&origin=${encodeURIComponent(location.origin)}`;
-      f.title = 'Tráiler oficial de Popayán Maldito';
-      f.referrerPolicy = 'strict-origin-when-cross-origin';
-      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      f.allowFullscreen = true;
-      b.replaceWith(f);
-      f.focus();
-    }));
     $$('details[data-strava]').forEach((d) => d.addEventListener('toggle', () => {
       if (!d.open || document.querySelector('script[src*="strava-embeds"]')) return;
       const sc = document.createElement('script');
@@ -843,35 +851,37 @@
       document.body.append(sc);
     }));
 
-    // ----- Formulario de contacto (Formspree) -----
-    // Se envía sin salir de la página; muestra el estado (enviando / enviado / error) en #form-status.
-    const form = $('#contactForm'), status = $('#form-status'), sendBtn = $('button[type="submit"]', form);
-    const showStatus = (msg, isError = false) => { status.hidden = false; status.classList.toggle('alert--error', isError); status.textContent = msg; };
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (!form.checkValidity()) {
-        form.querySelector(':invalid').focus();
-        form.reportValidity();
-        return;
-      }
-      const label = sendBtn.textContent;
-      sendBtn.disabled = true;
-      sendBtn.textContent = 'Enviando…';
-      status.hidden = true;
-      try {
-        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          throw new Error(data.errors?.map((x) => x.message).join(' ') || 'No se pudo enviar.');
+    // ----- Formularios (Formspree): contacto y tester del videojuego -----
+    // Se envían sin salir de la página y muestran el estado (enviando / enviado / error) en su .alert.
+    $$('form[data-formspree]').forEach((form) => {
+      const status = $('.alert', form), sendBtn = $('button[type="submit"]', form);
+      const showStatus = (msg, isError = false) => { status.hidden = false; status.classList.toggle('alert--error', isError); status.textContent = msg; };
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.querySelector(':invalid').focus();
+          form.reportValidity();
+          return;
         }
-        form.reset();
-        showStatus('¡Mensaje enviado! Te responderé pronto a tu correo.');
-      } catch (err) {
-        showStatus(`${err.message} Inténtalo de nuevo o escríbeme por WhatsApp.`, true);
-      } finally {
-        sendBtn.disabled = false;
-        sendBtn.textContent = label;
-      }
+        const label = sendBtn.textContent;
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Enviando…';
+        status.hidden = true;
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data.errors?.map((x) => x.message).join(' ') || 'No se pudo enviar.');
+          }
+          form.reset();
+          showStatus(form.dataset.success);
+        } catch (err) {
+          showStatus(`${err.message} Inténtalo de nuevo o escríbeme por WhatsApp.`, true);
+        } finally {
+          sendBtn.disabled = false;
+          sendBtn.textContent = label;
+        }
+      });
     });
 
     // ----- Copiar llave de Nequi / Bre-B -----
